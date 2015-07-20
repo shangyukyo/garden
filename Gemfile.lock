@@ -1,8 +1,12 @@
 GIT
-  remote: https://github.com/shangyukyo/dfs_uploader.git
-  revision: 7d4e8998bb3a61013235ab9e82e4cd7abded2246
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: 37cf31d34fa411db20e99cc654195020b06202c3
   specs:
-    dfs_uploader (0.1.2)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
 
 GEM
   remote: https://rubygems.org/
@@ -151,8 +155,8 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  carrierwave!
   coffee-rails (~> 4.1.0)
-  dfs_uploader!
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick

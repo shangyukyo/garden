@@ -13,8 +13,19 @@ class Api::UsersController < Api::ApplicationController
       @user.generate_private_token  
       @user.save
 
-      # render_data @user
+      render_json @user       
     end    
+  end
+
+  def upload_avatar
+    authenticate!
+    begin
+      @current_user.avatar = params[:avatar]
+      @current_user.save!
+      render_json @current_user
+    rescue => e
+      error e.inspect, 502
+    end
   end
 
 end

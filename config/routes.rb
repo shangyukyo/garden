@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
     resource :user, only: [] do 
       post :login
+      post :upload_avatar
     end
 
   end
