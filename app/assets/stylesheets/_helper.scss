@@ -1,0 +1,76 @@
+$left-background: #445668;
+$left-active-background: #f6878a;
+$left-width: 120px;
+$nav-background: #D8E5FB;
+
+
+@each $margin in 2, 5, 10, 15, 20, 25, 30, 50 {
+  .ml-#{$margin} { margin-left: #{$margin}px; }
+  .mr-#{$margin} { margin-right: #{$margin}px; }
+  .mt-#{$margin} { margin-top: #{$margin}px; }
+  .mb-#{$margin} { margin-bottom: #{$margin}px; }
+}
+
+
+// Buttons
+@mixin btn ($color) {
+  color: #FFF;
+  background-color: $color;
+  width: auto;
+  height: 30px; 
+  padding: 5px 14px;  
+
+  &.active, &.active:hover {
+    background-color: darken($color, 10%);
+  }
+
+  &:hover {
+    background-color: darken($color, 5%);
+  }
+
+  &.icon {
+    padding-right: 14px;
+    padding-left: 14px;
+    border-right: 1px solid darken($color, 16%);    
+    padding-top: 12px;
+  }
+
+  &.btn-small {
+    padding: 5px 10px;
+    height: 32px;
+  }
+
+}
+
+button.btn.btn-search {
+  @include btn($left-active-background);
+}
+
+.pager > ul > li > a.current {
+  border: 0px;
+}
+  
+table {
+  
+  & > tbody{
+
+    & > tr.active {
+      font-size:12px;
+      color: #666;
+    }
+
+    & > tr {  
+
+      & > td {     
+
+        font-size: 12px;
+        color: #666;
+      }
+    }
+  }   
+}
+
+
+.selectTabBar {
+  margin-bottom: 10px;
+}
