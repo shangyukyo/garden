@@ -1,0 +1,30 @@
+.page-header
+  h3: small 分类列表
+
+.search
+  = form_tag categories_path, class: 'form-inline', role: 'form', method: :post
+    = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '分类名称'
+    .form-group
+      button.btn.btn-search.ml-10 type='submit' 添加分类
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 分类名称        
+        th #
+    tbody
+      - if @categories.present?
+        - @categories. each do |category|
+          tr
+            td 
+              = category.name
+            td
+              a href='#' 商品列表
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

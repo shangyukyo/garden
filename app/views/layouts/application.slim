@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 html
   head  
-    title shopshow
+    title 田园
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -23,13 +23,13 @@ html
 
         li class="#{params[:controller] == 'categories' ? 'active' : nil}"
           a href=categories_path
-            i.fa.fa-reorder               
+            i.fa.fa-sitemap               
             p 分类            
 
 
         li class="#{params[:controller] == 'goods' ? 'active' : nil}"
           a href=goods_path
-            i.fa.fa-reorder               
+            i.fa.fa-th-list             
             p 商品            
 
         li class="#{params[:controller] == 'orders' ? 'active' : nil}"

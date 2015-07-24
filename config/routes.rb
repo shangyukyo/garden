@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   match 'sign_out' => 'index#sign_out', via: [:get, :post], as: :sign_out
 
   resources :users, only: [:index, :show]
-  resources :categories
+  resources :categories, only: [:index, :create]
   resources :goods
   resources :orders, only: [:index, :show]
 
