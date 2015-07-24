@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720064320) do
+ActiveRecord::Schema.define(version: 20150724020455) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "resource",   limit: 255
@@ -27,15 +27,36 @@ ActiveRecord::Schema.define(version: 20150720064320) do
     t.datetime "deleted_at"
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.decimal  "price",                  precision: 16, scale: 3, default: 0.0, null: false
+    t.string   "desc",       limit: 255
+    t.datetime "start_at"
+    t.datetime "expired_at"
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+  end
+
+  create_table "delivery_areas", force: :cascade do |t|
+    t.string   "province",   limit: 255
+    t.string   "city",       limit: 255
+    t.string   "region",     limit: 255
+    t.string   "address",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "good_specs", force: :cascade do |t|
-    t.integer  "good_id",      limit: 4
-    t.integer  "status",       limit: 4
-    t.string   "name",         limit: 255
-    t.text     "description",  limit: 65535
-    t.decimal  "origin_price",               precision: 16, scale: 3, default: 0.0, null: false
-    t.decimal  "price",                      precision: 16, scale: 3, default: 0.0, null: false
-    t.datetime "created_at",                                                        null: false
-    t.datetime "updated_at",                                                        null: false
+    t.integer  "good_id",         limit: 4
+    t.integer  "status",          limit: 4
+    t.string   "name",            limit: 255
+    t.text     "description",     limit: 65535
+    t.decimal  "origin_price",                  precision: 16, scale: 3, default: 0.0, null: false
+    t.decimal  "price",                         precision: 16, scale: 3, default: 0.0, null: false
+    t.string   "photo_asset_ids", limit: 255
+    t.text     "ext",             limit: 65535
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
     t.datetime "deleted_at"
   end
 
@@ -66,6 +87,35 @@ ActiveRecord::Schema.define(version: 20150720064320) do
   add_index "goods_categories", ["good_id", "category_id"], name: "index_goods_categories_on_good_id_and_category_id", using: :btree
   add_index "goods_categories", ["good_id"], name: "index_goods_categories_on_good_id", using: :btree
 
+  create_table "order_good_specs", force: :cascade do |t|
+    t.integer  "order_id",     limit: 4
+    t.integer  "good_spec_id", limit: 4
+    t.decimal  "price",                  precision: 16, scale: 3, default: 0.0, null: false
+    t.integer  "quantity",     limit: 4
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id",            limit: 4
+    t.string   "order_no",           limit: 255
+    t.decimal  "origin_total_price",               precision: 16, scale: 3, default: 0.0, null: false
+    t.decimal  "total_price",                      precision: 16, scale: 3, default: 0.0, null: false
+    t.integer  "quantity",           limit: 4
+    t.integer  "status",             limit: 4
+    t.text     "ext",                limit: 65535
+    t.datetime "created_at",                                                              null: false
+    t.datetime "updated_at",                                                              null: false
+  end
+
+  create_table "posters", force: :cascade do |t|
+    t.integer  "asset_id",   limit: 4
+    t.integer  "good_id",    limit: 4
+    t.text     "ext",        limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "tokens", force: :cascade do |t|
     t.string   "mobile",     limit: 255
     t.string   "body",       limit: 255
@@ -78,9 +128,21 @@ ActiveRecord::Schema.define(version: 20150720064320) do
 
   add_index "tokens", ["mobile"], name: "index_tokens_on_mobile", using: :btree
 
+  create_table "user_coupons", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "coupon_id",  limit: 4
+    t.integer  "status",     limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "user_coupons", ["coupon_id"], name: "index_user_coupons_on_coupon_id", using: :btree
+  add_index "user_coupons", ["user_id"], name: "index_user_coupons_on_user_id", using: :btree
+
   create_table "user_shippings", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.string   "state",      limit: 255
+    t.integer  "type",       limit: 4
+    t.string   "province",   limit: 255
     t.string   "city",       limit: 255
     t.string   "region",     limit: 255
     t.string   "address",    limit: 255

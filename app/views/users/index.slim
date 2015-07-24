@@ -1,0 +1,28 @@
+.page-header
+  h3: small 用户列表
+  
+= render partial: 'users/shared/search'
+
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 头像
+        th 手机号        
+        th #
+    tbody
+      - if @users.present?
+        - @users. each do |user|
+          tr
+            td 
+              = image_tag user.avatar_url(:thumb), size: "20x20"
+            td= user.mobile
+            td
+              a href='#' 收获地址
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

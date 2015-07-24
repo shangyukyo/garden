@@ -1,0 +1,5 @@
+.search
+  = form_tag users_path, class: 'form-inline', role: 'form', method: :get
+    = text_field_tag 'mobile', params[:mobile], class: 'form-control input-sm ml-10', placeholder: '手机号'
+    .form-group
+      button.btn.btn-search.ml-10 type='submit' 搜索

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+html
+  head  
+    title shopshow
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  body    
+
+    .left
+      .status      
+        a href="#{sign_out_path}"
+          = image_tag 'thumb.jpg'    
+          
+      ul    
+
+
+        li class="#{params[:controller] == 'users' ? 'active' : nil}"
+          a href=users_path
+            i.fa.fa-user               
+            p 用户管理
+
+        li class="#{params[:controller] == 'categories' ? 'active' : nil}"
+          a href=categories_path
+            i.fa.fa-reorder               
+            p 分类            
+
+
+        li class="#{params[:controller] == 'goods' ? 'active' : nil}"
+          a href=goods_path
+            i.fa.fa-reorder               
+            p 商品            
+
+        li class="#{params[:controller] == 'orders' ? 'active' : nil}"
+          a href="#{orders_path}"
+            i.fa.fa-reorder
+            p 订单
+
+        li.home
+          a href="#{root_path}" class="#{params[:controller] == 'index' ? 'active' : nil}"
+            i.fa.fa-home
+
+                      
+    .right      
+      = yield
+
