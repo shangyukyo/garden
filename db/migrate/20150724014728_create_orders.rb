@@ -7,7 +7,7 @@ class CreateOrders < ActiveRecord::Migration
       t.decimal :origin_total_price, precision: 16, scale: 3, null: false, default: 0.0
       t.decimal :total_price, precision: 16, scale: 3, null: false, default: 0.0
       t.integer :quantity
-      t.integer :status      
+      t.integer :status, null: false, default: 0
       t.text :ext      
       t.timestamps null: false
     end

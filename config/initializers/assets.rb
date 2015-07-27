@@ -10,5 +10,5 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 
 
-Rails.application.config.asset_host = "http://localhost"
-Rails.application.config.assets.precompile += %w( login.css )
+Rails.application.config.asset_host = "http://localhost:3000"
+Rails.application.config.assets.precompile += %w( login.css goods.js good_spec.js)

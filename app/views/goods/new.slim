@@ -1,4 +1,24 @@
+= javascript_include_tag 'goods'
+
 .page-header
   h3: small 商品
 
-  
+.alert.alert-danger.sr-only
+
+.goods.clearfix
+  .categories
+    - @categories.each do |category|
+      span.label.label-category.label-lg.ml-10 category-id=category.id
+        = category.name       
+  hr
+  .form-group
+    = text_field_tag :name, nil, placeholder: '产品名称', class: 'form-control'
+  .form-group
+    = kindeditor_tag :description, nil,  placeholder: '产品详情', class: 'form-control', editor_id: 'good_description'
+  .form-group
+    a.btn.btn-primary.createGoodsBtn href='#this' 提交
+
+
+
+javascript:
+  window._goodView = new GoodView()

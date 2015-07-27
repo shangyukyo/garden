@@ -5,7 +5,7 @@ class Api::UsersController < Api::ApplicationController
 
   def lu
     authenticate!    
-    render_data Lu::Province.build_related_city_region
+    render_json Lu::Province.build_related_city_region
   end
 
 

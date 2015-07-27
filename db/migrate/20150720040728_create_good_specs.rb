@@ -3,7 +3,7 @@ class CreateGoodSpecs < ActiveRecord::Migration
     create_table :good_specs do |t|
 
       t.belongs_to :good, index: true
-      t.integer :status
+      t.integer :status, null: false, default: 0
       t.string :name
       t.text :description      
       t.decimal :origin_price, precision: 16, scale: 3, null: false, default: 0.0

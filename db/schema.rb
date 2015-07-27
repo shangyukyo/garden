@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150724020455) do
 
   create_table "good_specs", force: :cascade do |t|
     t.integer  "good_id",         limit: 4
-    t.integer  "status",          limit: 4
+    t.integer  "status",          limit: 4,                              default: 0,   null: false
     t.string   "name",            limit: 255
     t.text     "description",     limit: 65535
     t.decimal  "origin_price",                  precision: 16, scale: 3, default: 0.0, null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20150724020455) do
   create_table "goods", force: :cascade do |t|
     t.string   "name",         limit: 255
     t.text     "description",  limit: 65535
-    t.integer  "status",       limit: 4
+    t.integer  "status",       limit: 4,                              default: 0,   null: false
     t.decimal  "origin_price",               precision: 16, scale: 3, default: 0.0, null: false
     t.decimal  "price",                      precision: 16, scale: 3, default: 0.0, null: false
     t.text     "ext",          limit: 65535
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20150724020455) do
     t.decimal  "origin_total_price",               precision: 16, scale: 3, default: 0.0, null: false
     t.decimal  "total_price",                      precision: 16, scale: 3, default: 0.0, null: false
     t.integer  "quantity",           limit: 4
-    t.integer  "status",             limit: 4
+    t.integer  "status",             limit: 4,                              default: 0,   null: false
     t.text     "ext",                limit: 65535
     t.datetime "created_at",                                                              null: false
     t.datetime "updated_at",                                                              null: false
@@ -131,9 +131,9 @@ ActiveRecord::Schema.define(version: 20150724020455) do
   create_table "user_coupons", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "coupon_id",  limit: 4
-    t.integer  "status",     limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "status",     limit: 4, default: 0, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "user_coupons", ["coupon_id"], name: "index_user_coupons_on_coupon_id", using: :btree

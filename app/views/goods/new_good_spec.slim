@@ -1,0 +1,36 @@
+= javascript_include_tag 'good_spec'
+
+.page-header
+  h3: small 商品规格-#{@good.name}
+
+.good-spec
+  .alert.alert-danger.sr-only
+
+  .good-pictures
+    span.btn.btn-success.fileinput-button.mb-10
+      i.fa.fa-plus
+      span 添加图片      
+      | <input id="resource" type="file" name="resource" data-url="/photos/handler" multiple>
+
+    .row
+    hr
+
+  .info.clearfix
+    .form-group
+      = text_field_tag :name, nil, placeholder: '规格名称', class: 'form-control'
+    .form-group
+      = text_field_tag :price, nil, placeholder: '价格', class: 'form-control'
+
+    .form-group
+      = kindeditor_tag :description, nil,  placeholder: '产品详情', class: 'form-control', editor_id: 'goodspec_description'
+    .form-group
+      a.btn.btn-primary.createGoodspecBtn href='#this' 提交
+
+
+
+javascript:
+  $(function(){
+    window._goodSpecView = new GoodSpecView({good_id: #{params[:id]} })
+  })
+
+

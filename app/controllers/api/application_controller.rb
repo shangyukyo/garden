@@ -3,6 +3,7 @@ class Api::ApplicationController < ApplicationController
   # For APIs, you may want to use :null_session instead.
 
   skip_before_action :verify_authenticity_token  
+  skip_before_action :login_required
 
   respond_to :json
 
@@ -23,11 +24,11 @@ class Api::ApplicationController < ApplicationController
   private
 
   def error(message, status = 200)
-    render json: { error: message }, status: status
+    render json: { error: message }, status: status and return
   end
 
   def render_json(data)
-    render json: {success: true, data: data}, status: 200
+    render json: {success: true, data: data}, status: 200 and return
   end
   
 end

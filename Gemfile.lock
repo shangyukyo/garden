@@ -8,6 +8,23 @@ GIT
       json (>= 1.7)
       mime-types (>= 1.16)
 
+GIT
+  remote: https://github.com/Macrow/rails_kindeditor.git
+  revision: fc247c3b565057e47aff70ddf41ea0293fce99a9
+  specs:
+    rails_kindeditor (0.4.5)
+      carrierwave
+      mini_magick
+
+GIT
+  remote: https://github.com/tors/jquery-fileupload-rails.git
+  revision: 13a13d706293d0bba533dd8bed5ed4daa08ae6f2
+  specs:
+    jquery-fileupload-rails (0.4.5)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      sass (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -176,10 +193,12 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   font-awesome-sass (~> 4.2.1)
   jbuilder (~> 2.0)
+  jquery-fileupload-rails!
   jquery-rails
   mini_magick
   mysql2
   rails (= 4.2.2)
+  rails_kindeditor!
   responders (~> 2.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

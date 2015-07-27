@@ -26,7 +26,9 @@ gem 'slim'
 gem 'aasm', '~> 4.1.1'
 gem 'unicorn'
 
+gem 'rails_kindeditor', git: 'https://github.com/Macrow/rails_kindeditor.git'
 
+gem "jquery-fileupload-rails", git: 'https://github.com/tors/jquery-fileupload-rails.git'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
