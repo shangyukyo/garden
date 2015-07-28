@@ -1,0 +1,55 @@
+= javascript_include_tag 'good_spec'
+
+css:  
+  .row > .img-panel.col-xs-1.col-md-1 > a.remove-img {
+    position: absolute;
+    top: -20px;
+    right: 1px;
+    font-size: 30px;
+    color: red;
+    z-index: 1000;
+  }  
+
+
+.page-header
+  h3: small 编辑商品规格-#{@good_spec.name}
+
+.good-spec
+  .alert.alert-danger.sr-only
+
+  .good-pictures
+    span.btn.btn-success.fileinput-button.mb-10
+      i.fa.fa-plus
+      span 添加图片        
+      | <input id="resource" type="file" name="resource" data-url="/photos/handler" multiple>
+
+    .row
+      - @good_spec.photo_asset_ids.split(',').each do |asset_id|
+        .img-panel.col-xs-1.col-md-1
+          a.remove-img
+            i.fa.fa-remove
+          a.thumbnail
+            img src="#{Asset.find(asset_id).resource_url}" width="100" height="100" asset-id=asset_id            
+
+    hr
+
+  .info.clearfix
+    .form-group
+      = hidden_field_tag :good_spec_id, @good_spec.id
+      = text_field_tag :name, @good_spec.name, placeholder: '规格名称', class: 'form-control'
+    .form-group
+      = text_field_tag :price, @good_spec.price, placeholder: '价格', class: 'form-control'
+
+    .form-group
+      = kindeditor_tag :description, @good_spec.description,  placeholder: '产品详情', class: 'form-control', editor_id: 'goodspec_description'
+    .form-group
+      a.btn.btn-primary.updateGoodspecBtn href='#this' 提交
+
+
+
+javascript:
+  $(function(){
+    window._goodSpecView = new GoodSpecView()
+  })
+
+

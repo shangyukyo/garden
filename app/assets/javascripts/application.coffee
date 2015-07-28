@@ -1,8 +1,11 @@
 #= require jquery
+#= require jquery.form.min
 #= require jquery_ujs
 #= require kindeditor
 #= require turbolinks
 #= require underscore
 #= require backbone
+#= require bootstrap/button
+#= require bootstrap/modal
 #= require jquery-fileupload/basic
 #= require_tree .

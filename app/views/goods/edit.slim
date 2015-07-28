@@ -1,0 +1,28 @@
+= javascript_include_tag 'goods'
+
+.page-header
+  h3: small 编辑商品
+
+.alert.alert-danger.sr-only
+
+.goods.clearfix
+  .categories
+    - @categories.each do |category|
+      span.label.label-category.label-lg.ml-10 class="#{@self_categories.include?(category) ? 'active' : nil}" category-id=category.id
+        = category.name    
+  hr  
+  .form-group
+    = hidden_field_tag :good_id, @good.id
+    = text_field_tag :name, @good.name, placeholder: '产品名称', class: 'form-control'
+  .form-group
+    = kindeditor_tag :description, @good.description,  placeholder: '产品详情', class: 'form-control', editor_id: 'good_description'
+  .form-group
+    a.btn.btn-primary.updateGoodsBtn href='#this' 提交
+
+
+
+javascript:
+  $(function(){
+    window._goodView = new GoodView()
+  })
+  

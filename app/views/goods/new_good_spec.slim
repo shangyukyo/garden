@@ -1,5 +1,15 @@
 = javascript_include_tag 'good_spec'
 
+css:  
+  .row > .img-panel.col-xs-1.col-md-1 > a.remove-img {
+    position: absolute;
+    top: -20px;
+    right: 1px;
+    font-size: 30px;
+    color: red;
+    z-index: 1000;
+  }
+
 .page-header
   h3: small 商品规格-#{@good.name}
 
@@ -26,6 +36,18 @@
     .form-group
       a.btn.btn-primary.createGoodspecBtn href='#this' 提交
 
+
+#goodspecModal.modal.fade role="dialog"
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal"
+          span aria-hidden="true" &times;
+        h5.modal-title 添加成功
+
+      .modal-body
+        a.btn.btn-default.ml-10 href="#{goods_path}" 返回商品列表
+        a.btn.btn-primary.ml-10 onclick="javascript: window.location.reload();" 继续添加规格
 
 
 javascript:

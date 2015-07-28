@@ -20,7 +20,7 @@
             td 
               = category.name
             td
-              a href='#' 商品列表
+              a href="#{goods_path(category_id: category.id)}" 商品列表
       - else
         tr
           td 暂无数据

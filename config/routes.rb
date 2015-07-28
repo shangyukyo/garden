@@ -27,9 +27,15 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :create]
   
   resources :goods do 
-    member do 
+    member do       
       get  :new_good_spec
-      post :create_good_spec
+      post :create_good_spec      
+    end
+
+    collection do
+      get  :destroy_good_spec
+      get  :edit_good_spec
+      post :update_good_spec
     end
   end
   resources :orders, only: [:index, :show]

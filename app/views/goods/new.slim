@@ -1,7 +1,7 @@
 = javascript_include_tag 'goods'
 
 .page-header
-  h3: small 商品
+  h3: small 添加商品
 
 .alert.alert-danger.sr-only
 
@@ -21,4 +21,7 @@
 
 
 javascript:
-  window._goodView = new GoodView()
+  $(function(){
+    window._goodView = new GoodView()
+  })
+  

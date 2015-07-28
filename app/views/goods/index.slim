@@ -1,0 +1,97 @@
+.page-header
+  h3: small 商品列表
+
+.search
+  = form_tag '', class: 'form-inline', role: 'form', method: :get do 
+    .form-group
+      = text_field_tag :name, params[:name], class: 'form-control input-sm', placeholder: '商品名称'    
+    .form-group                      
+      button.btn.btn-search.ml-10 type='submit' 搜索
+    .form-group  
+      a.btn.btn-primary.ml-20 href="#{new_good_path}" 添加商品
+  
+.table-responsive
+  table.table
+    - if @goods.present?
+      - @goods. each do |good|  
+        thread.mt-20
+          tr.active
+            th 商品名称
+            th 商品描述
+            th 分类
+            th #
+        tbody
+            tr
+              td 
+                = good.name
+              td
+                = good.description.to_s.truncate(30)
+              td
+                - good.categories.each do |category|
+                  span.label.label-info.ml-5= category.name
+              td
+                a href="#{edit_good_path(good)}" 编辑
+                = link_to "添加规格", new_good_spec_good_path(good), class: "btn btn-primary btn-xs ml-20"
+
+                = link_to "删除整个产品", good_path(good), data: {confirm: '确定要删除整个商品吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"             
+
+            tr
+              td colspan="4"
+                table.table
+                  thread
+                    tr.warning
+                      td 规格名称
+                      td 规格描述
+                      td 规格价格(¥)
+                      td 规格图片
+                      td #
+
+                  tbody
+                    - if good.good_specs.present?
+                      - good.good_specs.each do |spec|
+                        tr
+                          td= spec.name
+                          td= spec.description.to_s.truncate(30)
+                          td= spec.price
+                          td
+                            - spec.photo_urls.each do |pic|
+                              = image_tag pic, size: "40x40", class: "pic_thumb ml-10"
+                          td
+                            a href="#{edit_good_spec_goods_path(good_spec_id: spec.id)}" 编辑
+                            
+                            = link_to "删除规格", destroy_good_spec_goods_path(good_spec_id: spec.id), data: {confirm: '确定要删除此规格吗?'}, method: :get, class: "btn btn-danger btn-xs ml-20"
+
+                    - else
+                      tr
+                        td 暂无规格
+
+
+    - else
+      tr
+        td 暂无数据
+
+#imgModal.modal.fade role="dialog"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal"
+          span aria-hidden="true" &times;
+        h5.modal-title  预览
+
+      .modal-body style="text-align:center;"
+        = image_tag "", style: "max-height: 500px; max-width: 400px;"
+
+
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+  
+javascript:
+  $(function(){
+    $('img.pic_thumb').click(function(){
+      $("#imgModal .modal-body img").attr('src', $(this).attr('src'));
+      $("#imgModal").modal();
+    })
+  })
+    
+
