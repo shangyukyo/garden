@@ -1,0 +1,1 @@
+json.partial! '/api/goods/good', good: @good

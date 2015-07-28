@@ -2,7 +2,7 @@ class CreateUserShippings < ActiveRecord::Migration
   def change
     create_table :user_shippings do |t|
       t.belongs_to :user, index: true
-      t.integer :type
+      t.integer :default
       t.string :province
       t.string :city
       t.string :region

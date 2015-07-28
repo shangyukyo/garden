@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   validates :mobile, uniqueness: true, presence: true
   validates :private_token, uniqueness: true, presence: true
 
+  has_many :user_shippings
+
   mount_uploader :avatar, AvatarUploader
 
   def generate_private_token
@@ -12,4 +14,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def avatar_url_thumb
+    avatar_url(:thumb)
+  end
+  
 end

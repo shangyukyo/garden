@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       post :upload_avatar      
     end
 
+    resources :user_shippings, only: [:index, :show, :create] do 
+      collection do 
+        get :lu
+      end
+    end    
+
     resources :goods, only: [:index, :show]
 
     resources :categories, only: [:index, :show]

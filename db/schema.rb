@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20150724020455) do
 
   create_table "user_shippings", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.integer  "type",       limit: 4
+    t.integer  "default",    limit: 4
     t.string   "province",   limit: 255
     t.string   "city",       limit: 255
     t.string   "region",     limit: 255

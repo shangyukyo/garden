@@ -46,7 +46,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    ActionController::Base.helpers.asset_path("avatar.png")
+    Rails.application.config.asset_host + ActionController::Base.helpers.asset_path("avatar.png")
   end
 
   # Override the filename of the uploaded files:

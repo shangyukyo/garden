@@ -1,0 +1,1 @@
+json.partial! '/api/goods/good', collection: @goods, as: :good
