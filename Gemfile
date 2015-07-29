@@ -57,8 +57,9 @@ group :development, :test do
   gem 'byebug'
 
   gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-unicorn', require: false
   gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
+  gem 'capistrano-bundler'  
   gem 'capistrano-rails'  
 
   # Access an IRB console on exception pages or by using <%= console %> in views
