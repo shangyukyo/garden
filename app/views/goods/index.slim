@@ -8,7 +8,7 @@
     .form-group                      
       button.btn.btn-search.ml-10 type='submit' 搜索
     .form-group  
-      a.btn.btn-primary.ml-20 href="#{new_good_path}" 添加商品
+      a.btn.btn-primary.ml-20 href="#{new_good_path}" data-no-turbolink="true" 添加商品
   
 .table-responsive
   table.table
@@ -27,14 +27,19 @@
             tr
               td= good.name
               td= good.description.to_s.truncate(30)
-              td #
-              td #              
+              td
+                - good.categories.normal.each do |cate|
+                  span.label.label-info.ml-5= cate.name
+              td
+                - good.categories.partition.each do |cate|
+                  span.label.label-info.ml-5= cate.name
+
               td= good.price
               td
                 - good.photo_urls.each do |pic|
                   = image_tag pic, size: "40x40", class: "pic_thumb ml-10"
               td
-                a href="#{edit_good_path(good)}" 编辑
+                a href="#{edit_good_path(good)}" data-no-turbolink="true" 编辑
                 
                 = link_to "删除", good_path(good), data: {confirm: '确定要删除此商品吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"       
 

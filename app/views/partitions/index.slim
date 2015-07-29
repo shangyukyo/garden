@@ -21,6 +21,7 @@
               = partition.name
             td
               a href="#{goods_path(category_id: partition.id)}" 商品列表
+              = link_to "删除", partition_path(partition), data: {confirm: '确定要删除此分区吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20" 
       - else
         tr
           td 暂无数据

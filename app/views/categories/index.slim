@@ -21,6 +21,8 @@
               = category.name
             td
               a href="#{goods_path(category_id: category.id)}" 商品列表
+              = link_to "删除", category_path(category), data: {confirm: '确定要删除此分类吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"   
+
       - else
         tr
           td 暂无数据

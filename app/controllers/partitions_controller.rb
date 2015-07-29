@@ -13,4 +13,8 @@ class PartitionsController < ApplicationController
     redirect_to :back if Category.create(name: params[:name], category_type: Category.category_types[:partition], queue: params[:queue])
   end
 
+  def destroy
+    redirect_to :back if Category.find(params[:id]).destroy
+  end  
+
 end
