@@ -1,0 +1,1 @@
+json.(school, :id, :name, :created_at)

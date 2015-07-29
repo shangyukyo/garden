@@ -1,5 +1,14 @@
 = javascript_include_tag 'goods'
-
+css:  
+  .row > .img-panel.col-xs-1.col-md-1 > a.remove-img {
+    position: absolute;
+    top: -20px;
+    right: 1px;
+    font-size: 30px;
+    color: red;
+    z-index: 1000;
+  }  
+  
 .page-header
   h3: small 编辑商品
 
@@ -9,11 +18,29 @@
   .categories
     - @categories.each do |category|
       span.label.label-category.label-lg.ml-10 class="#{@self_categories.include?(category) ? 'active' : nil}" category-id=category.id
-        = category.name    
-  hr  
+        = category.name
+
+  hr
+  .good-pictures
+    span.btn.btn-success.fileinput-button.mb-10
+      i.fa.fa-plus
+      span 添加图片      
+      | <input id="resource" type="file" name="resource" data-url="/photos/handler" multiple>
+
+    .row
+      - @good.photo_asset_ids.split(',').each do |asset_id|
+        .img-panel.col-xs-1.col-md-1
+          a.remove-img: i.fa.fa-remove
+          a.thumbnail
+            img src="#{Asset.find(asset_id).resource_url(:middle)}" width="100" height="100" asset-id="#{asset_id}"
+
+
+      
   .form-group
     = hidden_field_tag :good_id, @good.id
     = text_field_tag :name, @good.name, placeholder: '产品名称', class: 'form-control'
+  .form-group
+    = text_field_tag :price, @good.price, placeholder: '价格', class: 'form-control'    
   .form-group
     = kindeditor_tag :description, @good.description,  placeholder: '产品详情', class: 'form-control', editor_id: 'good_description'
   .form-group

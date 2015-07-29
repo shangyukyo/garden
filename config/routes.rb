@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     resources :goods, only: [:index, :show]
 
     resources :categories, only: [:index, :show]
+    resources :partitions, only: [:index, :show]
+
+    resources :cities, only: [:index, :show]
   end
 
   root 'index#login'
@@ -24,20 +27,15 @@ Rails.application.routes.draw do
   match 'sign_out' => 'index#sign_out', via: [:get, :post], as: :sign_out  
 
   resources :users, only: [:index, :show]
-  resources :categories, only: [:index, :create]
-  
-  resources :goods do 
-    member do       
-      get  :new_good_spec
-      post :create_good_spec      
-    end
 
-    collection do
-      get  :destroy_good_spec
-      get  :edit_good_spec
-      post :update_good_spec
-    end
-  end
+  resources :categories, only: [:index, :create, :destroy]
+  resources :partitions, only: [:index, :create, :destroy]
+  resources :cities, only: [:index, :create, :destroy]
+  resources :areas, only: [:index, :create, :destroy]
+  resources :schools, only: [:index, :create, :destroy]
+  
+  resources :goods
+  
   resources :orders, only: [:index, :show]
 
   resources :photos, only: [] do 

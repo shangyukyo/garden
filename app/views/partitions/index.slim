@@ -1,0 +1,30 @@
+.page-header
+  h3: small 分类列表
+
+.search
+  = form_tag partitions_path, class: 'form-inline', role: 'form', method: :post
+    = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '分区名称'
+    .form-group
+      button.btn.btn-search.ml-10 type='submit' 添加分区
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 分类名称        
+        th #
+    tbody
+      - if @partitions.present?
+        - @partitions. each do |partition|
+          tr
+            td 
+              = partition.name
+            td
+              a href="#{goods_path(category_id: partition.id)}" 商品列表
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

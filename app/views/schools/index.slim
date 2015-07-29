@@ -1,0 +1,38 @@
+.page-header
+  h3: small 学校列表
+
+.search
+  = form_tag schools_path, class: 'form-inline', role: 'form', method: :post
+    .form-group
+      = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '学校名称'
+    .form-group
+      select.form-control.input-sm.ml-10 name="city"
+        - @cities.each do |city|
+          option value="#{city.name}"= city.name
+
+    .form-group
+      button.btn.btn-search.ml-10 type='submit' 添加学校
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 学校
+        th 所属城市        
+        th #
+    tbody
+      - if @schools.present?
+        - @schools.each do |school|
+          tr
+            td 
+              = school.name
+            td= school.city 
+            td
+              = link_to "删除", school_path(school), data: {confirm: '确定要删除此学校吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

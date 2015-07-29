@@ -1,15 +1,7 @@
 class Api::CategoriesController < Api::ApplicationController
 
   def index
-    @categories = Category.all.order('id desc')
-    
-    res = @categories.map do |category|
-      {
-        category: category, 
-        goods: category.goods.published
-      }
-    end
-    
+    @categories = Category.normal.order('queue desc')  
   end
 
   def show

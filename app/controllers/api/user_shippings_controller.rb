@@ -20,11 +20,9 @@ class Api::UserShippingsController < Api::ApplicationController
       authenticate!
       @user_shipping = @current_user.user_shippings.build
       @user_shipping.default = params[:default]
-      @user_shipping.province  = params[:province]
-      @user_shipping.city = params[:city]
-      @user_shipping.region = params[:region]
+      @user_shipping.area  = params[:area]
+      @user_shipping.school = params[:school]      
       @user_shipping.address = params[:address]
-      @user_shipping.zip_code = params[:zip_code]
       @user_shipping.name = params[:name]
       @user_shipping.mobile = params[:mobile]
       @user_shipping.save!

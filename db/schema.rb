@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724020455) do
+ActiveRecord::Schema.define(version: 20150729052544) do
+
+  create_table "areas", force: :cascade do |t|
+    t.string   "province",   limit: 255
+    t.string   "city",       limit: 255
+    t.string   "region",     limit: 255
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "assets", force: :cascade do |t|
     t.string   "resource",   limit: 255
@@ -20,11 +29,19 @@ ActiveRecord::Schema.define(version: 20150724020455) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.text     "ext",        limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "name",          limit: 255
+    t.integer  "category_type", limit: 4
+    t.integer  "queue",         limit: 4
+    t.text     "ext",           limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.datetime "deleted_at"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "coupons", force: :cascade do |t|
@@ -37,17 +54,7 @@ ActiveRecord::Schema.define(version: 20150724020455) do
     t.datetime "updated_at",                                                    null: false
   end
 
-  create_table "delivery_areas", force: :cascade do |t|
-    t.string   "province",   limit: 255
-    t.string   "city",       limit: 255
-    t.string   "region",     limit: 255
-    t.string   "address",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "good_specs", force: :cascade do |t|
-    t.integer  "good_id",         limit: 4
+  create_table "goods", force: :cascade do |t|
     t.integer  "status",          limit: 4,                              default: 0,   null: false
     t.string   "name",            limit: 255
     t.text     "description",     limit: 65535
@@ -57,20 +64,6 @@ ActiveRecord::Schema.define(version: 20150724020455) do
     t.text     "ext",             limit: 65535
     t.datetime "created_at",                                                           null: false
     t.datetime "updated_at",                                                           null: false
-    t.datetime "deleted_at"
-  end
-
-  add_index "good_specs", ["good_id"], name: "index_good_specs_on_good_id", using: :btree
-
-  create_table "goods", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.text     "description",  limit: 65535
-    t.integer  "status",       limit: 4,                              default: 0,   null: false
-    t.decimal  "origin_price",               precision: 16, scale: 3, default: 0.0, null: false
-    t.decimal  "price",                      precision: 16, scale: 3, default: 0.0, null: false
-    t.text     "ext",          limit: 65535
-    t.datetime "created_at",                                                        null: false
-    t.datetime "updated_at",                                                        null: false
     t.datetime "deleted_at"
   end
 
@@ -87,13 +80,14 @@ ActiveRecord::Schema.define(version: 20150724020455) do
   add_index "goods_categories", ["good_id", "category_id"], name: "index_goods_categories_on_good_id_and_category_id", using: :btree
   add_index "goods_categories", ["good_id"], name: "index_goods_categories_on_good_id", using: :btree
 
-  create_table "order_good_specs", force: :cascade do |t|
-    t.integer  "order_id",     limit: 4
-    t.integer  "good_spec_id", limit: 4
-    t.decimal  "price",                  precision: 16, scale: 3, default: 0.0, null: false
-    t.integer  "quantity",     limit: 4
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+  create_table "order_goods", force: :cascade do |t|
+    t.integer  "order_id",   limit: 4
+    t.integer  "good_id",    limit: 4
+    t.decimal  "price",                    precision: 16, scale: 3, default: 0.0, null: false
+    t.integer  "quantity",   limit: 4
+    t.text     "ext",        limit: 65535
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -114,6 +108,15 @@ ActiveRecord::Schema.define(version: 20150724020455) do
     t.text     "ext",        limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string   "province",   limit: 255
+    t.string   "city",       limit: 255
+    t.string   "region",     limit: 255
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "tokens", force: :cascade do |t|

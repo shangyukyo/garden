@@ -21,6 +21,12 @@ html
             i.fa.fa-user               
             p 用户管理
 
+        li class="#{params[:controller] == 'partitions' ? 'active' : nil}"
+          a href=partitions_path
+            i.fa.fa-sitemap               
+            p 分区            
+
+
         li class="#{params[:controller] == 'categories' ? 'active' : nil}"
           a href=categories_path
             i.fa.fa-sitemap               
@@ -37,9 +43,21 @@ html
             i.fa.fa-reorder
             p 订单
 
-        li.home
-          a href="#{root_path}" class="#{params[:controller] == 'index' ? 'active' : nil}"
+        li class="#{params[:controller] == 'cities' ? 'active' : nil}"
+          a href="#{cities_path}"
+            i.fa.fa-location-arrow
+            p 配送城市  
+
+        li class="#{params[:controller] == 'areas' ? 'active' : nil}"
+          a href="#{areas_path}"
+            i.fa.fa-building
+            p 配送社区
+
+        li class="#{params[:controller] == 'schools' ? 'active' : nil}"
+          a href="#{schools_path}"
             i.fa.fa-home
+            p 配送学校                             
+
 
                       
     .right                

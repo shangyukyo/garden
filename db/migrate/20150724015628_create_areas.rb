@@ -1,11 +1,12 @@
-class CreateDeliveryAreas < ActiveRecord::Migration
+class CreateAreas < ActiveRecord::Migration
   def change
-    create_table :delivery_areas do |t|
+    create_table :areas do |t|
       t.string :province
       t.string :city
       t.string :region
-      t.string :address      
+      t.string :name            
       t.timestamps null: false
     end
   end
+
 end

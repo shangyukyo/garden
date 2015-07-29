@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   include AASM
 
   belongs_to :user
-  has_many :order_good_specs
+  has_many :order_goods
 
 
   enum status: {
