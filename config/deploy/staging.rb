@@ -20,7 +20,7 @@
 set :password, ask('Server password', nil)
 set :rails_env, 'production'
 
-fetch(:default_env).merge!( rvm_path: "/home/www/.rvm/bin/rvm" )
+# fetch(:default_env).merge!( rvm_path: "/home/garden/.rvm/bin/rvm" )
 
 server '101.200.197.162', 
         user: 'garden',
