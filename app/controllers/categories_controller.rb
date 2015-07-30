@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
 
   def create
     params.permit!
-    redirect_to :back if Category.create(name: params[:name], category_type: Category.category_types[:normal], queue: params[:queue])
+    redirect_to :back if Category.create(name: params[:name], category_type: Category.category_types[:normal], queue: params[:queue].to_i)
   end
 
   def destroy
