@@ -34,6 +34,42 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :pid_path, "#{shared_path}/tmp/pids"
+set :log_path, "#{shared_path}/log"
+
+namespace :unicorn do
+  pid = "#{fetch(:pid_path)}/unicorn.pid"
+
+  task :start do
+    on roles(:web, :db, :app) do
+      within release_path do
+        with rails_env: 'production' do
+          execute :bundle, 'exec unicorn_rails -c config/unicorn.rb -D' 
+        end
+      end
+    end
+  end
+
+  task :stop do
+    on roles(:web, :db, :app) do
+      execute :kill, "-QUIT `cat #{pid}`"
+    end
+  end
+
+  task :restart do
+    on roles(:web, :db, :app) do
+      execute :kill, "-USR2 `cat #{pid}`"
+    end    
+  end
+
+  task :force_reload do
+    on roles(:web, :db, :app) do
+      execute :kill, "-TERM `cat #{pid}`"
+      invoke 'unicorn:start'
+    end
+  end
+end
+
 namespace :deploy do
 
   after :restart, :clear_cache do

@@ -1,6 +1,6 @@
 # Set your full path to application.
 application = "garden"
-app_path = "~/garden/www"
+app_path = "~/www"
 shared_path = "#{app_path}/shared"
 current_path = "#{app_path}/current"
 
