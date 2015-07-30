@@ -3,8 +3,8 @@ class CreateTokens < ActiveRecord::Migration
     create_table :tokens do |t|
       t.string :mobile    
       t.string :body
-      t.integer :type, null:false
-      t.integer :status, null: false
+      t.integer :token_type, null:false, default: 0
+      t.integer :status, null: false, default: 0
       t.text :ext
       t.timestamps null: false
     end

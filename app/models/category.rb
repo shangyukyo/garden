@@ -4,8 +4,8 @@ class Category < ActiveRecord::Base
 
 
   enum category_type: {
-    normal:             0,      # 待发布的(没有添加规格的产品是不允许被发布的)
-    partition:          1,      # 已经发布的    
+    normal:             0,      # 普通分类
+    partition:          1,      # 分区
   }
     
 end

@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 20150729052544) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",          limit: 255
-    t.integer  "category_type", limit: 4
-    t.integer  "queue",         limit: 4
+    t.integer  "category_type", limit: 4,     default: 0, null: false
+    t.integer  "queue",         limit: 4,     default: 0, null: false
     t.text     "ext",           limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.datetime "deleted_at"
   end
 
@@ -45,13 +45,14 @@ ActiveRecord::Schema.define(version: 20150729052544) do
   end
 
   create_table "coupons", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.decimal  "price",                  precision: 16, scale: 3, default: 0.0, null: false
-    t.string   "desc",       limit: 255
+    t.string   "name",        limit: 255
+    t.decimal  "price",                   precision: 16, scale: 3, default: 0.0, null: false
+    t.string   "desc",        limit: 255
+    t.integer  "coupon_type", limit: 4
     t.datetime "start_at"
     t.datetime "expired_at"
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
   end
 
   create_table "goods", force: :cascade do |t|
@@ -61,6 +62,8 @@ ActiveRecord::Schema.define(version: 20150729052544) do
     t.decimal  "origin_price",                  precision: 16, scale: 3, default: 0.0, null: false
     t.decimal  "price",                         precision: 16, scale: 3, default: 0.0, null: false
     t.string   "photo_asset_ids", limit: 255
+    t.integer  "sales",           limit: 4,                              default: 0,   null: false
+    t.integer  "likes",           limit: 4,                              default: 0,   null: false
     t.text     "ext",             limit: 65535
     t.datetime "created_at",                                                           null: false
     t.datetime "updated_at",                                                           null: false
@@ -122,11 +125,11 @@ ActiveRecord::Schema.define(version: 20150729052544) do
   create_table "tokens", force: :cascade do |t|
     t.string   "mobile",     limit: 255
     t.string   "body",       limit: 255
-    t.integer  "type",       limit: 4,     null: false
-    t.integer  "status",     limit: 4,     null: false
+    t.integer  "token_type", limit: 4,     default: 0, null: false
+    t.integer  "status",     limit: 4,     default: 0, null: false
     t.text     "ext",        limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "tokens", ["mobile"], name: "index_tokens_on_mobile", using: :btree
@@ -145,11 +148,9 @@ ActiveRecord::Schema.define(version: 20150729052544) do
   create_table "user_shippings", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "default",    limit: 4
-    t.string   "province",   limit: 255
-    t.string   "city",       limit: 255
-    t.string   "region",     limit: 255
+    t.string   "area",       limit: 255
+    t.string   "school",     limit: 255
     t.string   "address",    limit: 255
-    t.string   "zip_code",   limit: 255
     t.string   "name",       limit: 255
     t.string   "mobile",     limit: 255
     t.datetime "created_at",             null: false
