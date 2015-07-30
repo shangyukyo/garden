@@ -60,7 +60,7 @@ group :development, :test do
   gem 'byebug'
 
   gem 'capistrano', '~> 3.4.0'
-  gem 'capistrano-unicorn', require: false
+  gem 'capistrano-unicorn', require: false, github: 'inbeom/capistrano-unicorn', branch: 'capistrano3'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'  
   gem 'capistrano-rails'  

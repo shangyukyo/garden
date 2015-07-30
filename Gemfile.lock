@@ -9,6 +9,14 @@ GIT
       mime-types (>= 1.16)
 
 GIT
+  remote: git://github.com/inbeom/capistrano-unicorn.git
+  revision: 857f8045143416b34511557ccac2ee5a9cd03403
+  branch: capistrano3
+  specs:
+    capistrano-unicorn (0.3.0)
+      capistrano (~> 3.0)
+
+GIT
   remote: https://github.com/Macrow/rails_kindeditor.git
   revision: fc247c3b565057e47aff70ddf41ea0293fce99a9
   specs:
@@ -85,8 +93,6 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano-unicorn (0.1.10)
-      capistrano
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -221,7 +227,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
-  capistrano-unicorn
+  capistrano-unicorn!
   carrierwave!
   coffee-rails (~> 4.1.0)
   execjs
