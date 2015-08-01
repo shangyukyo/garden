@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
     pagination
     @categories = Category.normal
     @total = @categories.size
-    @categories = @categories.order('id desc').offset(@o).limit(@per_page)    
+    @categories = @categories.order('queue desc').offset(@o).limit(@per_page)    
   end
 
   def create

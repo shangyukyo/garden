@@ -5,7 +5,7 @@ class PartitionsController < ApplicationController
 
     @partitions = Category.partition
     @total = @partitions.size
-    @partitions = @partitions.order('id desc').offset(@o).limit(@per_page)    
+    @partitions = @partitions.order('queue desc').offset(@o).limit(@per_page)    
   end
 
   def create

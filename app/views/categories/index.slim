@@ -3,7 +3,20 @@
 
 .search
   = form_tag categories_path, class: 'form-inline', role: 'form', method: :post
-    = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '分类名称'
+    .form-group
+      = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '分类名称'
+    .form-group      
+      select.form-control.input-sm.ml-10 name="queue"
+        option value=0
+          | 选择显示优先级
+        - 0.upto(100).each do |i|
+          option value=i
+            = i
+
+    .form-group
+      a.ml-5 href="#this" onclick="javascript:$('#faqModal').modal();"
+        i.fa.fa-question-circle
+
     .form-group
       button.btn.btn-search.ml-10 type='submit' 添加分类
   
@@ -11,7 +24,8 @@
   table.table
     thread
       tr.active
-        th 分类名称        
+        th 分类名称
+        th 显示优先级   
         th #
     tbody
       - if @categories.present?
@@ -20,12 +34,25 @@
             td 
               = category.name
             td
+              = category.queue
+            td
               a href="#{goods_path(category_id: category.id)}" 商品列表
               = link_to "删除", category_path(category), data: {confirm: '确定要删除此分类吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"   
 
       - else
         tr
           td 暂无数据
+
+#faqModal.modal.fade role="dialog"
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal"
+          span aria-hidden="true" &times;
+        h5.modal-title 显示优先级
+
+      .modal-body
+        | APP内显示顺序是以优先级由高到底排列的       
 
 .nav
   = pager :total => @total, :page => @page, :per_page => @per_page
