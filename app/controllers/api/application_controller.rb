@@ -4,6 +4,8 @@ class Api::ApplicationController < ApplicationController
 
   skip_before_action :verify_authenticity_token  
   skip_before_action :login_required
+  
+  layout false
 
   respond_to :json
 
