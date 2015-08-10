@@ -65,6 +65,8 @@ window.GoodView = Backbone.View.extend
     
     name = $('input[name=name]').val()
     price = $('input[name=price]').val()
+    unit = $('input[name=unit]').val()
+    address = $('input[name=address]').val()
     description = good_description.html()    
 
     if category_ids == ''            
@@ -82,11 +84,13 @@ window.GoodView = Backbone.View.extend
       this.alertMsg('价格必须大于等于0')
       return
     else if name == ''
-      this.alertMsg('规格不能为空')
-      return          
-
+      this.alertMsg('名称不能为空')
+      return      
+    else if unit == ''    
+      this.alertMsg('单位不能为空')
+      return
     else
-      $.post '/goods', {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, description: description}, (res) ->
+      $.post '/goods', {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, unit: unit, address: address, description: description}, (res) ->
         if res.success
           $("#goodsModal").modal()
         else
@@ -110,6 +114,8 @@ window.GoodView = Backbone.View.extend
 
     name = $('input[name=name]').val()
     price = $('input[name=price]').val()
+    unit = $('input[name=unit]').val()
+    address = $('input[name=address]').val()    
     good_id = $('input[name=good_id]').val()
     description = good_description.html()    
 
@@ -128,14 +134,17 @@ window.GoodView = Backbone.View.extend
       this.alertMsg('价格必须大于等于0')
       return
     else if name == ''
-      this.alertMsg('规格不能为空')
+      this.alertMsg('名称不能为空')
       return          
+    else if unit == ''    
+      this.alertMsg('单位不能为空')
+      return
 
     else
       $.ajax
         type: 'PUT'
         url: '/goods/' + good_id
-        data: {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, description: description}
+        data: {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, unit: unit, address: address, description: description}
         success: (res) ->
           if res.success
             window.location.href = "/goods"

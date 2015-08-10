@@ -39,8 +39,17 @@ css:
   .form-group
     = hidden_field_tag :good_id, @good.id
     = text_field_tag :name, @good.name, placeholder: '产品名称', class: 'form-control'
+
+  .form-group.clearfix    
+    = text_field_tag :price, @good.price, placeholder: '价格', class: 'form-control pull-left mr-20', style: "width: 100px;"
+    .input-group.ml-20      
+      span.input-group-addon.ml-20
+        | /
+      = text_field_tag :unit, @good.unit, placeholder: '单位 例如( 个  500g )', class: 'form-control ', style: "width: 200px;" 
+      
   .form-group
-    = text_field_tag :price, @good.price, placeholder: '价格', class: 'form-control'    
+    = text_field_tag :address, @good.address, placeholder: '产地', class: 'form-control'
+
   .form-group
     = kindeditor_tag :description, @good.description,  placeholder: '产品详情', class: 'form-control', editor_id: 'good_description'
   .form-group

@@ -15,12 +15,13 @@
     - if @goods.present?      
       thread.mt-20
         tr.active
-          td 规格名称
-          td 规格描述
+          td 商品名称
+          td 商品描述
           td 分类
           td 分区
-          td 规格价格(¥)
-          td 规格图片
+          td 商品价格(¥)
+          td 产地
+          td 商品图片
           td #
         tbody
           - @goods. each do |good|  
@@ -34,7 +35,12 @@
                 - good.categories.partition.each do |cate|
                   span.label.label-info.ml-5= cate.name
 
-              td= good.price
+              td
+                = good.price
+                | /
+                = good.unit
+              td= good.address
+
               td
                 - good.photo_urls.each do |pic|
                   = image_tag pic, size: "40x40", class: "pic_thumb ml-10"

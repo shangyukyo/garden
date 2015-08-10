@@ -32,6 +32,8 @@ class GoodsController < ApplicationController
       @good.name = params[:name]
       @good.origin_price = params[:price]
       @good.price = params[:price]
+      @good.unit = params[:unit]
+      @good.address = params[:address]
       @good.description = params[:description]
       @good.photo_asset_ids = params[:photo_asset_ids]
       @good.save!
@@ -56,6 +58,8 @@ class GoodsController < ApplicationController
       @good.name = params[:name]
       @good.origin_price = params[:price]
       @good.price = params[:price]      
+      @good.unit = params[:unit]
+      @good.address = params[:address]      
       @good.description = params[:description]
       @good.photo_asset_ids = params[:photo_asset_ids]      
       @good.save!

@@ -3,6 +3,10 @@ class Good < ActiveRecord::Base
   has_many :goods_categories, class_name: 'GoodsCategory'
   has_many :categories, through: :goods_categories
 
+  acts_as_taggable
+
+  store :ext, accessors: [:unit, :address]
+
   default_scope { order('id desc') }
 
   enum status: {
