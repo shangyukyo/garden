@@ -1,7 +1,7 @@
 class Api::CategoriesController < Api::ApplicationController
 
   def index
-    @categories = Category.normal.order('queue desc')  
+    @categories = Category.normal.show.order('queue desc')  
   end
 
   def show

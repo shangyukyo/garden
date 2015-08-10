@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810073556) do
+ActiveRecord::Schema.define(version: 20150810102523) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "province",   limit: 255
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150810073556) do
   create_table "categories", force: :cascade do |t|
     t.string   "name",          limit: 255
     t.integer  "category_type", limit: 4,     default: 0, null: false
+    t.integer  "status",        limit: 4,     default: 0, null: false
     t.integer  "queue",         limit: 4,     default: 0, null: false
     t.text     "ext",           limit: 65535
     t.datetime "created_at",                              null: false

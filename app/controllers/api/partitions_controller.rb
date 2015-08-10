@@ -1,7 +1,7 @@
 class Api::PartitionsController < Api::ApplicationController
 
   def index
-    @partitions = Category.partition.order('queue desc')            
+    @partitions = Category.partition.show.order('queue desc')            
   end
 
   def show

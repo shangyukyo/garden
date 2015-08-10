@@ -28,8 +28,18 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
 
-  resources :categories, only: [:index, :create, :destroy]
-  resources :partitions, only: [:index, :create, :destroy]
+  resources :categories do
+    member do 
+      get :switch_display
+    end
+  end
+
+  resources :partitions do 
+    member do 
+      get :switch_display
+    end
+  end
+
   resources :cities, only: [:index, :create, :destroy]
   resources :areas, only: [:index, :create, :destroy]
   resources :schools, only: [:index, :create, :destroy]
