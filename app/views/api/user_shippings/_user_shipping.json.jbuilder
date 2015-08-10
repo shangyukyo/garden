@@ -1,1 +1,1 @@
-json.(user_shipping, :id, :default, :province, :city, :region, :address, :zip_code, :name, :mobile)
+json.(user_shipping, :id, :defaults, :province, :city, :region, :address, :zip_code, :name, :mobile)

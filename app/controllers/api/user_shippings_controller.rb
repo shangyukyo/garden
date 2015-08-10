@@ -19,7 +19,7 @@ class Api::UserShippingsController < Api::ApplicationController
     begin
       authenticate!
       @user_shipping = @current_user.user_shippings.build
-      @user_shipping.default = params[:default]
+      @user_shipping.default = params[:defaults]
       @user_shipping.area  = params[:area]
       @user_shipping.school = params[:school]      
       @user_shipping.address = params[:address]
