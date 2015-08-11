@@ -17,4 +17,8 @@ class Api::GoodsController < Api::ApplicationController
     end
   end
 
+  def description
+    render html: Good.find(params[:id]).description.html_safe
+  end
+
 end

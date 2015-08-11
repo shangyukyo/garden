@@ -13,7 +13,11 @@ Rails.application.routes.draw do
       end
     end    
 
-    resources :goods, only: [:index, :show]
+    resources :goods, only: [:index, :show] do 
+      member do 
+        get :description
+      end
+    end
 
     resources :categories, only: [:index, :show]
     resources :partitions, only: [:index, :show]

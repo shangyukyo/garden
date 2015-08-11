@@ -19,4 +19,8 @@ class Good < ActiveRecord::Base
     Asset.where(id: photo_asset_ids.split(',')).map(&:resource_url)
   end  
 
+  def description_url
+    "http://101.200.197.162/api/goods/#{self.id}/description"
+  end
+
 end

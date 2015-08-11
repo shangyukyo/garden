@@ -1,1 +1,1 @@
-json.(good, :id, :name, :description, :price, :unit, :address, :photo_urls, :created_at, :updated_at)
+json.(good, :id, :name, :description, :description_url, :price, :unit, :address, :photo_urls, :created_at, :updated_at)
