@@ -1,0 +1,9 @@
+---
+zh-CN:
+  order:
+    statuses:
+      pending:            待支付
+      paid:               已支付 等待配送
+      delivering:         配送中
+      finished:           订单完成
+      canceled:           已取消的订单

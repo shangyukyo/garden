@@ -1,0 +1,32 @@
+.page-header
+  h3: small 订单详情
+
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 产品图片
+        th 产品名称
+        th 数量
+        th 单价
+        th 总价        
+        th #
+    tbody      
+      - @order_goods.inspect
+      - if @order_goods.present?
+        - @order_goods.each do |order_good|          
+          tr
+            td= image_tag order_good.good.photo_urls.first, size: '60x60'
+            td= order_good.good_snapshot["name"]
+            td= order_good.quantity
+            td= order_good.good_snapshot["price"]
+            td= order_good.price            
+            td              
+      - else
+        tr
+          td 暂无数据
+
+.pull-right
+  | 总共
+  span.text-danger #{@order_goods.sum(:quantity)}
+  | 件商品          

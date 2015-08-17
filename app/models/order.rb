@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   include AASM
+  include LocaleTransform
 
   belongs_to :user
   has_many :order_goods

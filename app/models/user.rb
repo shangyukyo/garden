@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 
           order_good                = order.order_goods.build
           order_good.good_id        = good.id
-          order_good.price          = good.price
+          order_good.price          = good.price * quantity
           order_good.quantity       = quantity
           order_good.good_snapshot  = good.as_json(except: [:status, :created_at, :updated_at, :deleted_at])
           order_good.save!

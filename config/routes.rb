@@ -52,7 +52,11 @@ Rails.application.routes.draw do
   
   resources :goods
   
-  resources :orders, only: [:index, :show]
+  resources :orders, only: [:index, :show] do 
+    member do
+      post :delivery
+    end
+  end
 
   resources :photos, only: [] do 
     collection do 

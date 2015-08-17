@@ -1,0 +1,56 @@
+.page-header
+  h3: small 订单列表
+
+.search
+  = form_tag "#{orders_path}", class: 'form-inline', method: 'get', role: 'form' do 
+    .form-group      
+      = text_field_tag 'order_no', params[:order_no], class: 'form-control input-sm', placeholder: '订单编号'
+
+    .form-group             
+      = datetime_field_tag :start_at, params[:start_at], class: 'form-control input-sm ml-20', placeholder: '开始时间 1980-01-01 24:00:00'      
+    .form-group                
+      = datetime_field_tag :end_at, params[:end_at], class: 'form-control input-sm ml-20', placeholder: '结束时间 1980-01-01 24:00:00'   
+       
+    .form-group
+      - status_ar = [ ['所有', nil] ] + Order.statuses.map{|k, v| [I18n.t("order.statuses.#{k}"), k.to_sym]}
+      
+      = select_tag "status", options_for_select(status_ar, [params[:status]]), class: 'form-control input-sm ml-20'
+
+    .form-group                      
+      button.btn.btn-search.ml-10 type='submit' 搜索
+        
+
+.table-responsive
+  table.table
+    - if @orders.present?      
+      thread.mt-20
+        tr.active
+          td 订单编号
+          td 订单价格
+          td 订单状态
+          td 配送地址
+          td 下单时间
+          td #
+        tbody
+          - @orders.each do |order|  
+            tr
+              td= order.order_no
+              td= order.total_price
+              td= order.status_i18n                
+              td= order.shipping
+              td= order.created_at.strftime('%F %T')
+              td
+                a href="#{order_path(order)}" data-no-turbolink="true" 商品详情
+                - if order.status == "paid"
+                  = link_to "配送", delivery_order_path(id: order.id), data: {confirm: '确定要配送此订单吗?'}, method: :post, class: "btn btn-danger btn-xs ml-20"       
+
+
+    - else
+      tr
+        td 暂无数据
+
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+
+
