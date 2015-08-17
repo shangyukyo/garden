@@ -17,6 +17,10 @@ Rails.application.routes.draw do
       member do 
         get :description
       end
+
+      collection do 
+        get :search
+      end
     end
 
     resources :categories, only: [:index, :show]

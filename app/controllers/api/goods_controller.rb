@@ -21,4 +21,8 @@ class Api::GoodsController < Api::ApplicationController
     render html: Good.find(params[:id]).description.html_safe
   end
 
+  def search
+    @goods = Good.where("name like ?", "%#{params[:name]}%")
+  end
+
 end

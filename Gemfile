@@ -44,6 +44,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'acts-as-taggable-on', '~> 3.4'
 
+gem 'sidekiq'
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -66,6 +69,7 @@ group :development, :test do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'  
   gem 'capistrano-rails'  
+  gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'  
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
