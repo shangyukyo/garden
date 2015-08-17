@@ -17,6 +17,14 @@ GIT
       capistrano (~> 3.0)
 
 GIT
+  remote: git://github.com/seuros/capistrano-sidekiq.git
+  revision: 3f200fdb679d47cf5252352146dfaefbbecf8479
+  specs:
+    capistrano-sidekiq (0.5.4)
+      capistrano
+      sidekiq
+
+GIT
   remote: https://github.com/Macrow/rails_kindeditor.git
   revision: fc247c3b565057e47aff70ddf41ea0293fce99a9
   specs:
@@ -287,6 +295,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
+  capistrano-sidekiq!
   capistrano-unicorn!
   carrierwave!
   coffee-rails (~> 4.1.0)
