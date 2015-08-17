@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :partitions, only: [:index, :show]
 
     resources :cities, only: [:index, :show]
+
+    resources :orders
   end
 
   root 'index#login'
