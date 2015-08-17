@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   has_many :order_goods
   has_many :goods, through: :order_goods
 
-  store :ext, accessors: [:shipping]
+  store :ext, accessors: [:shipping, :coupon]
 
 
   enum status: {
