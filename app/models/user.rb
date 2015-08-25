@@ -51,6 +51,11 @@ class User < ActiveRecord::Base
         end
 
         if coupon.present?
+          
+          if coupon.start_at < Time.now and coupon.expired_at > Time.now
+            raise "优惠券已过有效期或未到有效期!"
+          end
+
           total_price -= coupon.price
           use_coupon(coupon.id)
           order.coupon = coupon.as_json(except: [:created_at, :updated_at])

@@ -10,10 +10,6 @@ set :repo_url, 'git@github.com:shangyukyo/garden.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/garden/www"
 
-set :pty,  false
-
-set :sidekiq_monit_use_sudo, false
-
 # Default value for :scm is :git
 # set :scm, :git
 

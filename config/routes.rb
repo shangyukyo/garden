@@ -11,6 +11,10 @@ Rails.application.routes.draw do
       collection do 
         get :lu
       end
+
+      member do
+        post :update
+      end
     end    
 
     resources :goods, only: [:index, :show] do 
