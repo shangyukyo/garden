@@ -35,8 +35,10 @@ class GoodsController < ApplicationController
       @good.unit = params[:unit]
       @good.address = params[:address]
       @good.description = params[:description]
-      @good.photo_asset_ids = params[:photo_asset_ids]
+      @good.photo_asset_ids = params[:photo_asset_ids]      
       @good.save!
+
+      @good.published!
 
       @good.categories = @categories
 
