@@ -3,7 +3,16 @@ class Api::GoodsController < Api::ApplicationController
   def index
     begin      
       category = Category.find params[:category_id]
-      @goods = category.goods.published      
+      @goods = category.goods.published
+
+      if params[:by_sales].present?
+        @goods = @goods.order("sales #{params[:by_sales]}")
+      end
+
+      if params[:by_price].present?
+        @goods = @goods.order("price #{params[:by_price]}")
+      end
+
     rescue => e
       error e.inspect
     end
