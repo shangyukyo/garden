@@ -30,7 +30,11 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :show]
     resources :partitions, only: [:index, :show]
 
-    resources :cities, only: [:index, :show]
+    resources :cities, only: [:index, :show] do 
+      collection do 
+        get :search
+      end
+    end
 
     resources :orders
   end
