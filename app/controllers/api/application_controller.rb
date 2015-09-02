@@ -26,11 +26,13 @@ class Api::ApplicationController < ApplicationController
   private
 
   def error(message, status = 200)
-    render json: { error: message }, status: status and return
+    render json: { error: message }, status: status
+    return 
   end
 
   def render_json(data)
-    render json: {success: true, data: data}, status: 200 and return
+    render json: {success: true, data: data}, status: 200
+    return
   end
   
 end
