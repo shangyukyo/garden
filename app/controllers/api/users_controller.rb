@@ -6,6 +6,10 @@ class Api::UsersController < Api::ApplicationController
   def login
     token = Token.where(mobile: params[:mobile], body: params[:verfiy_code])
 
+    if not params[:mobile].present?
+      error "错误的参数!", 200
+    end
+
     if false #not token.present?
       error("验证码无效或者已过期!", status = 200)
     else      
