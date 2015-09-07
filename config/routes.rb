@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     end
 
     resources :orders
+
+    resources :coupons, only: [:index]
   end
 
   root 'index#login'
