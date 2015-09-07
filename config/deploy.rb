@@ -34,8 +34,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :pid_path, "#{shared_path}/tmp/pids"
-set :log_path, "#{shared_path}/log"
+set :pid_path, "#{linked_dirs}/tmp/pids"
+set :log_path, "#{linked_dirs}/log"
 
 namespace :unicorn do
   pid = "#{fetch(:pid_path)}/unicorn.pid"

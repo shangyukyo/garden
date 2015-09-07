@@ -10,10 +10,11 @@ Rails.application.routes.draw do
     resources :user_shippings, only: [:index, :show, :create] do 
       collection do 
         get :lu
-      end
+        post :delete
+      end      
 
       member do
-        post :update
+        post :update        
       end
     end    
 

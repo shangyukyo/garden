@@ -18,16 +18,13 @@ class Api::ApplicationController < ApplicationController
   end
   
   def authenticate!
-    if params[:token].blank? || !current_user
-      error('未登录或登录已失效', 401)
+    if params[:token].blank? || !current_user      
+      raise '未登录或者登录实效'
     end
   end  
 
-  private
-
-  def error(message, status = 200)
-    render json: { error: message }, status: status
-    return 
+  def error(message, status = 200)      
+    render json: { error: message }, status: 200 and return
   end
 
   def render_json(data)

@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
     ActiveRecord::Base.transaction do 
       begin
         raise "商品不能为空" if not goods_info.present?        
+        
         total_price = total_quantity  = 0        
         order          = orders.build
         user_shipping  = user_shippings.find(user_shipping_id)
