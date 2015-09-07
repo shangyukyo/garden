@@ -1,0 +1,33 @@
+.page-header
+  h3: small 优惠券列表
+
+.search
+  a.btn.btn-danger.ml-10 href="#{new_coupon_path}" 添加优惠券
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 优惠券名称
+        th 优惠券价值(元)      
+        th 有效期 开始时间
+        th 有效期 结束时间
+        th #
+    tbody
+      - if @coupons.present?
+        - @coupons.each do |coupon|
+          tr
+            td 
+              = coupon.name
+            td= coupon.price
+            td= coupon.start_at.strftime('%F %T')
+            td= coupon.expired_at.strftime('%F %T')
+            td
+              = link_to "删除", coupon_path(coupon), data: {confirm: '确定要删除此优惠券吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

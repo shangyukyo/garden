@@ -1,0 +1,18 @@
+.page-header
+  h3: small 添加优惠券
+
+- if flash[:alert].present?
+  .alert.alert-danger= flash[:alert]
+
+.clearfix
+  = form_tag coupons_path, class: 'form', role: 'form', method: :post
+  .form-group
+    = text_field_tag 'name', nil, class: 'form-control', placeholder: '优惠券名称'
+  .form-group
+    = text_field_tag 'price', nil, class: 'form-control', placeholder: '价值(元)'
+  .form-group
+    = datetime_field_tag 'start_at', nil, class: 'form-control', placeholder: '有效期 开始时间 格式例如 1970-01-01 01:00:00' 
+  .form-group
+    = datetime_field_tag 'expired_at', nil, class: 'form-control', placeholder: '有效期 结束时间 格式例如 1970-01-01 01:00:00'
+  .form-group
+    button.btn.btn-primary.createGoodsBtn type='submit' 提交

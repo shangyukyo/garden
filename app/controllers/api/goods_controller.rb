@@ -34,4 +34,8 @@ class Api::GoodsController < Api::ApplicationController
     @goods = Good.where("name like ?", "%#{params[:name]}%")
   end
 
+  def hot_keywords
+    render json: Good.last(10).map(&:name)
+  end
+
 end

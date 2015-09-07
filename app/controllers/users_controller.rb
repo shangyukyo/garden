@@ -14,4 +14,13 @@ class UsersController < ApplicationController
 
   def show
   end
+
+  def shippings
+    @user = User.find params[:id]
+    @shippings = @user.user_shippings
+  end
+
+  def give_coupon
+  end
+
 end

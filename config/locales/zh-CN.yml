@@ -1,0 +1,22 @@
+---
+zh-CN:
+  activerecord:
+    attributes:
+      coupon:
+        start_at: 有效期 开始时间
+        expired_at: 有效期 结束时间
+        price: 价值
+        name: 名称
+
+    errors:
+      models:
+        coupon:
+          attributes:
+            start_at:
+              blank: 有效期 开始时间不能为空
+            expired_at: 
+              blank: 有效期结束时间不能为空
+            price:  
+              blank: 价值不能为空
+            name: 
+              blank: 名称不能为空

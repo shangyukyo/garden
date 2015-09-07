@@ -37,7 +37,13 @@
               td= order.order_no
               td= order.total_price
               td= order.status_i18n                
-              td= order.shipping
+              td
+                - if order.shipping.present?
+                  span.label.label-info
+                    | 社区: #{order.shipping["area"] || "空"} 学校: #{order.shipping["school"] || "空"} 地址: #{order.shipping["address"]} 收货人: #{order.shipping["name"]} 手机号: #{order.shipping["mobile"]}
+                - else
+                  | 空
+
               td= order.created_at.strftime('%F %T')
               td
                 a href="#{order_path(order)}" data-no-turbolink="true" 商品详情

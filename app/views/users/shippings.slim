@@ -1,0 +1,33 @@
+.page-header
+  h3: small 收货地址列表
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 是否默认收货地址
+        th 社区
+        th 学校
+        th 地址
+        th 收货人
+        th 手机号
+        th #
+    tbody
+      - if @shippings.present?
+        - @shippings.each do |shipping|
+          tr
+            td= shipping.default ? "默认收货地址" : "否"
+            td= shipping.area
+            td= shipping.school
+            td= shipping.address
+            td= shipping.name
+            td= shipping.mobile
+            td
+              #
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

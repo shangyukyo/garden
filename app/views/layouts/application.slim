@@ -56,7 +56,13 @@ html
         li class="#{params[:controller] == 'schools' ? 'active' : nil}"
           a href="#{schools_path}"
             i.fa.fa-home
-            p 配送学校                             
+            p 配送学校              
+
+        li class="#{params[:controller] == 'coupons' ? 'active' : nil}"
+          a href="#{coupons_path}"
+            i.fa.fa-money
+            p 优惠券                             
+
 
 
                       

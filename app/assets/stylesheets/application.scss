@@ -11,6 +11,26 @@
   padding: 0 0;
 }
 
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: $left-active-background; 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255,0,0,0.4); 
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}   
+
+
 
 .left {
   background-color: $left-background;  
@@ -36,7 +56,15 @@
 
 
   & > ul {
-    width: 100%;    
+    width: 100%;   
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;   
+
+    SCROLLBAR-FACE-COLOR: rgb(255,0,0);
+    SCROLLBAR-3DLIGHT-COLOR: rgb(255,0,0);
+    SCROLLBAR-DARKSHADOW-COLOR: rgb(255,0,0);
+    SCROLLBAR-BASE-COLOR: rgb(255,255,255);        
 
     & > li {      
       width: $left-width;

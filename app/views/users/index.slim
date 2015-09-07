@@ -18,7 +18,7 @@
               = image_tag user.avatar_url(:thumb), size: "20x20"
             td= user.mobile
             td
-              a href='#' 收获地址
+              a href="#{shippings_user_path(user)}" 收货地址
       - else
         tr
           td 暂无数据

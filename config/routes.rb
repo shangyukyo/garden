@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
       collection do 
         get :search
+        get :hot_keywords
       end
     end
 
@@ -45,7 +46,11 @@ Rails.application.routes.draw do
   match 'login'    => 'index#login', via: [:get, :post], as: :login
   match 'sign_out' => 'index#sign_out', via: [:get, :post], as: :sign_out  
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do 
+    member do 
+      get :shippings      
+    end
+  end
 
   resources :categories do
     member do 
@@ -76,5 +81,7 @@ Rails.application.routes.draw do
       post :handler
     end
   end
+
+  resources :coupons
 
 end
