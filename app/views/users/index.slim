@@ -19,10 +19,32 @@
             td= user.mobile
             td
               a href="#{shippings_user_path(user)}" 收货地址
+              a.ml-10 href="javascript:;" onclick="javascript: _couponView.popupCoupon('#{user.id}');" 发送优惠券
       - else
         tr
           td 暂无数据
 
+
 .nav
   = pager :total => @total, :page => @page, :per_page => @per_page
 
+
+#couponsModal.modal.fade role="dialog"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal"
+          span aria-hidden="true" &times;
+        h5.modal-title  有效期内的优惠券
+
+      .modal-body style="text-align:center;"
+        select#couponSelect.form-control.input-sm name="coupons"
+          - @coupons.each do |coupon|
+            option value="#{coupon.id}" #{coupon.name}  -----------  #{coupon.price} 元
+      .modal-footer
+        a.btn.btn-primary.ml-10.giveCouponBtn href="javascript:_couponView.giveCoupon();"  发送优惠券
+
+javascript:
+  $(function(){
+    window._couponView = new CouponView()
+  })            

@@ -8,6 +8,8 @@ class UsersController < ApplicationController
       @users = @users.where(mobile: params[:mobile])      
     end
 
+    @coupons = Coupon.effect_coupons.order('id desc')
+
     @total = @users.size
     @users = @users.order('id desc').offset(@o).limit(@per_page)    
   end
@@ -21,6 +23,16 @@ class UsersController < ApplicationController
   end
 
   def give_coupon
+    begin
+      coupon = Coupon.find(params[:coupon_id])
+
+      users = params[:user] == 'all' ? User.all : User.where(id: params[:user])
+
+      render json: {success: coupon.give_to(users)}
+    rescue => e
+      raise e
+      render json: {success: false}
+    end
   end
 
 end

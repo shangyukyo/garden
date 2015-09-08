@@ -1,0 +1,32 @@
+.page-header
+  h3: small 广告列表
+
+.search
+  a.btn.btn-danger.ml-10 href="#{new_poster_path}" 添加广告
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 广告图片
+        th 产品名称        
+        th 创建时间
+        th #
+    tbody
+      - if @posters.present?
+        - @posters.each do |poster|
+          - good = poster.good
+          tr
+            td 
+              = image_tag poster.poster_asset.resource_url(:thumb)              
+            td= good.name
+            td= poster.created_at.strftime('%F %T')            
+            td
+              = link_to "删除", poster_path(poster), data: {confirm: '确定要删除此广告吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

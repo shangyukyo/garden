@@ -41,6 +41,8 @@ Rails.application.routes.draw do
     resources :orders
 
     resources :coupons, only: [:index]
+
+    resources :posters, only: [:index]
   end
 
   root 'index#login'
@@ -51,6 +53,10 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do 
     member do 
       get :shippings      
+    end
+
+    collection do 
+      post :give_coupon
     end
   end
 
@@ -81,9 +87,16 @@ Rails.application.routes.draw do
   resources :photos, only: [] do 
     collection do 
       post :handler
+      post :handle_poster
     end
   end
 
   resources :coupons
+
+  resources :posters do 
+    collection do
+      post :good_info
+    end
+  end
 
 end

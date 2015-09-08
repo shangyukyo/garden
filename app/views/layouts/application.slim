@@ -61,7 +61,14 @@ html
         li class="#{params[:controller] == 'coupons' ? 'active' : nil}"
           a href="#{coupons_path}"
             i.fa.fa-money
-            p 优惠券                             
+            p 优惠券        
+
+        li class="#{params[:controller] == 'posters' ? 'active' : nil}"
+          a href="#{posters_path}"
+            i.fa.fa-photo
+            p 广告                   
+
+        li                     
 
 
 

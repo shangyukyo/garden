@@ -1,0 +1,33 @@
+.page-header
+  h3: small 添加广告
+
+- if flash[:alert].present?
+  .alert.alert-danger= flash[:alert]
+
+.clearfix
+  .poster-pictures
+    span.btn.btn-success.fileinput-button.mb-10
+      i.fa.fa-plus
+      span 添加图片      
+      | <input id="resource" type="file" name="resource" data-url="/photos/handle_poster" multiple>
+
+    .row
+hr
+.clearfix
+  = form_tag posters_path, class: 'form posterForm', role: 'form', method: :post
+    = hidden_field_tag 'asset_id'
+    .form-group
+      .input-group.col-md-2
+        = text_field_tag 'good_id', nil, class: 'form-control',  placeholder: '商品ID'
+        .input-group-addon onclick="javascript:_posterView.checkGood();" 查找商品
+    .form-group
+      button.btn.btn-primary.createPoster type="submit" 提交
+
+
+
+
+javascript:
+  $(function(){
+    window._posterView = new PosterView
+
+  })    
