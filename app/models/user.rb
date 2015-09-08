@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
           order_good.save!
 
           total_quantity += quantity
-          total_price += (order_good.price * quantity)
+          total_price += order_good.price
         end
 
         if coupon.present?
