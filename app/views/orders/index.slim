@@ -29,6 +29,7 @@
           td 订单价格
           td 订单状态
           td 配送地址
+          td 优惠券
           td 下单时间
           td #
         tbody
@@ -44,6 +45,8 @@
                 - else
                   | 空
 
+              td= order.coupon.present? ? "优惠券名称: #{order.coupon['name']}, 价值: #{order.coupon['price']}" : '未使用优惠券'
+              
               td= order.created_at.strftime('%F %T')
               td
                 a href="#{order_path(order)}" data-no-turbolink="true" 商品详情
