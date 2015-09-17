@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :posters, only: [:index]
   end
 
-  root 'index#login'
+  # root 'index#login'  
 
   match 'login'    => 'index#login', via: [:get, :post], as: :login
   match 'sign_out' => 'index#sign_out', via: [:get, :post], as: :sign_out  

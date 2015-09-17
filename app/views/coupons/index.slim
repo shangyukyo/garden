@@ -1,8 +1,25 @@
 .page-header
   h3: small 优惠券列表
 
-.search
-  a.btn.btn-danger.ml-10 href="#{new_coupon_path}" 添加优惠券
+- if not params[:coupon_type].present?
+  .search
+    a.btn.btn-danger.ml-10 href="#{new_coupon_path}" 添加优惠券
+
+.selectTabBar.clearfix
+  ul.nav.nav-pills
+    li class="#{!params[:coupon_type].present? ? 'active' : nil}"
+      a.btn.btn-default.btn-xs href="#{coupons_path}" 
+        | 普通优惠券        
+
+    li class="#{params[:coupon_type] == 'new_user' ? 'active' : nil}"
+      a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'new_user')}" 
+        | 新手注册优惠券        
+
+    li class="#{params[:coupon_type] == 'consume_100' ? 'active' : nil}"
+      a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'consume_100')}" 
+        | 消费满100元优惠券        
+
+
   
 .table-responsive
   table.table

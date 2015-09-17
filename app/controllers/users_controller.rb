@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       @users = @users.where(mobile: params[:mobile])      
     end
 
-    @coupons = Coupon.effect_coupons.order('id desc')
+    @coupons = Coupon.default.effect_coupons.order('id desc')
 
     @total = @users.size
     @users = @users.order('id desc').offset(@o).limit(@per_page)    

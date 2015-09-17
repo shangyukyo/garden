@@ -4,7 +4,9 @@ class Coupon < ActiveRecord::Base
   validates :expired_at,  presence: true
 
   enum coupon_type: {
-    default: 0    
+    default: 0,
+    new_user: 1,
+    consume_100: 2
   }
 
   scope :effect_coupons, -> {where("start_at < ? and expired_at > ?", Time.now, Time.now)}

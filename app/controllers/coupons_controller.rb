@@ -2,7 +2,14 @@ class CouponsController < ApplicationController
 
   def index
     pagination
-    @coupons = Coupon.all
+    @coupons = Coupon.default
+
+    if params[:coupon_type] == "new_user"
+      @coupons = Coupon.new_user
+    elsif params[:coupon_type] == "consume_100"
+      @coupons = Coupon.consume_100
+    end
+
     @total = @coupons.size
     @coupons = @coupons.order('id desc').offset(@o).limit(@per_page)
   end

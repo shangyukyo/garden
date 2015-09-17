@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  after_create :give_new_user_coupon
+
   def generate_private_token
     loop do
       self.private_token = SecureRandom.hex(16)
@@ -21,6 +23,12 @@ class User < ActiveRecord::Base
   def avatar_url_thumb
     avatar_url(:thumb)
   end
+
+  def give_new_user_coupon
+    coupon = Coupon.new_user.first
+    coupon.give_to [self]
+  end
+
 
   #下单
   def placed!(user_shipping_id, goods_info, coupon_id)

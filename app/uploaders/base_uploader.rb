@@ -35,15 +35,15 @@ class BaseUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
 
   version :small do
-    process :resize_to_fit => [100, 100]
+    process :resize_to_fit => [375, 200]
   end  
 
   version :middle do
-    process :resize_to_fit => [200, 200]
+    process :resize_to_fit => [750, 400]
   end
 
   version :large do 
-    process :resize_to_fit => [300, 300]
+    process :resize_to_fit => [1125, 600]
   end
 
   def extension_white_list
