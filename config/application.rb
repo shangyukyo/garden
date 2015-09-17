@@ -19,8 +19,11 @@ module Garden
     config.time_zone = 'Beijing'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-
+    config.eager_load_paths += ["#{config.root}/lib"]
+    
+    config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths += %W(#{config.root}/app/uploaders)
+
 
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
 

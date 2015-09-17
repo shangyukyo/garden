@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
     resource :user, only: [] do       
       post :login
-      post :upload_avatar      
+      post :upload_avatar
+
+      collection do 
+        post :send_verfiy_code
+      end
     end
 
     resources :user_shippings, only: [:index, :show, :create] do 

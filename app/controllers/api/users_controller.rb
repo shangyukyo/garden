@@ -1,6 +1,11 @@
 class Api::UsersController < Api::ApplicationController
 
-  def send_verfiy_code 
+  def send_verfiy_code
+    error "错误的参数!" if not params[:mobile].present?
+
+    token = Token.generate_body params[:mobile]
+    token.send_msg
+    render_json send: 'ok'
   end
 
   def login
