@@ -1,31 +1,17 @@
 .page-header
-  h3: small 分类列表
+  h3: small 分区列表
 
 .search
-  = form_tag partitions_path, class: 'form-inline', role: 'form', method: :post
-    .form-group
-      = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '分区名称'
-    .form-group      
-      select.form-control.input-sm.ml-10 name="queue"
-        option value=0
-          | 选择显示优先级
-        - 0.upto(100).each do |i|
-          option value=i
-            = i
-    .form-group
-      .a.ml-5 href="#this" onclick="javascript:$('#faqModal').modal();"
-        i.fa.fa-question-circle
-
-    .form-group
-      button.btn.btn-search.ml-10 type='submit' 添加分区
+  a.btn.btn-danger href="#{new_partition_path}" 添加分区
   
 .table-responsive
   table.table
     thread
       tr.active
-        th 分类名称
+        th 分区名称
         th 显示优先级
         th 状态
+        th 预览图
         th #
     tbody
       - if @partitions.present?
@@ -38,60 +24,23 @@
               span.label class="#{partition.show? ? 'label-info' : 'label-danger'}"
                 = partition.status_str
             td
+              - if partition.photo_url.present?
+                = image_tag partition.photo_url, size: '60x30'
+              - else
+                | 空
+
+            td
               a href="#{goods_path(category_id: partition.id)}" 商品列表
-              a.edit-btn.ml-10 href="#this" 编辑
+              a.edit-btn.ml-10 href="#{edit_partition_path(partition)}" 编辑
               = link_to "删除", partition_path(partition), data: {confirm: '确定要删除此分区吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20" 
 
               = link_to "#{partition.show? ? '隐藏此分区' : '显示此分区'}", switch_display_partition_path(partition), data: {confirm: "确定要#{partition.show? ? '隐藏' : '显示'}此分区吗?"}, class: "btn btn-warning btn-xs ml-20"
 
-          = form_tag partition_path(partition), method: :PUT, class: 'form'
-            tr.edit.sr-only
-              td              
-                .input-group.input-group-sm
-                  = text_field_tag :name, partition.name, class: 'form-control input-sm '
-              td
-                .input-group.input-group-sm
-                  select.form-control name="queue"
-                    - 0.upto(100).each do |i|
-                      - if partition.queue == i
-                        option value=i selected="selected"
-                          = i
-                      - else
-                        option value=i
-                          = i
-
-              td
-                = submit_tag "更新", class: "btn btn-primary btn-xs"
-                a.cancel-btn.ml-10.btn.btn-danger.btn-xs href="#this" 取消
 
       - else
         tr
-          td 暂无数据
-
-#faqModal.modal.fade role="dialog"
-  .modal-dialog.modal-sm
-    .modal-content
-      .modal-header
-        button.close data-dismiss="modal"
-          span aria-hidden="true" &times;
-        h5.modal-title 显示优先级
-
-      .modal-body
-        | APP内显示顺序是以优先级由高到底排列的            
+          td 暂无数据       
 
 .nav
   = pager :total => @total, :page => @page, :per_page => @per_page
 
-javascript:
-
-  $(function(){
-    $("a.edit-btn").click(function(){
-      $(this).closest('tr').hide();
-      $($(this).closest('tr').nextAll('tr.edit.sr-only').first()).removeClass('sr-only');
-    });
-
-    $("a.cancel-btn").click(function(){
-      $(this).closest('tr.edit').addClass('sr-only');
-      $($(this).closest('tr.edit').prevAll('tr').first()).show();
-    })
-  })

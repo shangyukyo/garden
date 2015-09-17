@@ -1,0 +1,58 @@
+.page-header
+  h3: small 编辑分类
+
+- if flash[:alert].present?
+  .alert.alert-danger= flash[:alert]
+
+.clearfix
+  .poster-pictures
+    span.btn.btn-success.fileinput-button.mb-10
+      i.fa.fa-plus
+      span 添加图片 图片尺寸比例(375x200)  
+      | <input id="resource" type="file" name="resource" data-url="/photos/handler" multiple>
+
+    .row
+      img-panel.col-xs-1.col-md-1
+        a.thumbnail
+          = image_tag @category.photo_url    
+hr
+.clearfix
+  = form_tag category_path(id: @category.id), class: 'form-inline', role: 'form', method: :put
+    = hidden_field_tag :asset_id, @category.asset_id
+    .form-group
+      = text_field_tag 'name', @category.name, class: 'form-control input-sm', placeholder: '分类名称'
+    .form-group      
+      select.form-control.input-sm.ml-10 name="queue"
+        option value=0 
+          | 选择显示优先级
+        - 0.upto(100).each do |i|
+          - if i == @category.queue
+            option value=i selected="selected"
+              = i
+          - else
+            option value=i
+              = i
+    .form-group
+      .a.ml-5 href="#this" onclick="javascript:$('#faqModal').modal();"
+        i.fa.fa-question-circle
+
+    .form-group
+      button.btn.btn-search.ml-10 type='submit' 修改分类
+
+#faqModal.modal.fade role="dialog"
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal"
+          span aria-hidden="true" &times;
+        h5.modal-title 显示优先级
+
+      .modal-body
+        | APP内显示顺序是以优先级由高到底排列的         
+
+
+javascript:
+  $(function(){
+    window._categoryView = new CategoryView
+
+  })          

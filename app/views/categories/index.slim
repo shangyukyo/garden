@@ -2,24 +2,8 @@
   h3: small 分类列表
 
 .search
-  = form_tag categories_path, class: 'form-inline', role: 'form', method: :post
-    .form-group
-      = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '分类名称'
-    .form-group      
-      select.form-control.input-sm.ml-10 name="queue"
-        option value=0
-          | 选择显示优先级
-        - 0.upto(100).each do |i|
-          option value=i
-            = i
+  a.btn.btn-danger href="#{new_category_path}" 添加分类
 
-    .form-group
-      a.ml-5 href="#this" onclick="javascript:$('#faqModal').modal();"
-        i.fa.fa-question-circle
-
-    .form-group
-      button.btn.btn-search.ml-10 type='submit' 添加分类
-  
 .table-responsive
   table.table
     thread
@@ -27,6 +11,7 @@
         th 分类名称
         th 显示优先级   
         th 状态
+        th 预览图
         th #
     tbody
       - if @categories.present?
@@ -41,59 +26,23 @@
                 = category.status_str
 
             td
+              - if category.photo_url.present?
+                = image_tag category.photo_url, size: '60x30'
+              - else
+                | 空
+
+            td
               a href="#{goods_path(category_id: category.id)}" 商品列表
-              a.edit-btn.ml-10 href="#this" 编辑
+              a.edit-btn.ml-10 href="#{edit_category_path(category)}" 编辑
               = link_to "删除", category_path(category), data: {confirm: '确定要删除此分类吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"     
 
               = link_to "#{category.show? ? '隐藏此分类' : '显示此分类'}", switch_display_category_path(category), data: {confirm: "确定要#{category.show? ? '隐藏' : '显示'}此分类吗?"}, class: "btn btn-warning btn-xs ml-20"                  
 
-          = form_tag category_path(category), method: :PUT, class: 'form'
-            tr.edit.sr-only
-              td              
-                .input-group.input-group-sm
-                  = text_field_tag :name, category.name, class: 'form-control input-sm '
-              td
-                .input-group.input-group-sm
-                  select.form-control name="queue"
-                    - 0.upto(100).each do |i|
-                      - if category.queue == i
-                        option value=i selected="selected"
-                          = i
-                      - else
-                        option value=i
-                          = i
-
-              td
-                = submit_tag "更新", class: "btn btn-primary btn-xs"
-                a.cancel-btn.ml-10.btn.btn-danger.btn-xs href="#this" 取消
 
       - else
         tr
           td 暂无数据
-
-#faqModal.modal.fade role="dialog"
-  .modal-dialog.modal-sm
-    .modal-content
-      .modal-header
-        button.close data-dismiss="modal"
-          span aria-hidden="true" &times;
-        h5.modal-title 显示优先级
-
-      .modal-body
-        | APP内显示顺序是以优先级由高到底排列的       
+    
 
 .nav
   = pager :total => @total, :page => @page, :per_page => @per_page
-
-javascript: 
-  $(function(){
-    $("a.edit-btn").click(function(){
-      $(this).closest('tr').hide();
-      $($(this).closest('tr').nextAll('tr.edit.sr-only').first()).removeClass('sr-only');
-    });
-
-    $("a.cancel-btn").click(function(){
-      $(this).closest('tr.edit').addClass('sr-only');
-      $($(this).closest('tr.edit').prevAll('tr').first()).show();
-    })
-  })
