@@ -5,7 +5,7 @@ class Good < ActiveRecord::Base
 
   acts_as_taggable
 
-  store :ext, accessors: [:unit, :address]
+  store :ext, accessors: [:unit, :address, :partition_photo, :category_photo]
 
   default_scope { order('id desc') }
 
@@ -21,6 +21,10 @@ class Good < ActiveRecord::Base
 
   def description_url
     "http://101.200.197.162/api/goods/#{self.id}/description"
+  end
+
+  def index_photo_url
+    Asset.find_by(id: partition_photo).try(:resource_url) || photo_urls.first
   end
 
 end

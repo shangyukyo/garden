@@ -32,6 +32,20 @@ css:
     .row
 
   hr
+
+  .partition-pictures
+    span.btn.btn-success.fileinput-button.mb-10
+      i.fa.fa-plus
+      span 添加图片 图片尺寸比例(375x200) 用于首页显示使用  
+      | <input id="partition-photo" type="file" name="resource" data-url="/photos/handler" multiple>
+
+    .row    
+   
+
+
+  hr
+  .form-group
+    = hidden_field_tag :partition_photo    
   .form-group
     = text_field_tag :name, nil, placeholder: '产品名称', class: 'form-control'
 

@@ -22,6 +22,7 @@
           td 分区
           td 商品价格(¥)
           td 产地
+          td 用于首页显示的图片
           td 商品图片
           td #
         tbody
@@ -43,6 +44,8 @@
                 = good.unit
               td= good.address
 
+              td
+                = image_tag good.index_photo_url, size: '40x40'
               td
                 - good.photo_urls.each do |pic|
                   = image_tag pic, size: "40x40", class: "pic_thumb ml-10"
