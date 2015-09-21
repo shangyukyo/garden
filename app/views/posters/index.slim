@@ -15,6 +15,7 @@
     tbody
       - if @posters.present?
         - @posters.each do |poster|
+          - next if not poster.good.present?
           - good = poster.good
           tr
             td 
