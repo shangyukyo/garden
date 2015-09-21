@@ -7,6 +7,8 @@ class Api::PostersController < Api::ApplicationController
       next if not p.good.present?
       p
     }
+    
+    @posters.delete(nil)    
   end
 
 end
