@@ -9,6 +9,16 @@
       button.btn.btn-search.ml-10 type='submit' 搜索
     .form-group  
       a.btn.btn-primary.ml-20 href="#{new_good_path}" data-no-turbolink="true" 添加商品
+
+.selectTabBar.clearfix
+  ul.nav.nav-pills
+    - Category.all.each do |c|
+      li class="#{params[:category_id] == c.id ? 'active' : nil}"
+        a.btn.btn-default.btn-xs href="#{goods_path(category_id: c.id)}" 
+          = c.name
+
+
+
   
 .table-responsive
   table.table
