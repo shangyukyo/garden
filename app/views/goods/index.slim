@@ -13,7 +13,7 @@
 .selectTabBar.clearfix
   ul.nav.nav-pills
     - Category.all.each do |c|
-      li class="#{params[:category_id] == c.id ? 'active' : nil}"
+      li class="#{params[:category_id].to_i == c.id ? 'active' : nil}"
         a.btn.btn-default.btn-xs href="#{goods_path(category_id: c.id)}" 
           = c.name
 

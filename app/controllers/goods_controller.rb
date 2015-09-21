@@ -15,7 +15,7 @@ class GoodsController < ApplicationController
     end
 
     @total = @goods.size
-    @categories = @goods.order('id desc').offset(@o).limit(@per_page)       
+    @goods = @goods.order('id desc').offset(@o).limit(@per_page)       
   end
 
   def show
