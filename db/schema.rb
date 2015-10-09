@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810102523) do
+ActiveRecord::Schema.define(version: 20151009025121) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "province",   limit: 255
@@ -94,6 +94,17 @@ ActiveRecord::Schema.define(version: 20150810102523) do
     t.datetime "updated_at",                                                      null: false
   end
 
+  create_table "order_payments", force: :cascade do |t|
+    t.string   "order_id",   limit: 255, null: false
+    t.string   "payment_no", limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "order_payments", ["order_id", "payment_no"], name: "index_order_payments_on_order_id_and_payment_no", using: :btree
+  add_index "order_payments", ["order_id"], name: "index_order_payments_on_order_id", using: :btree
+  add_index "order_payments", ["payment_no"], name: "index_order_payments_on_payment_no", using: :btree
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",            limit: 4
     t.string   "order_no",           limit: 255
@@ -104,6 +115,21 @@ ActiveRecord::Schema.define(version: 20150810102523) do
     t.text     "ext",                limit: 65535
     t.datetime "created_at",                                                              null: false
     t.datetime "updated_at",                                                              null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "user_id",                 limit: 4
+    t.string   "payment_no",              limit: 191,                                          null: false
+    t.string   "subject",                 limit: 255,                                          null: false
+    t.decimal  "original_amount",                     precision: 16, scale: 3, default: 0.0,   null: false
+    t.decimal  "amount",                              precision: 16, scale: 3, default: 0.0,   null: false
+    t.integer  "gateway",                 limit: 4,                            default: 0
+    t.string   "gateway_transacation_id", limit: 255
+    t.boolean  "notified",                limit: 1,                            default: false
+    t.integer  "status",                  limit: 4,                            default: 0
+    t.datetime "deleted_at"
+    t.datetime "created_at",                                                                   null: false
+    t.datetime "updated_at",                                                                   null: false
   end
 
   create_table "posters", force: :cascade do |t|

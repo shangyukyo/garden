@@ -12,7 +12,8 @@ module Sms
 
       @timestamp   = Time.now.strftime("%Y%m%d%H%M%S")
 
-      sign_params = @account_sid
+      sign_params = ""
+      sign_params << @account_sid
       sign_params << @auth_token
       sign_params << @timestamp
 
@@ -39,21 +40,24 @@ module Sms
         datas: @datas
       }
 
+      puts "#{@account_sid}:#{@timestamp}"
+
+
       headers = {
         "Accept"        => "application/json",
-        "Content-Type"  => "application/xml;charset=utf-8、application/json;charset=utf-8",
-        "Authorization" => Base64.encode64("#{@account_sid}:#{@timestamp}")
+        "Content-Type"  => "application/json;charset=utf-8",        
+        "Authorization" => Base64.encode64("#{@account_sid}:#{@timestamp}").delete("\n")
       }
 
-      # response = RestClient.post @url, params.to_json, headers
+      a = Base64.encode64("#{@account_sid}:#{@timestamp}")
+
+
 
       client = RestClient::Resource.new @domain
 
       response = client[@path].post params.to_json, headers
 
-      puts response.headers.inspect
-
-      puts response.inspect
+      response
     end
 
   end

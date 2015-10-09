@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :order_goods
   has_many :goods, through: :order_goods
+  has_many :order_payments
+  has_many :payments,  through:      :order_payments
 
   store :ext, accessors: [:shipping, :coupon]
 

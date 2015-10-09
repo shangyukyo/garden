@@ -9,13 +9,15 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def login
-    token = Token.where(mobile: params[:mobile], body: params[:verfiy_code])
+    token = Token.where(mobile: params[:mobile]).order("id desc").first    
 
-    if not params[:mobile].present?
+    if not params[:mobile].present? or not params[:verfiy_code].present?
       error "错误的参数!", 200
     end
 
-    if false #not token.present?
+    puts token.inspect
+
+    if not token.present? or token.body != params[:verfiy_code]
       error("验证码无效或者已过期!", status = 200)
     else      
       @user = User.find_by(mobile: params[:mobile]) || User.new(mobile: params[:mobile])

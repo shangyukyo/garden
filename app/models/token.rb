@@ -9,7 +9,7 @@ class Token < ActiveRecord::Base
     used: -1    
   }
 
-  after_create do
+  before_create do
     loop do
       self.body = SecureRandom.random_number(10000).to_s.rjust(4, '0')
       break if !Token.find_by(body: body)
