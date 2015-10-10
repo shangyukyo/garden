@@ -46,6 +46,8 @@ gem 'acts-as-taggable-on', '~> 3.4'
 
 gem 'sidekiq'
 
+gem 'alipay', '~> 0.8.0'
+
 
 # Http Client
 gem 'rest-client', '~> 1.7.2'

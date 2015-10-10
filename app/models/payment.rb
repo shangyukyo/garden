@@ -46,4 +46,39 @@ class Payment < ActiveRecord::Base
     end
   end  
 
+
+  def alipay_mobile_securitypay
+
+    rsa_private_key = "-----BEGIN RSA PRIVATE KEY-----
+MIICXgIBAAKBgQDMJ8rJdkVelkqVx9upyW+rbNA7y4YNtQ9wNkSW/zxYCAvJ2UIE
+ToTLhWmSxCkylTxxJsSUVDdyM1rKIC1HFRxbyL4brUeMvmmh9L73I6/j5By7lut7
++83qC9dUic6W47vP9ZCKw0VCp9W7XyjAOmkLP8QAGsXhRoU/pFncTdaXUQIDAQAB
+AoGBAKwsKuM4cUxR51jmEiTgkuK5g+vJuqY4umph+fp2CogbUQXLydcj+O5C90Ql
+VrEoFq8+iK6nT5NqJ/kqpcS60ww7SZwlUetMjpdhoH7+eMqxPSzhZDZftZyrVgts
+BSu8NOZufajO3q55GvP4WDTaMMH2tr924hemKRaon/wqXbABAkEA6k8tnzWMFKNk
+OEWfgOsqGjyK1ZHxJI0e/pujDN5qOkBBDSHi2j8CcaDT/0nUkHZb60Y68WCDDQsi
+0suNf3rI0QJBAN8OAd/yTLS71qGVEMFivTTq3JCeO68AtKqZpDHHnDel/e0JLR5b
+f2ZckMzNAinQwsR+jobP8+ejiSFNqaS6hoECQHgOUeX93eTFQ5jBs9Suqkf/NXPw
+74o29OaogIcbf3qRacN81WvWVT47leR8w/mxa6/FsHX1abDJP/Kaccob88ECQQDD
+v50xlYhvi/D9+L2tmSOGzx4l5Fdoa2wh05fe/9g+lfPUE5t+6rlRcaa5tKhTXhuv
+KYmXEeRwwnnTuj5IjFEBAkEAuSFDB9a9WdUVQtV9m34yP6JzYMagkK/F2xSoOj6T
+f2cQYwcFL9I0sSusTV37/87S/7QMmhBB7R6ftuxIwuaZbQ==
+-----END RSA PRIVATE KEY-----"
+
+
+    Alipay::Mobile::Service.mobile_securitypay_pay_string({
+      out_trade_no: '20150401000-0001',
+      notify_url: 'http://101.200.197.162/api/notify/alipay',
+      subject: 'subject',
+      total_fee: '0.01',
+      body: 'test'
+    }, {
+      sign_type: 'RSA',
+      key: rsa_private_key
+    })
+
+  
+
+  end
+
 end

@@ -32,6 +32,23 @@ class Api::OrdersController < Api::ApplicationController
     end
   end
 
+  def purchase
+    begin    
+      ActiveRecord::Base.transaction do 
+        order                   = Order.find_by order_no: params[:order_no]
+        @payment                 = Payment.new
+        @payment.user            = order.user
+        @payment.subject         = "订单支付"        
+        @payment.original_amount = order.total_price
+        @payment.gateway         = :alipay
+        @payment.save!
+        order.payments << @payment        
+      end
+    rescue => e
+      error e.inspect
+    end
+  end
+
   def update
   end
 

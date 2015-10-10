@@ -42,11 +42,21 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders
+    resources :orders do 
+      collection do 
+        post :purchase
+      end
+    end
 
     resources :coupons, only: [:index]
 
     resources :posters, only: [:index]
+
+    resource :notify, only: [] do
+      collection do 
+        post :alipay
+      end
+    end
   end
 
   # root 'index#login'  

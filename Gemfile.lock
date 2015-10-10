@@ -82,6 +82,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
+    alipay (0.8.0)
     arel (6.0.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -293,6 +294,7 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 4.1.1)
   acts-as-taggable-on (~> 3.4)
+  alipay (~> 0.8.0)
   bootstrap-sass (~> 3.2.0.2)
   byebug
   capistrano (~> 3.4.0)
