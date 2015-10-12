@@ -1,4 +1,4 @@
-class Api::NotifyController < Api::ApplicationController
+class Api::NotifiesController < Api::ApplicationController
 
   def alipay
 

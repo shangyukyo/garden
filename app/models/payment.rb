@@ -68,11 +68,12 @@ EEHtHp+27EjC5plt
 
 
     Alipay::Mobile::Service.mobile_securitypay_pay_string({
-      out_trade_no: '20150401000-0001',
+      seller_id: 'dashengtianqi@aliyun.com',
+      out_trade_no: payment_no,
       notify_url: 'http://101.200.197.162/api/notify/alipay',
-      subject: 'subject',
-      total_fee: '0.01',
-      body: 'test'
+      subject: '订单支付',
+      total_fee: original_amount,
+      body: '订单支付'
     }, {
       sign_type: 'RSA',
       key: rsa_private_key
