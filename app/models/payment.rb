@@ -7,7 +7,7 @@ class Payment < ActiveRecord::Base
   validates_presence_of     :original_amount
 
   belongs_to  :user
-  has_many    :order_payments
+  has_many    :order_payments, foreign_key:  :payment_no
   has_many    :orders,             through:      :order_payments
 
   # 支付的渠道
