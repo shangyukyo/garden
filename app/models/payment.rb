@@ -72,7 +72,8 @@ EEHtHp+27EjC5plt
       out_trade_no: payment_no,
       notify_url: 'http://101.200.197.162/api/notify/alipay',
       subject: '订单支付',
-      total_fee: original_amount,
+      # total_fee: original_amount,
+      total_fee: 0.01,
       body: '订单支付'
     }, {
       sign_type: 'RSA',
