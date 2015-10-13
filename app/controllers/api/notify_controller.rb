@@ -26,9 +26,11 @@ class Api::NotifiesController < Api::ApplicationController
       rsp = Alipay::Service.single_trade_query({ "trade_no" => payment.gateway_transacation_id }, opts)
 
       logger.info "======= ALIPAY PAYMENT QUERY ============"
+      logger.info Hash.from_xml(rsp)
+      
       rsp = Hash.from_xml(rsp)["alipay"]
 
-      logger.info Hash.from_xml(rsp)
+
       logger.info rsp
 
       payment.amount = rsp["response"]["trade"]["total_fee"]      
