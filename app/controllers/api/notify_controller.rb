@@ -18,22 +18,25 @@ class Api::NotifiesController < Api::ApplicationController
 
     opts = { sign_type: 'RSA', key: Alipay.key }
 
+    logger.info "==========ALIPAY VERIFY=========="
+    logger.info Alipay::Notify.verify?(notify_params)
+
     if not Alipay::Notify.verify?(notify_params)
       return_code = 'error'
     else
       payment.amount = notify_params['total_fee'].to_f
 
-      rsp = Alipay::Service.single_trade_query({ "trade_no" => payment.gateway_transacation_id }, opts)
+      # rsp = Alipay::Service.single_trade_query({ "trade_no" => payment.gateway_transacation_id }, opts)
 
-      logger.info "======= ALIPAY PAYMENT QUERY ============"
-      logger.info Hash.from_xml(rsp)
-      
-      rsp = Hash.from_xml(rsp)["alipay"]
+      # logger.info "======= ALIPAY PAYMENT QUERY ============"
+      # logger.info Hash.from_xml(rsp)
+
+      # rsp = Hash.from_xml(rsp)["alipay"]
 
 
-      logger.info rsp
+      # logger.info rsp
 
-      payment.amount = rsp["response"]["trade"]["total_fee"]      
+      # payment.amount = notify_params["total_fee"]
 
       if trade_succeed?(notify_params['trade_status'])
         return_code = 'success'
