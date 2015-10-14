@@ -3,7 +3,7 @@ class Api::ApplicationController < ApplicationController
   # For APIs, you may want to use :null_session instead.
 
   skip_before_action :verify_authenticity_token  
-  skip_before_action :login_required
+  skip_before_action :login_required, :check_current_user_power
   
   layout false
 
