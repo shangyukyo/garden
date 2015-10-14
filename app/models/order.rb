@@ -55,9 +55,7 @@ class Order < ActiveRecord::Base
     goods.first.photo_urls.first
   end
 
-  def use_coupon coupon_id
-    return if self.coupon.present?
-    
+  def use_coupon coupon_id      
     target_coupon  = user.coupons.find_by(id: coupon_id)
     if target_coupon.present?
                 
