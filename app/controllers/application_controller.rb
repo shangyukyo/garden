@@ -7,7 +7,35 @@ class ApplicationController < ActionController::Base
 
   helper_method :login?, :current_user
 
-  before_action :login_required
+  before_action :login_required, :check_current_user_power
+
+
+  def check_current_user_power
+    if current_user.admin_power
+      return
+    elsif current_user.edit_power
+      if not ["index", "partitions", "categories", "goods", "posters"].include? params[:controller]
+        render text: "您权限不够！"
+      else
+
+        if params[:action] == "destroy"
+          render text: "您权限不够"
+        end
+
+
+      end
+    elsif current_user.order_power
+      if not ["index", "orders"].include? params[:controller]
+        render text: "您权限不够！"
+      else
+
+        if params[:action] == "destroy"
+          render text: "您权限不够"
+        end
+
+      end      
+    end
+  end
 
   private
 

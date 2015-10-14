@@ -30,7 +30,13 @@ class Payment < ActiveRecord::Base
     event :purchase do
       transitions from: [:pending, :paid_failed], to: :paid
       after do
-        orders.map { |order| order.try(:pay!) }        
+        orders.map { |order|           
+          order.try(:pay!) 
+
+          if order.coupon.present?
+            order.user.use_coupon(order.coupon["id"])
+          end
+        }        
       end
     end
 

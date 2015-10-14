@@ -61,17 +61,16 @@ class Order < ActiveRecord::Base
     target_coupon  = user.coupons.find_by(id: coupon_id)
     if target_coupon.present?
                 
-      if target_coupon.start_at < Time.now and target_coupon.expired_at > Time.now
+      if not target_coupon.effect?
         raise "优惠券已过有效期或未到有效期!"
       end
 
-      self.total_price = self.total_price - target_coupon.price
+      self.total_price = self.total_origin_price - target_coupon.price
 
       if self.total_price <= 0
         self.total_price = 0.01
       end
-
-      user.use_coupon(target_coupon.id)
+      
       self.coupon = target_coupon.as_json(except: [:created_at, :updated_at])
       self.save!
       self
