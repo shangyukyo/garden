@@ -1,5 +1,5 @@
 class IndexController < ApplicationController
-  skip_before_action :login_required, only: [:login]
+  skip_before_action :login_required, :check_current_user_power, only: [:login, :sign_out]
   skip_before_filter :verify_authenticity_token, only: [:login]
 
   def login
@@ -23,6 +23,11 @@ class IndexController < ApplicationController
 
     render layout: false  
 
+  end
+
+  def sign_out
+    logout
+    redirect_to login_path
   end
 
 end
