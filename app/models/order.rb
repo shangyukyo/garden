@@ -63,7 +63,7 @@ class Order < ActiveRecord::Base
         raise "优惠券已过有效期或未到有效期!"
       end
 
-      self.total_price = self.total_origin_price - target_coupon.price
+      self.total_price = self.origin_total_price - target_coupon.price
 
       if self.total_price <= 0
         self.total_price = 0.01
