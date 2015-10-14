@@ -32,7 +32,8 @@
             td
               a href="#{goods_path(category_id: partition.id)}" 商品列表
               a.edit-btn.ml-10 href="#{edit_partition_path(partition)}" 编辑
-              = link_to "删除", partition_path(partition), data: {confirm: '确定要删除此分区吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20" 
+              - if current_user.admin_power
+                = link_to "删除", partition_path(partition), data: {confirm: '确定要删除此分区吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20" 
 
               = link_to "#{partition.show? ? '隐藏此分区' : '显示此分区'}", switch_display_partition_path(partition), data: {confirm: "确定要#{partition.show? ? '隐藏' : '显示'}此分区吗?"}, class: "btn btn-warning btn-xs ml-20"
 

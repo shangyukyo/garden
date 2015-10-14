@@ -1,0 +1,32 @@
+.page-header
+  h3: small 编辑管理员
+
+
+.clearfix
+  = form_tag administrator_path, class: 'form', role: 'form', method: :put
+    
+    .form-group
+      = text_field_tag 'mobile', @administrator.mobile, class: 'form-control input-sm', placeholder: '手机号'
+    .form-group
+      = text_field_tag 'password', nil, class: 'form-control input-sm', placeholder: '密码'
+
+    .form-group      
+      select.form-control.input-sm name="power"
+        - if @administrator.admin_power
+          option value=0 selected="selected" 管理员权限
+        - else
+          option value=0 管理员权限
+
+        - if @administrator.edit_power
+          option value=1  selected="selected" 编辑权限
+        - else
+          option value=1 编辑权限
+
+        - if @administrator.order_power
+          option value=2 selected="selected" 订单权限
+        - else
+          option value=2 订单权限          
+
+
+    .form-group
+      button.btn.btn-search type='submit' 更新

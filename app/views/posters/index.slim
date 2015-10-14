@@ -23,7 +23,8 @@
             td= good.name
             td= poster.created_at.strftime('%F %T')            
             td
-              = link_to "删除", poster_path(poster), data: {confirm: '确定要删除此广告吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+              - if current_user.admin_power
+                = link_to "删除", poster_path(poster), data: {confirm: '确定要删除此广告吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
       - else
         tr
           td 暂无数据

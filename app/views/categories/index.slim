@@ -34,7 +34,8 @@
             td
               a href="#{goods_path(category_id: category.id)}" 商品列表
               a.edit-btn.ml-10 href="#{edit_category_path(category)}" 编辑
-              = link_to "删除", category_path(category), data: {confirm: '确定要删除此分类吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"     
+              - if current_user.admin_power
+                = link_to "删除", category_path(category), data: {confirm: '确定要删除此分类吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"     
 
               = link_to "#{category.show? ? '隐藏此分类' : '显示此分类'}", switch_display_category_path(category), data: {confirm: "确定要#{category.show? ? '隐藏' : '显示'}此分类吗?"}, class: "btn btn-warning btn-xs ml-20"                  
 

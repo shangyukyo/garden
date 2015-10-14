@@ -27,8 +27,9 @@
             td 
               = area.name
             td= area.city 
-            td
-              = link_to "删除", area_path(area), data: {confirm: '确定要删除此社区吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+            - if current_user.admin_power
+              td
+                = link_to "删除", area_path(area), data: {confirm: '确定要删除此社区吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
       - else
         tr
           td 暂无数据

@@ -107,6 +107,8 @@ Rails.application.routes.draw do
 
   resources :coupons
 
+  resources :administrators
+
   resources :posters do 
     collection do
       post :good_info

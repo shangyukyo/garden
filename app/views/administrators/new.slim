@@ -1,0 +1,24 @@
+.page-header
+  h3: small 添加管理员
+
+
+.clearfix
+  = form_tag administrators_path, class: 'form', role: 'form', method: :post
+    
+    .form-group
+      = text_field_tag 'mobile', nil, class: 'form-control input-sm', placeholder: '手机号'
+    .form-group
+      = text_field_tag 'password', nil, class: 'form-control input-sm', placeholder: '密码'
+
+    .form-group      
+      select.form-control.input-sm name="power"
+        option value=0
+          | 管理员权限
+        option value=1
+          | 编辑权限
+        option value=2
+          | 订单权限
+
+
+    .form-group
+      button.btn.btn-search type='submit' 添加管理员

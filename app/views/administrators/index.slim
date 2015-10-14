@@ -1,0 +1,44 @@
+.page-header
+  h3: small 管理员列表
+
+.search 
+   a.btn.btn-danger href="#{new_administrator_path}" 添加管理员
+
+.table-responsive
+  table.table
+    thread
+      tr.active        
+        th 手机号       
+        th 管理员权限
+        th 编辑权限
+        th 订单权限 
+        th #
+    tbody
+      - if @administrators.present?
+        - @administrators. each do |admin|
+          tr
+            td= admin.mobile
+            td 
+              - if admin.admin_power
+                i.fa.fa-check-circle
+              - else
+                i.fa.fa-times-circle
+            td
+              - if admin.edit_power
+                i.fa.fa-check-circle
+              - else
+                i.fa.fa-times-circle
+            td
+              - if admin.order_power
+                i.fa.fa-check-circle
+              - else
+                i.fa.fa-times-circle
+
+            td
+              a href="#{edit_administrator_path(admin)}" 编辑
+              = link_to "删除", administrator_path(admin), data: {confirm: '确定要删除此管理员吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20" 
+              
+              
+      - else
+        tr
+          td 暂无数据

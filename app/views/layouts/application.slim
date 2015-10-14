@@ -16,6 +16,11 @@ html
       ul    
 
         - if current_user.admin_power      
+          li class="#{params[:controller] == 'administrators' ? 'active' : nil}"
+            a href=administrators_path
+              i.fa.fa-user               
+              p 管理员
+
           li class="#{params[:controller] == 'users' ? 'active' : nil}"
             a href=users_path
               i.fa.fa-user               

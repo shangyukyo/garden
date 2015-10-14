@@ -28,7 +28,8 @@
               = school.name
             td= school.city 
             td
-              = link_to "删除", school_path(school), data: {confirm: '确定要删除此学校吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+              - if current_user.admin_power
+                = link_to "删除", school_path(school), data: {confirm: '确定要删除此学校吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
       - else
         tr
           td 暂无数据

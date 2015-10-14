@@ -23,7 +23,8 @@
             td
               a href="#{areas_path(city: city.name)}" 社区
               a.ml-10 href="#{schools_path(city: city.name)}" 学校
-              = link_to "删除", city_path(city), data: {confirm: '确定要删除此城市吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                  
+              - if current_user.admin_power
+                = link_to "删除", city_path(city), data: {confirm: '确定要删除此城市吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                  
       - else
         tr
           td 暂无数据
