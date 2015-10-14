@@ -39,8 +39,7 @@ class User < ActiveRecord::Base
         total_price = total_quantity  = 0        
         order          = orders.build
         user_shipping  = user_shippings.find(user_shipping_id)
-        coupon         = coupons.find_by(id: coupon_id)
-
+        
         order.shipping = user_shipping.as_json(except: [:created_at, :updated_at])
         order.save!
 
@@ -58,17 +57,6 @@ class User < ActiveRecord::Base
 
           total_quantity += quantity
           total_price += order_good.price
-        end
-
-        if coupon.present?
-                    
-          if coupon.start_at < Time.now and coupon.expired_at > Time.now
-            raise "优惠券已过有效期或未到有效期!"
-          end
-
-          total_price -= coupon.price
-          use_coupon(coupon.id)
-          order.coupon = coupon.as_json(except: [:created_at, :updated_at])
         end
 
         if total_price <= 0

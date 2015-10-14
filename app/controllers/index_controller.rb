@@ -4,13 +4,20 @@ class IndexController < ApplicationController
 
   def login
     if request.post?
-      user = User.find_by(mobile: params[:login])      
-      if user.present?
-        redirect_to login_path and return unless params[:password] == '123456'        
-        login_as(user)
-        redirect_to users_path and return 
+      admin = Administrator.find_by(mobile: params[:login])      
+      # if user.present?
+      #   redirect_to login_path and return unless params[:password] == '123456'        
+      #   login_as(user)
+      #   redirect_to users_path and return 
+      # end
+      if admin.authenticate(params[:password])
+        login_as(admin)
+        redirect_to users_path and return
+      else
+        redirect_to login_path and return
       end
     end
+
     render layout: false  
 
   end

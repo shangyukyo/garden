@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009025121) do
+ActiveRecord::Schema.define(version: 20151014064155) do
+
+  create_table "administrators", force: :cascade do |t|
+    t.string   "mobile",          limit: 255,                   null: false
+    t.string   "password_digest", limit: 255,                   null: false
+    t.boolean  "admin_power",     limit: 1,     default: false
+    t.boolean  "edit_power",      limit: 1,     default: false
+    t.boolean  "order_power",     limit: 1,     default: false
+    t.text     "ext",             limit: 65535
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.datetime "deleted_at"
+  end
 
   create_table "areas", force: :cascade do |t|
     t.string   "province",   limit: 255

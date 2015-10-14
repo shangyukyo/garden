@@ -36,6 +36,11 @@ class Api::OrdersController < Api::ApplicationController
     begin    
       ActiveRecord::Base.transaction do 
         order                   = Order.find_by order_no: params[:order_no]
+
+        if params[:coupon_id].present? and !order.coupon.present?
+          order.use_coupon params[:coupon_id]
+        end
+
         @payment                 = Payment.new
         @payment.user            = order.user
         @payment.subject         = "订单支付"        
@@ -45,6 +50,7 @@ class Api::OrdersController < Api::ApplicationController
         order.payments << @payment        
       end
     rescue => e
+      raise e
       error e.inspect
     end
   end

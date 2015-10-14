@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   def login_from_session
     if session[:user_id].present?
       begin
-        User.find session[:user_id]
+        Administrator.find session[:user_id]
       rescue
         session[:user_id] = nil
       end
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
 
   def login_from_cookies
     if cookies[:remember_token].present?
-      if user = User.find_by_remember_token(cookies[:remember_token])
+      if user = Administrator.find_by_remember_token(cookies[:remember_token])
         session[:user_id] = user.id
         user
       else
@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login_from_access_token
-    @current_user ||= User.find_by_access_token(params[:access_token]) if params[:access_token]
+    @current_user ||= Administrator.find_by_access_token(params[:access_token]) if params[:access_token]
   end
 
   def store_location(path)

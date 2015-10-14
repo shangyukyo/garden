@@ -19,7 +19,7 @@ class Coupon < ActiveRecord::Base
 
 
   def effect?
-    Time.at.now > start_at and Time.at.now < expired_at
+    Time.now > start_at and Time.now < expired_at
   end
   
 end

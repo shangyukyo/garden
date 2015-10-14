@@ -19,6 +19,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.10'
+
 gem 'mini_magick'
 
 gem 'slim'
@@ -47,6 +50,7 @@ gem 'acts-as-taggable-on', '~> 3.4'
 gem 'sidekiq'
 
 gem 'alipay', '~> 0.8.0'
+gem 'wx_pay'
 
 
 # Http Client

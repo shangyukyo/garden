@@ -15,61 +15,89 @@ html
           
       ul    
 
+        - if current_user.admin_power      
+          li class="#{params[:controller] == 'users' ? 'active' : nil}"
+            a href=users_path
+              i.fa.fa-user               
+              p 用户管理
 
-        li class="#{params[:controller] == 'users' ? 'active' : nil}"
-          a href=users_path
-            i.fa.fa-user               
-            p 用户管理
-
-        li class="#{params[:controller] == 'partitions' ? 'active' : nil}"
-          a href=partitions_path
-            i.fa.fa-sitemap               
-            p 分区            
-
-
-        li class="#{params[:controller] == 'categories' ? 'active' : nil}"
-          a href=categories_path
-            i.fa.fa-sitemap               
-            p 分类            
+          li class="#{params[:controller] == 'partitions' ? 'active' : nil}"
+            a href=partitions_path
+              i.fa.fa-sitemap               
+              p 分区            
 
 
-        li class="#{params[:controller] == 'goods' ? 'active' : nil}"
-          a href=goods_path
-            i.fa.fa-th-list             
-            p 商品            
+          li class="#{params[:controller] == 'categories' ? 'active' : nil}"
+            a href=categories_path
+              i.fa.fa-sitemap               
+              p 分类            
 
-        li class="#{params[:controller] == 'orders' ? 'active' : nil}"
-          a href="#{orders_path}"
-            i.fa.fa-reorder
-            p 订单
 
-        li class="#{params[:controller] == 'cities' ? 'active' : nil}"
-          a href="#{cities_path}"
-            i.fa.fa-location-arrow
-            p 配送城市  
+          li class="#{params[:controller] == 'goods' ? 'active' : nil}"
+            a href=goods_path
+              i.fa.fa-th-list             
+              p 商品            
 
-        li class="#{params[:controller] == 'areas' ? 'active' : nil}"
-          a href="#{areas_path}"
-            i.fa.fa-building
-            p 配送社区
+          li class="#{params[:controller] == 'orders' ? 'active' : nil}"
+            a href="#{orders_path}"
+              i.fa.fa-reorder
+              p 订单
 
-        li class="#{params[:controller] == 'schools' ? 'active' : nil}"
-          a href="#{schools_path}"
-            i.fa.fa-home
-            p 配送学校              
+          li class="#{params[:controller] == 'cities' ? 'active' : nil}"
+            a href="#{cities_path}"
+              i.fa.fa-location-arrow
+              p 配送城市  
 
-        li class="#{params[:controller] == 'coupons' ? 'active' : nil}"
-          a href="#{coupons_path}"
-            i.fa.fa-money
-            p 优惠券        
+          li class="#{params[:controller] == 'areas' ? 'active' : nil}"
+            a href="#{areas_path}"
+              i.fa.fa-building
+              p 配送社区
 
-        li class="#{params[:controller] == 'posters' ? 'active' : nil}"
-          a href="#{posters_path}"
-            i.fa.fa-photo
-            p 广告                   
+          li class="#{params[:controller] == 'schools' ? 'active' : nil}"
+            a href="#{schools_path}"
+              i.fa.fa-home
+              p 配送学校              
 
-        li                     
+          li class="#{params[:controller] == 'coupons' ? 'active' : nil}"
+            a href="#{coupons_path}"
+              i.fa.fa-money
+              p 优惠券        
 
+          li class="#{params[:controller] == 'posters' ? 'active' : nil}"
+            a href="#{posters_path}"
+              i.fa.fa-photo
+              p 广告                   
+
+          li    
+
+        - elsif current_user.edit_power
+          li class="#{params[:controller] == 'partitions' ? 'active' : nil}"
+            a href=partitions_path
+              i.fa.fa-sitemap               
+              p 分区            
+
+
+          li class="#{params[:controller] == 'categories' ? 'active' : nil}"
+            a href=categories_path
+              i.fa.fa-sitemap               
+              p 分类   
+          li class="#{params[:controller] == 'goods' ? 'active' : nil}"
+            a href=goods_path
+              i.fa.fa-th-list             
+              p 商品            
+          li class="#{params[:controller] == 'posters' ? 'active' : nil}"
+            a href="#{posters_path}"
+              i.fa.fa-photo
+              p 广告                   
+
+          li    
+        - elsif current_user.order_power
+          li class="#{params[:controller] == 'orders' ? 'active' : nil}"
+            a href="#{orders_path}"
+              i.fa.fa-reorder
+              p 订单
+
+          li        
 
 
                       
