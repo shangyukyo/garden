@@ -56,7 +56,7 @@ class Api::OrdersController < Api::ApplicationController
   end
 
 
-  def wechat_purchat
+  def wechat_purchase
     begin    
       ActiveRecord::Base.transaction do 
         order                   = Order.find_by order_no: params[:order_no]

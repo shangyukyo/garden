@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :orders do 
       collection do 
         post :purchase
+        post :wechat_purchase
       end
     end
 
