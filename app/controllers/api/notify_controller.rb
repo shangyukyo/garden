@@ -70,7 +70,7 @@ class Api::NotifiesController < Api::ApplicationController
       payment = Payment.find_by payment_no: result["out_trade_no"]
 
       if trade_succeed?(result['return_code'], result['result_code'], result['trade_state'])        
-        payment.amount = result['total_fee'].to_f  
+        payment.amount = result['total_fee'].to_i / 100.0
         payment.notified = true
         payment.save!
         payment.purchase!        
