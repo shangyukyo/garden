@@ -92,9 +92,8 @@ class Payment < ActiveRecord::Base
       noncestr: invoke_r["nonce_str"]
     }
 
-    g_r = WxPay::Service::generate_app_pay_req app_pay_params
+    WxPay::Service::generate_app_pay_req app_pay_params
 
-    puts g_r.inspect
   end
 
 end
