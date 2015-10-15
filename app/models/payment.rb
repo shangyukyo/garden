@@ -59,17 +59,42 @@ class Payment < ActiveRecord::Base
       seller_id: 'dashengtianqi@aliyun.com',
       out_trade_no: payment_no,
       notify_url: 'http://101.200.197.162/api/notify/alipay',
-      subject: '订单支付',
+      subject: subject,
       # total_fee: original_amount,
       total_fee: 0.01,
-      body: '订单支付'
+      body: subject
     }, {
       sign_type: 'RSA',
       key: Alipay.key
     })
 
-  
+  end
 
+  def wechat_mobile_securitypay
+    unifiedorder_params = {
+      body: subject,
+      out_trade_no: payment_no,
+      # total_fee: original_amount,
+      total_fee: 1,
+      spbill_create_ip: '101.200.197.162',
+      notify_url: 'http://101.200.197.162/api/notify/wechat',
+      trade_type: 'APP'      
+    }
+
+    invoke_r = WxPay::Service.invoke_unifiedorder unifiedorder_params
+
+    puts invoke_r.inspect
+
+    raise '支付失败' if not invoke_r.success?
+
+    app_pay_params = {
+      prepayid: invoke_r["prepay_id"],
+      noncestr: invoke_r["nonce_str"]
+    }
+
+    g_r = WxPay::Service::generate_app_pay_req app_pay_params
+
+    puts g_r.inspect
   end
 
 end

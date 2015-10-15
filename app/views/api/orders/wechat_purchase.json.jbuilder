@@ -1,0 +1,1 @@
+json.(@payment, :id, :user_id, :payment_no, :subject, :original_amount, :gateway, :wechat_mobile_securitypay)

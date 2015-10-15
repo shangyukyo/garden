@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     resource :notify, only: [] do
       collection do 
         post :alipay
+        post :wechat
       end
     end
   end

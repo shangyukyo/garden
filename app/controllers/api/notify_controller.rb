@@ -58,6 +58,33 @@ class Api::NotifiesController < Api::ApplicationController
   end
 
 
+  def wechat
+    logger.info "============= WECHAT ================"
+    
+    result = Hash.from_xml(request.body.read)["xml"]
+
+    logger.info result
+
+    if WxPay::Sign.verify?(result)
+
+      payment = Payment.find_by payment_no: result["out_trade_no"]
+
+      if trade_succeed?(result['return_code'], result['result_code'], result['trade_state'])        
+        payment.amount = result['total_fee'].to_f  
+        payment.notified = true
+        payment.save!
+        payment.purchase!        
+      else              
+        payment.paid_failed!
+      end
+      
+      render :xml => {return_code: "SUCCESS"}.to_xml(root: 'xml', dasherize: false)
+    else
+      render :xml => {return_code: "SUCCESS", return_msg: "签名失败"}.to_xml(root: 'xml', dasherize: false)
+    end    
+  end
+
+
 
   private
 

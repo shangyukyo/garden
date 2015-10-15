@@ -1,4 +1,4 @@
 # required
-WxPay.appid = 'YOUR_APPID'
-WxPay.key = 'YOUR_KEY'
-WxPay.mch_id = 'YOUR_MCH_ID'
+WxPay.appid = 'wxe37d6944e2b3f8ab'
+WxPay.key = 'zuoluzhangliangyanjihangzuolu899'
+WxPay.mch_id = '1274100101'
