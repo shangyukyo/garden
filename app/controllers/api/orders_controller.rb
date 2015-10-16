@@ -25,7 +25,7 @@ class Api::OrdersController < Api::ApplicationController
       authenticate!
       
       goods_info = MultiJson.load(params[:goods_info])
-      @order     = @current_user.placed!(params[:user_shipping_id], goods_info, params[:coupon_id])
+      @order     = @current_user.placed!(params[:user_shipping_id], goods_info, params[:coupon_id], params[:warehouse_id])
             
     rescue => e      
       error e.inspect      

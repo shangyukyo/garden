@@ -9,6 +9,10 @@ class OrdersController < ApplicationController
       @orders = @orders.where(order_no: params[:order_no])
     end
 
+    if params[:warehouse_name].present?
+      @orders = @orders.where("ext like ?", "%#{params[:warehouse_name]}%")
+    end
+
     if params[:start_at].present?
       @orders = @orders.where("created_at > ?", params[:start_at])
     end

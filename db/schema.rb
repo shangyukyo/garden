@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014064155) do
+ActiveRecord::Schema.define(version: 20151016022054) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "mobile",          limit: 255,                   null: false
@@ -152,6 +152,13 @@ ActiveRecord::Schema.define(version: 20151014064155) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "regions", force: :cascade do |t|
+    t.integer  "city_id",    limit: 4
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "schools", force: :cascade do |t|
     t.string   "province",   limit: 255
     t.string   "city",       limit: 255
@@ -226,6 +233,17 @@ ActiveRecord::Schema.define(version: 20151014064155) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.datetime "deleted_at"
+  end
+
+  create_table "warehouses", force: :cascade do |t|
+    t.integer  "region_id",     limit: 4
+    t.string   "name",          limit: 255,   null: false
+    t.string   "business_time", limit: 255
+    t.string   "address",       limit: 255,   null: false
+    t.text     "content",       limit: 65535
+    t.string   "url",           limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end

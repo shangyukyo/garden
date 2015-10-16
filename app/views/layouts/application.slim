@@ -53,15 +53,27 @@ html
               i.fa.fa-location-arrow
               p 配送城市  
 
-          li class="#{params[:controller] == 'areas' ? 'active' : nil}"
-            a href="#{areas_path}"
-              i.fa.fa-building
-              p 配送社区
+          li class="#{params[:controller] == 'regions' ? 'active' : nil}"
+            a href="#{regions_path}"
+              i.fa.fa-th-list
+              p 配送区/县  
 
-          li class="#{params[:controller] == 'schools' ? 'active' : nil}"
-            a href="#{schools_path}"
-              i.fa.fa-home
-              p 配送学校              
+          li class="#{params[:controller] == 'warehouses' ? 'active' : nil}"
+            a href="#{warehouses_path}"
+              i.fa.fa-building
+              p 提货点
+
+
+          - if false
+            li class="#{params[:controller] == 'areas' ? 'active' : nil}"
+              a href="#{areas_path}"
+                i.fa.fa-building
+                p 配送社区
+
+            li class="#{params[:controller] == 'schools' ? 'active' : nil}"
+              a href="#{schools_path}"
+                i.fa.fa-home
+                p 配送学校              
 
           li class="#{params[:controller] == 'coupons' ? 'active' : nil}"
             a href="#{coupons_path}"
@@ -93,7 +105,7 @@ html
           li class="#{params[:controller] == 'posters' ? 'active' : nil}"
             a href="#{posters_path}"
               i.fa.fa-photo
-              p 广告                   
+              p 广告  
 
           li    
         - elsif current_user.order_power

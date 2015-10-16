@@ -1,0 +1,1 @@
+json.(warehouse, :id, :name, :business_time, :address, :content, :url , :created_at)

@@ -31,16 +31,26 @@ class User < ActiveRecord::Base
 
 
   #下单
-  def placed!(user_shipping_id, goods_info, coupon_id)
+  def placed!(user_shipping_id, goods_info, coupon_id, warehouse_id)
     ActiveRecord::Base.transaction do 
       begin
-        raise "商品不能为空" if not goods_info.present?        
+        raise "商品不能为空" if not goods_info.present?     
+
+        warehouse = Warehouse.find_by id: warehouse_id
+
+        raise "提货点不能为空" if not warehouse.present?  
         
         total_price = total_quantity  = 0        
         order          = orders.build
-        user_shipping  = user_shippings.find(user_shipping_id)
+
+        if false
+          user_shipping  = user_shippings.find(user_shipping_id)
+          
+          order.shipping = user_shipping.as_json(except: [:created_at, :updated_at])
+        end
+
+        order.warehouse = warehouse.as_json(except: [:created_at, :updated_at])
         
-        order.shipping = user_shipping.as_json(except: [:created_at, :updated_at])
         order.save!
 
         goods_info.each do |good_info|

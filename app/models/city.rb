@@ -1,5 +1,6 @@
 class City < ActiveRecord::Base
 
+  has_many :regions  
 
   def areas
     Area.where(city: name)

@@ -1,0 +1,35 @@
+.page-header
+  h3: small 区/县 列表
+
+.search
+  = form_tag regions_path, class: 'form-inline', role: 'form', method: :post
+    .form-group
+      = text_field_tag 'name', nil, class: 'form-control input-sm ml-10', placeholder: '区/县 名称'
+    .form-group
+      select.form-control.input-sm.ml-10 name="city"
+        - @cities.each do |city|
+          option value="#{city.id}"= city.name
+
+    .form-group
+      button.btn.btn-search.ml-10 type='submit' 添加 区/县
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 区/县
+        th 所属城市        
+        th #
+    tbody
+      - if @regions.present?
+        - @regions.each do |region|
+          tr
+            td 
+              = region.name
+            td= region.city.name 
+            - if current_user.admin_power
+              td
+                = link_to "删除", region_path(region), data: {confirm: '确定要删除 区/县 吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+      - else
+        tr
+          td 暂无数据

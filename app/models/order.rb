@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
   has_many :order_payments
   has_many :payments,  through:      :order_payments
 
-  store :ext, accessors: [:shipping, :coupon]
+  store :ext, accessors: [:shipping, :coupon, :warehouse]
 
 
   enum status: {

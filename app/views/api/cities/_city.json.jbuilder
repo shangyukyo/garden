@@ -1,9 +1,6 @@
 json.(city, :id, :name, :created_at)
 
-json.areas do 
-  json.partial! '/api/cities/area', collection: city.areas, as: :area
+json.regions do 
+  json.partial! '/api/cities/region', collection: city.regions, as: :region
 end
 
-json.schools do 
-  json.partial! '/api/cities/school', collection: city.schools, as: :school
-end

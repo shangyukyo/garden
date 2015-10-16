@@ -1,0 +1,42 @@
+.page-header
+  h3: small 提货点 列表
+
+.search
+  a.btn.btn-danger href="#{new_warehouse_path}" target="_blank" 添加提货点
+  
+.table-responsive
+  table.table
+    thread
+      tr.active
+        th 所属市区
+        th 名称
+        th 营业时间
+        th 地址
+        th 店铺提示
+        th 店铺 url
+        th #
+    tbody
+      - if @warehouses.present?
+        - @warehouses.each do |warehouse|
+          tr
+            td
+              = warehouse.region.city.name 
+              | -
+              = warehouse.region.name
+            td 
+              = warehouse.name
+            td= warehouse.business_time
+            td= warehouse.address
+            td= warehouse.content
+            td= warehouse.url
+            - if current_user.admin_power
+              td
+                a href="#{edit_warehouse_path(warehouse)}" 编辑
+                = link_to "删除", warehouse_path(warehouse), data: {confirm: '确定要删除 提货点 吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
+      - else
+        tr
+          td 暂无数据
+
+.nav
+  = pager :total => @total, :page => @page, :per_page => @per_page
+

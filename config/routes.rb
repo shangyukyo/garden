@@ -117,4 +117,8 @@ Rails.application.routes.draw do
     end
   end
 
+
+  resources :regions
+  resources :warehouses
+
 end

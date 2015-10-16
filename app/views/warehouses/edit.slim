@@ -1,0 +1,31 @@
+.page-header
+  h3: small 编辑 提货点
+
+
+.clearfix
+  = form_tag warehouse_path, class: 'form', role: 'form', method: :put
+    
+    .form-group
+      = text_field_tag 'name', @warehouse.name, class: 'form-control input-sm', placeholder: '名称'
+    .form-group
+      = text_field_tag 'business_time', @warehouse.business_time, class: 'form-control input-sm', placeholder: '营业时间'
+    .form-group
+      = text_field_tag 'address', @warehouse.address, class: 'form-control input-sm', placeholder: '地址'
+    .form-group
+      = text_area_tag 'content', @warehouse.content, class: 'form-control input-sm', placeholder: '店铺提示'
+    .form-group
+      = text_field_tag 'url', @warehouse.url, class: 'form-control input-sm', placeholder: '店铺 url'
+
+    .form-group      
+      select.form-control.input-sm name="region"
+        - Region.order("id desc").each do |r|
+          - if r.id == @warehouse.region_id
+            option value=r.id selected="selected"
+              = r.name
+          - else
+            option value=r.id
+              = r.name
+
+
+    .form-group
+      button.btn.btn-search type='submit' 添加 提货点

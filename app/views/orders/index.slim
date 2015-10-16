@@ -6,6 +6,8 @@
     .form-group      
       = text_field_tag 'order_no', params[:order_no], class: 'form-control input-sm', placeholder: '订单编号'
 
+      = text_field_tag 'warehouse_name', params[:warehouse_name], class: 'form-control input-sm ml-20', placeholder: '提货点'      
+
     .form-group             
       = datetime_field_tag :start_at, params[:start_at], class: 'form-control input-sm ml-20', placeholder: '开始时间 1980-01-01 24:00:00'      
     .form-group                
@@ -28,7 +30,8 @@
           td 订单编号
           td 订单价格
           td 订单状态
-          td 配送地址
+          / td 配送地址
+          td 提货点
           td 优惠券
           td 下单时间
           td #
@@ -38,13 +41,18 @@
               td= order.order_no
               td= order.total_price
               td= order.status_i18n                
-              td
-                - if order.shipping.present?
-                  span.label.label-info
-                    | 社区: #{order.shipping["area"] || "空"} 学校: #{order.shipping["school"] || "空"} 地址: #{order.shipping["address"]} 收货人: #{order.shipping["name"]} 手机号: #{order.shipping["mobile"]}
-                - else
-                  | 空
+              - if false
+                td
+                  - if order.shipping.present?
+                    span.label.label-info
+                      | 社区: #{order.shipping["area"] || "空"} 学校: #{order.shipping["school"] || "空"} 地址: #{order.shipping["address"]} 收货人: #{order.shipping["name"]} 手机号: #{order.shipping["mobile"]}
+                  - else
+                    | 空
 
+              td
+                - if order.warehouse.present?
+                  = order.warehouse["name"]
+                
               td= order.coupon.present? ? "优惠券名称: #{order.coupon['name']}, 价值: #{order.coupon['price']}" : '未使用优惠券'
               
               td= order.created_at.strftime('%F %T')
