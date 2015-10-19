@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016022054) do
+ActiveRecord::Schema.define(version: 20151019034013) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "mobile",          limit: 255,                   null: false
@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 20151016022054) do
     t.string   "name",          limit: 255,   null: false
     t.string   "business_time", limit: 255
     t.string   "address",       limit: 255,   null: false
+    t.string   "tel",           limit: 255
     t.text     "content",       limit: 65535
     t.string   "url",           limit: 255
     t.datetime "created_at",                  null: false

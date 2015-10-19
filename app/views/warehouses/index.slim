@@ -12,6 +12,7 @@
         th 名称
         th 营业时间
         th 地址
+        th 联系电话
         th 店铺提示
         th 店铺 url
         th #
@@ -27,6 +28,7 @@
               = warehouse.name
             td= warehouse.business_time
             td= warehouse.address
+            td= warehouse.tel
             td= warehouse.content
             td= warehouse.url
             - if current_user.admin_power

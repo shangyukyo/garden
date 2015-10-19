@@ -12,6 +12,8 @@
     .form-group
       = text_field_tag 'address', @warehouse.address, class: 'form-control input-sm', placeholder: '地址'
     .form-group
+      = text_field_tag 'tel', @warehouse.tel, class: 'form-control input-sm', placeholder: '联系电话'      
+    .form-group
       = text_area_tag 'content', @warehouse.content, class: 'form-control input-sm', placeholder: '店铺提示'
     .form-group
       = text_field_tag 'url', @warehouse.url, class: 'form-control input-sm', placeholder: '店铺 url'

@@ -20,7 +20,8 @@ class WarehousesController < ApplicationController
     warehouse.name = params[:name]
     warehouse.business_time = params[:business_time]
     warehouse.address = params[:address]
-    warehouse.content = params[:content]
+    warehouse.tel = params[:tel]
+    warehouse.content = params[:content]    
     warehouse.url = params[:url]
     warehouse.save!
 
@@ -34,6 +35,7 @@ class WarehousesController < ApplicationController
     @warehouse.name = params[:name]
     @warehouse.business_time = params[:business_time]
     @warehouse.address = params[:address]
+    @warehouse.tel = params[:tel]
     @warehouse.content = params[:content]
     @warehouse.url = params[:url]
     @warehouse.region_id = params[:region]
