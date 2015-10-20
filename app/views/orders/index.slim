@@ -63,7 +63,7 @@
                 a href="#{order_path(order)}" data-no-turbolink="true" 商品详情
                 - if order.status == "paid"
                   = link_to "配送", delivery_order_path(id: order.id), data: {confirm: '确定要配送此订单吗?'}, method: :post, class: "btn btn-danger btn-xs ml-20"
-                - if Order.statuses[order.status] > Order.statuses["paid"]
+                - if Order.statuses[order.status] >= Order.statuses["paid"]
                   = link_to "订单完成", finish_order_path(id: order.id), data: {confirm: '确定要完成此订单吗'}, method: :post, class: "btn btn-danger btn-xs ml-20"
 
 
