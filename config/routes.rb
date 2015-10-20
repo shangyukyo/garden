@@ -97,6 +97,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show] do 
     member do
       post :delivery
+      post :finish
     end
   end
 

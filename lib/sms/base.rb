@@ -28,8 +28,15 @@ module Sms
       @path = "/2013-12-26/Accounts/#{@account_sid}/SMS/TemplateSMS?sig=#{sign_params}"
       @to = args[:to]
       @app_id = "aaf98f894fba2cb2014fd0361da9112e"
-      @template_id = "37453"
-      @datas = [ args[:code] ]
+
+      if args[:type] == "verfiy_code"
+        @template_id = "37453"
+        @datas = [ args[:code] ]
+      elsif args[:type] == "pick_up_code"
+        @template_id = "42560"
+        @datas = [ args[:code], args[:address] ]
+      end
+
     end
 
     def send

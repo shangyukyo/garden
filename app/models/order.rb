@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
   has_many :order_payments
   has_many :payments,  through:      :order_payments
 
-  store :ext, accessors: [:shipping, :coupon, :warehouse]
+  store :ext, accessors: [:shipping, :coupon, :warehouse, :pick_up_code]
 
 
   enum status: {
@@ -24,11 +24,16 @@ class Order < ActiveRecord::Base
     state :pending, initial: true
     state :paid
     state :delivering
+    state :finished
     state :canceled
 
     event :pay do
       transitions from: [:pending], to: :paid
       
+      after do 
+        process_pick_up_code
+      end
+
     end
 
     event :deliver do
@@ -36,7 +41,7 @@ class Order < ActiveRecord::Base
     end
 
     event :finish do
-      transitions from: :delivering, to: :finished
+      transitions from: [:delivering, :paid, :finished], to: :finished
     end
 
   end
@@ -74,5 +79,17 @@ class Order < ActiveRecord::Base
       self
     end    
   end
+
+  def process_pick_up_code
+    self.pick_up_code = SecureRandom.random_number(100000000).to_s.rjust(9, '0')
+    self.save!
+    send_pick_up_code
+  end
+
+  def send_pick_up_code
+    s = Sms::Base.new to: self.user.mobile, code: self.pick_up_code, address: self.warehouse.try(:address), type: 'pick_up_code'
+    s.send    
+  end
+
 
 end

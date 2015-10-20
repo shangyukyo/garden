@@ -26,7 +26,7 @@ class Token < ActiveRecord::Base
   end
 
   def send_msg
-    s = Sms::Base.new to: mobile, code: body
+    s = Sms::Base.new to: mobile, code: body, type: 'verfiy_code'
     s.send
   end
 

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show, :delivery]
+  before_action :find_order, only: [:show, :delivery, :finish]
 
   def index
     pagination    
@@ -11,6 +11,10 @@ class OrdersController < ApplicationController
 
     if params[:warehouse_name].present?
       @orders = @orders.where("ext like ?", "%#{params[:warehouse_name]}%")
+    end
+
+    if params[:pick_up_code].present?
+      @orders = @orders.where("ext like ?", "%#{params[:pick_up_code]}%")
     end
 
     if params[:start_at].present?
@@ -37,6 +41,11 @@ class OrdersController < ApplicationController
 
   def delivery
     @order.deliver!
+    redirect_to :back
+  end
+
+  def finish
+    @order.finish!
     redirect_to :back
   end
 
