@@ -13,7 +13,16 @@ class User < ActiveRecord::Base
 
   store :ext, accessors: [:target_invite_code]
 
-  after_create :give_new_user_coupon
+  after_create :generate_invite_code
+
+  def generate_invite_code
+    loop do
+      self.invite_code = SecureRandom.hex(4)
+      break if not User.find_by(invite_code: invite_code).present?    
+    end
+
+    self.save!
+  end
 
   def generate_private_token
     loop do
@@ -36,7 +45,7 @@ class User < ActiveRecord::Base
     self.target_invite_code = code
     self.save!
 
-    target_user = User.find_by mobile: code
+    target_user = User.find_by invite_code: code
 
     Coupon.new_user.first.give_to [target_user, self]
   end

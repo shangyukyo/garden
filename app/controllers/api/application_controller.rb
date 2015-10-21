@@ -24,7 +24,8 @@ class Api::ApplicationController < ApplicationController
   end  
 
   def error(message, status = 200)      
-    render json: { error: message }, status: 200 and return
+    render json: { error: message }, status: 200
+    return
   end
 
   def render_json(data)

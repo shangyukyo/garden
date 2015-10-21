@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021060036) do
+ActiveRecord::Schema.define(version: 20151021090154) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "mobile",          limit: 255,                   null: false
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20151021060036) do
     t.string   "mobile",           limit: 255,                   null: false
     t.string   "avatar",           limit: 255
     t.string   "private_token",    limit: 255
+    t.string   "invite_code",      limit: 255
     t.boolean  "used_invite_code", limit: 1,     default: false, null: false
     t.text     "ext",              limit: 65535
     t.datetime "created_at",                                     null: false

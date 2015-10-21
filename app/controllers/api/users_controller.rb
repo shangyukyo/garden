@@ -13,14 +13,19 @@ class Api::UsersController < Api::ApplicationController
 
     if not params[:mobile].present? or not params[:verfiy_code].present?
       error "错误的参数!", 200
+      return
     end
-
-    puts token.inspect
 
     if not token.present? or token.body != params[:verfiy_code]
       error("验证码无效或者已过期!", status = 200)
+      return
     else      
       @user = User.find_by(mobile: params[:mobile]) || User.new(mobile: params[:mobile])
+
+      if not @user.invite_code.present?
+        @user.generate_invite_code
+      end
+
       @user.generate_private_token  
       @user.save
     end    
@@ -29,17 +34,23 @@ class Api::UsersController < Api::ApplicationController
   def use_invite_code
     authenticate!    
     
-
-    if @current_user.mobile == params[:code]
+    if @current_user.invite_code == params[:code]
       error("不能使用自己的邀请码!", status = 200)
+      return 
     end
 
     if @current_user.used_invite_code
       error("您已使用过邀请码!", status = 200)
+      return 
     end
-    
+
+    if not User.find_by(invite_code: params[:code]).present?
+      error("邀请码错误!", status = 200)      
+      return
+    end
+
     @current_user.use_invite_code params[:code]
-    
+
   end
 
   def upload_avatar
