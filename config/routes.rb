@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       collection do 
         post :send_verfiy_code
+        post :use_invite_code
       end
     end
 

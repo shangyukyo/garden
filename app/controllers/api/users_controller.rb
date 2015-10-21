@@ -26,6 +26,22 @@ class Api::UsersController < Api::ApplicationController
     end    
   end
 
+  def use_invite_code
+    authenticate!    
+    
+
+    if @current_user.mobile == params[:code]
+      error("不能使用自己的邀请码!", status = 200)
+    end
+
+    if @current_user.used_invite_code
+      error("您已使用过邀请码!", status = 200)
+    end
+    
+    @current_user.use_invite_code params[:code]
+    
+  end
+
   def upload_avatar
     begin
       authenticate!    

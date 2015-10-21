@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019034013) do
+ActiveRecord::Schema.define(version: 20151021060036) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "mobile",          limit: 255,                   null: false
@@ -226,12 +226,13 @@ ActiveRecord::Schema.define(version: 20151019034013) do
   add_index "user_shippings", ["user_id"], name: "index_user_shippings_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "mobile",        limit: 255,   null: false
-    t.string   "avatar",        limit: 255
-    t.string   "private_token", limit: 255
-    t.text     "ext",           limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "mobile",           limit: 255,                   null: false
+    t.string   "avatar",           limit: 255
+    t.string   "private_token",    limit: 255
+    t.boolean  "used_invite_code", limit: 1,     default: false, null: false
+    t.text     "ext",              limit: 65535
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.datetime "deleted_at"
   end
 

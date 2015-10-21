@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  store :ext, accessors: [:target_invite_code]
+
   after_create :give_new_user_coupon
 
   def generate_private_token
@@ -29,6 +31,15 @@ class User < ActiveRecord::Base
     coupon.give_to [self]
   end
 
+  def use_invite_code code
+    self.used_invite_code = true
+    self.target_invite_code = code
+    self.save!
+
+    target_user = User.find_by mobile: code
+
+    Coupon.new_user.first.give_to [target_user, self]
+  end
 
   #下单
   def placed!(user_shipping_id, goods_info, coupon_id, warehouse_id)

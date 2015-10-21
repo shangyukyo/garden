@@ -27,4 +27,5 @@ class Coupon < ActiveRecord::Base
     Coupon.new_user.update_all name: "新用户大反馈"
     Coupon.consume_100.update_all name: "推广优惠券"
   end
+  
 end
