@@ -22,7 +22,30 @@
 
     .form-group                      
       button.btn.btn-search.ml-10 type='submit' 搜索
-        
+    
+
+= form_tag "#{orders_path(format: 'xls')}", class: 'form-inline', method: 'get', role: 'form' do 
+  .form-group      
+    = hidden_field_tag 'order_no', params[:order_no], class: 'form-control input-sm', placeholder: '订单编号'
+
+    = hidden_field_tag 'warehouse_name', params[:warehouse_name], class: 'form-control input-sm ml-20', placeholder: '提货点'
+
+    = hidden_field_tag 'pick_up_code', params[:pick_up_code], class: 'form-control input-sm ml-20', placeholder: '提货码'
+
+  .form-group             
+    = datetime_field_tag :start_at, params[:start_at], class: 'form-control sr-only input-sm ml-20', placeholder: '开始时间 1980-01-01 24:00:00'      
+  .form-group                
+    = datetime_field_tag :end_at, params[:end_at], class: 'form-control sr-only input-sm ml-20', placeholder: '结束时间 1980-01-01 24:00:00'   
+     
+  .form-group
+    - status_ar = [ ['所有', nil] ] + Order.statuses.map{|k, v| [I18n.t("order.statuses.#{k}"), k.to_sym]}
+    
+    = select_tag "status", options_for_select(status_ar, [params[:status]]), class: 'form-control sr-only input-sm ml-20'
+
+  .form-group                      
+    button.btn.btn-search.ml-10 type='submit' 导出excel
+hr
+/ a.btn.btn-lg.btn-primary href="#{orders_path(format: 'xls')}" 导出excel
 
 .table-responsive
   table.table
@@ -71,8 +94,36 @@
       tr
         td 暂无数据
 
-
 .nav
   = pager :total => @total, :page => @page, :per_page => @per_page
+
+.panel.panel-default
+  .panel-heading: .text-danger 订单列表里包含的所有水果统计
+  .panel-body
+    .table-responsive.mt-20
+      table.table
+        thread
+          tr.warning
+            td 产品名称
+            td 单价
+            td 产地
+            td 简介
+            td 总数
+
+        tbody
+          - if @total_goods.present?
+            - @total_goods.each do |g|
+              - good = g.good
+              tr 
+                td= good.name
+                td #{good.price} / #{good.unit}
+                td= good.address
+                td= good.description
+                td #{g.quantity} (单位: #{good.unit})
+          - else
+            tr
+              td 暂无数据
+
+
 
 

@@ -53,6 +53,11 @@ gem 'alipay', '~> 0.8.0'
 gem 'wx_pay'
 
 
+# excel
+gem 'spreadsheet'
+
+
+
 # Http Client
 gem 'rest-client', '~> 1.7.2'
 
