@@ -146,13 +146,14 @@ class OrdersController < ApplicationController
 
     sheet2 = book.create_worksheet :name => "group"
     red = Spreadsheet::Format.new :color => :red, :weight => :bold, :size => 12
-    
+
     sheet2.row(0).default_format = red  
     sheet2.row(0).concat ["产品名称", "单价", "产地", "总数"]        
     count_row = 1
 
     groups.each do |g|
       good = g.good
+      next if not good.present?
       sheet2[count_row,0]=good.name
       sheet2[count_row,1]= "#{good.price} / #{good.unit}"
       sheet2[count_row,2]=good.address

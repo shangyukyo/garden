@@ -114,6 +114,7 @@ hr
           - if @total_goods.present?
             - @total_goods.each do |g|
               - good = g.good
+              - next if not good.present?
               tr 
                 td= good.name
                 td #{good.price} / #{good.unit}
