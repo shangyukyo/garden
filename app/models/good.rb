@@ -7,7 +7,7 @@ class Good < ActiveRecord::Base
 
   store :ext, accessors: [:unit, :address, :partition_photo, :category_photo]
 
-  default_scope { order('id desc') }
+  # default_scope { order('id desc') }
 
   enum status: {
     pending:               0,      # 待发布的(没有添加规格的产品是不允许被发布的)
