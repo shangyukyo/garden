@@ -8,4 +8,6 @@
 #= require bootstrap/button
 #= require bootstrap/modal
 #= require jquery-fileupload/basic
+#= require bootstrap-datetimepicker.min
+#= require bootstrap-datetimepicker.zh-CN
 #= require_tree .

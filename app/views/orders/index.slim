@@ -6,14 +6,24 @@
     .form-group      
       = text_field_tag 'order_no', params[:order_no], class: 'form-control input-sm', placeholder: '订单编号'
 
-      = text_field_tag 'warehouse_name', params[:warehouse_name], class: 'form-control input-sm ml-20', placeholder: '提货点'
+      = select_tag "warehouse_name", options_for_select( [["所有", ""]] + Warehouse.order("id desc").map{|w| [w.name, w.name]}, [params[:warehouse_name]]), class: 'form-control input-sm ml-20'
 
       = text_field_tag 'pick_up_code', params[:pick_up_code], class: 'form-control input-sm ml-20', placeholder: '提货码'
 
-    .form-group             
-      = datetime_field_tag :start_at, params[:start_at], class: 'form-control input-sm ml-20', placeholder: '开始时间 1980-01-01 24:00:00'      
+    .form-group.ml-10
+      /= datetime_field_tag :start_at, params[:start_at], class: 'form-control input-sm ml-20', placeholder: '开始时间 1980-01-01 24:00:00'      
+      .input-append.date#start_at data-date-format="yyyy-mm-dd hh:ii:ss"
+        input.input-sm.form-control size="20" type="text" name="start_at" placeholder="开始时间" value="#{params[:start_at]}"
+        span.add-on
+          i.icon-th
+
     .form-group                
-      = datetime_field_tag :end_at, params[:end_at], class: 'form-control input-sm ml-20', placeholder: '结束时间 1980-01-01 24:00:00'   
+      / = datetime_field_tag :end_at, params[:end_at], class: 'form-control input-sm ml-20', placeholder: '结束时间 1980-01-01 24:00:00'   
+
+      .input-append.ml-10.date#end_at data-date-format="yyyy-mm-dd hh:ii:ss"
+        input.input-sm.form-control size="20" type="text" name="end_at" placeholder="结束时间" value="#{params[:end_at]}"
+        span.add-on
+          i.icon-th
        
     .form-group
       - status_ar = [ ['所有', nil] ] + Order.statuses.map{|k, v| [I18n.t("order.statuses.#{k}"), k.to_sym]}
@@ -126,5 +136,29 @@ hr
               td 暂无数据
 
 
+
+javascript:
+  $(function(){
+    $("#start_at").datetimepicker({
+        language: "zh-CN",
+        format: "yyyy-mm-dd hh:ii:ss",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"        
+    }).on('show', function(){
+      $(".datetimepicker").css({top: 40})
+    });
+
+    $("#end_at").datetimepicker({
+        language: "zh-CN",
+        format: "yyyy-mm-dd hh:ii:ss",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"        
+    }).on('show', function(){
+      $(".datetimepicker").css({top: 40})
+    });
+
+  })
 
 
