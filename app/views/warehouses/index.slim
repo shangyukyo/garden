@@ -15,6 +15,9 @@
         th 联系电话
         th 店铺提示
         th 店铺 url
+
+        th 经度
+        th 纬度
         th #
     tbody
       - if @warehouses.present?
@@ -31,6 +34,8 @@
             td= warehouse.tel
             td= warehouse.content
             td= warehouse.url
+            td= warehouse.longitude
+            td= warehouse.latitude
             - if current_user.admin_power
               td
                 a href="#{edit_warehouse_path(warehouse)}" 编辑

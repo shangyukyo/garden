@@ -12,6 +12,11 @@
     .form-group
       = text_field_tag 'address', @warehouse.address, class: 'form-control input-sm', placeholder: '地址'
     .form-group
+      = text_field_tag 'longitude', @warehouse.longitude, class: 'form-control input-sm', placeholder: '经度'
+    .form-group
+      = text_field_tag 'latitude', @warehouse.latitude, class: 'form-control input-sm', placeholder: '纬度'   
+
+    .form-group
       = text_field_tag 'tel', @warehouse.tel, class: 'form-control input-sm', placeholder: '联系电话'      
     .form-group
       = text_area_tag 'content', @warehouse.content, class: 'form-control input-sm', placeholder: '店铺提示'

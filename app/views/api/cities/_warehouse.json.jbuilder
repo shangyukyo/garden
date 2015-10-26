@@ -1,1 +1,1 @@
-json.(warehouse, :id, :name, :business_time, :address, :tel, :content, :url , :created_at)
+json.(warehouse, :id, :name, :business_time, :address, :longitude, :latitude, :tel, :content, :url , :created_at)
