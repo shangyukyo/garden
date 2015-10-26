@@ -22,7 +22,7 @@ class Api::UsersController < Api::ApplicationController
     else      
       @user = User.find_by(mobile: params[:mobile]) || User.new(mobile: params[:mobile])
 
-      if not @user.invite_code.present?
+      if !@user.invite_code.present? and @user.id.present?
         @user.generate_invite_code
       end
 
