@@ -87,7 +87,8 @@ class Order < ActiveRecord::Base
   end
 
   def send_pick_up_code
-    s = Sms::Base.new to: self.user.mobile, code: self.pick_up_code, address: self.warehouse.try(:address), type: 'pick_up_code'
+    address = self.warehouse.present? ? self.warehouse["address"] : ""
+    s = Sms::Base.new to: self.user.mobile, code: self.pick_up_code, address: address, type: 'pick_up_code'
     s.send    
   end
 
