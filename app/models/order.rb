@@ -88,9 +88,6 @@ class Order < ActiveRecord::Base
 
   def send_pick_up_code
     begin
-      address = self.warehouse.present? ? self.warehouse["address"] : ""
-      time = self.warehouse.present? ? self.warehouse["business_time"]
-
       if self.warehouse.present?
         address = self.warehouse["address"]
         time = self.warehouse["business_time"].scan(/\（(.*?)\）/).map{|c| c}.join("")
