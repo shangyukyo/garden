@@ -47,8 +47,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'acts-as-taggable-on', '~> 3.4'
 
-gem 'sidekiq'
+# Sidekiq for queue
+gem 'sidekiq', '~> 3.3.4'
+gem 'sidetiq', '0.6.3'
 
+
+# pay
 gem 'alipay', '~> 0.8.0'
 gem 'wx_pay'
 
