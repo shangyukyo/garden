@@ -14,7 +14,7 @@ class Api::GoodsController < Api::ApplicationController
       end
 
     rescue => e
-      error e.inspect
+      error e.message
     end
   end
 
@@ -22,7 +22,7 @@ class Api::GoodsController < Api::ApplicationController
     begin
       @good = Good.find params[:id]      
     rescue => e      
-      error e.inspect
+      error e.message
     end
   end
 

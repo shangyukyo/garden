@@ -8,7 +8,7 @@ class Api::CategoriesController < Api::ApplicationController
     begin
       @category = Category.find params[:id]      
     rescue => e
-      error e.inspect
+      error e.message
     end
   end
 

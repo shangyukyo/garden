@@ -27,7 +27,7 @@ class Api::UserShippingsController < Api::ApplicationController
       @user_shipping.mobile = params[:mobile]
       @user_shipping.save!
     rescue => e
-      error e.inspect
+      error e.message
     end
   end
 
@@ -50,7 +50,7 @@ class Api::UserShippingsController < Api::ApplicationController
       end
 
     rescue => e
-      error e.inspect
+      error e.message
     end    
   end
 
@@ -60,7 +60,7 @@ class Api::UserShippingsController < Api::ApplicationController
       @user_shipping = @current_user.user_shippings.find_by id: params[:id]
       @user_shipping.destroy!
     rescue => e
-      error e.inspect
+      error e.message
     end
   end
 

@@ -91,7 +91,7 @@ class Order < ActiveRecord::Base
       if self.warehouse.present?
         address = self.warehouse["address"]
         time = self.warehouse["business_time"].scan(/\((.*?)\)/).map{|c| c}.join("")
-        
+
         if not time.present?
           time = self.warehouse["business_time"].scan(/\（(.*?)\）/).map{|c| c}.join("")          
         end
@@ -111,4 +111,5 @@ class Order < ActiveRecord::Base
   def test_regext
     puts self.warehouse["business_time"].scan(/\（(.*?)\）/).map{|c| c}.join("")
   end
+
 end

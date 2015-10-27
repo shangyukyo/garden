@@ -28,7 +28,7 @@ class Api::OrdersController < Api::ApplicationController
       @order     = @current_user.placed!(params[:user_shipping_id], goods_info, params[:coupon_id], params[:warehouse_id])
             
     rescue => e      
-      error e.inspect      
+      error e.message      
     end
   end
 
@@ -49,9 +49,8 @@ class Api::OrdersController < Api::ApplicationController
         @payment.save!
         order.payments << @payment        
       end
-    rescue => e
-      raise e
-      error e.inspect
+    rescue => e      
+      error e.message
     end
   end
 
@@ -73,9 +72,8 @@ class Api::OrdersController < Api::ApplicationController
         @payment.save!
         order.payments << @payment        
       end
-    rescue => e
-      raise e
-      error e.inspect
+    rescue => e      
+      error e.message
     end    
   end
 
