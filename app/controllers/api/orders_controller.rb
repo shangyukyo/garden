@@ -7,7 +7,7 @@ class Api::OrdersController < Api::ApplicationController
     if params[:status] == "pending"
       @orders = @orders.pending
     elsif params[:status] == "paid"
-      @orders = @orders.paid
+      @orders = @orders.paid.limit(8)
     elsif params[:status] == "delivering"
       @orders = @orders.delivering
     elsif params[:status] == "finished"
