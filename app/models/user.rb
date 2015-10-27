@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   store :ext, accessors: [:target_invite_code]
 
-  after_create :generate_invite_code
+  after_create :generate_invite_code, :generate_private_token
 
   def generate_invite_code
     loop do
