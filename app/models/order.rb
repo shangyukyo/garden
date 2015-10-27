@@ -87,10 +87,26 @@ class Order < ActiveRecord::Base
   end
 
   def send_pick_up_code
-    address = self.warehouse.present? ? self.warehouse["address"] : ""
-    s = Sms::Base.new to: self.user.mobile, code: self.pick_up_code, address: address, type: 'pick_up_code'
-    s.send    
+    begin
+      address = self.warehouse.present? ? self.warehouse["address"] : ""
+      time = self.warehouse.present? ? self.warehouse["business_time"]
+
+      if self.warehouse.present?
+        address = self.warehouse["address"]
+        time = self.warehouse["business_time"].scan(/\（(.*?)\）/).map{|c| c}.join("")
+        time = Time.now.tomorrow.strftime("%F") + " " + time
+      else
+        address, time = "", ""
+      end
+
+      s = Sms::Base.new to: self.user.mobile, code: self.pick_up_code, address: address, type: 'pick_up_code'
+      s.send    
+    rescue => e
+      nil    
+    end
   end
 
-
+  def self.test_regext
+    puts self.warehouse["business_time"].scan(/\（(.*?)\）/).map{|c| c}.join("")
+  end
 end
