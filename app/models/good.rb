@@ -5,7 +5,7 @@ class Good < ActiveRecord::Base
 
   acts_as_taggable
 
-  store :ext, accessors: [:unit, :address, :partition_photo, :category_photo]
+  store :ext, accessors: [:unit, :address, :partition_photo, :category_photo, :cover_photo]
 
   # default_scope { order('id desc') }
 
@@ -25,6 +25,10 @@ class Good < ActiveRecord::Base
 
   def index_photo_url
     Asset.find_by(id: partition_photo).try(:resource_url) || photo_urls.first
+  end
+
+  def cover_photo_url
+    Asset.find_by(id: cover_photo).try(:resource_url) || photo_urls.first
   end
 
 end

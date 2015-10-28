@@ -33,23 +33,35 @@ css:
           a.remove-img: i.fa.fa-remove
           a.thumbnail
             img src="#{Asset.find(asset_id).resource_url(:middle)}" width="100" height="100" asset-id="#{asset_id}"
-
+  hr
   .partition-pictures
     span.btn.btn-success.fileinput-button.mb-10
       i.fa.fa-plus
-      span 添加图片 图片尺寸比例(110x110) 用于首页显示使用  
+      span 添加图片 图片尺寸比例(138x92) 用于首页显示使用  
       | <input id="partition-photo" type="file" name="resource" data-url="/photos/handler" multiple>
 
     .row                
-      .img-panel.col-xs-1.col-md-1        
+      .img-panel.col-xs-1.col-md-1 
+        a.remove-img: i.fa.fa-remove       
         a.thumbnail
           img src="#{@good.index_photo_url}" width="100" height="100"
+  hr
+  .cover-pictures
+    span.btn.btn-success.fileinput-button.mb-10            
+      span 添加图片 图片尺寸比例(192x160) 用于 列表封面 显示使用  
+      | <input id="cover-photo" type="file" name="resource" data-url="/photos/handler" multiple>
 
+    .row                
+      .img-panel.col-xs-1.col-md-1  
+        a.remove-img: i.fa.fa-remove      
+        a.thumbnail
+          img src="#{@good.cover_photo_url}" width="100" height="100"
 
       
   .form-group
     = hidden_field_tag :good_id, @good.id
     = hidden_field_tag :partition_photo, @good.partition_photo
+    = hidden_field_tag :cover_photo, @good.cover_photo
     = text_field_tag :name, @good.name, placeholder: '产品名称', class: 'form-control'
 
   .form-group.clearfix    

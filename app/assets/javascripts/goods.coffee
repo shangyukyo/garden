@@ -56,6 +56,29 @@ window.GoodView = Backbone.View.extend
 
 
 
+    $('#cover-photo').fileupload
+      forceIframeTransport: true,
+      autoUpload: true,    
+      dataType: 'json'
+      url: '/photos/handler'
+      done: (e, data) ->
+        response = data.result
+        if response.success          
+          $img = "<div class='img-panel col-xs-1 col-md-1'>                  
+                  <a class='thumbnail'>
+                  <img src='" + response.data.resource.middle.url + "' width='100' height='100' asset-id='" + response.data.id + "'/ > 
+                  </a>
+                  </div> "
+          
+          $('.cover-pictures .row').empty().append($img)
+
+          $("input[name=cover_photo]").val(response.data.id)
+        else
+          $('.alert.alert-danger').removeClass('sr-only').text(response.data)
+        
+        return    
+
+
   checkCategory : (e) ->
     $this = $(e.currentTarget)
 
@@ -94,6 +117,7 @@ window.GoodView = Backbone.View.extend
     address = $('input[name=address]').val()
     description = good_description.html()    
     partition_photo = $("input[name=partition_photo]").val()
+    cover_photo = $("input[name=cover_photo]").val()
 
     if category_ids == ''            
       $alert.empty().text('商品分类不能为空')      
@@ -116,7 +140,7 @@ window.GoodView = Backbone.View.extend
       this.alertMsg('单位不能为空')
       return
     else
-      $.post '/goods', {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, unit: unit, address: address, description: description, partition_photo: partition_photo}, (res) ->
+      $.post '/goods', {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, unit: unit, address: address, description: description, partition_photo: partition_photo, cover_photo: cover_photo}, (res) ->
         if res.success
           $("#goodsModal").modal()
         else
@@ -145,6 +169,7 @@ window.GoodView = Backbone.View.extend
     good_id = $('input[name=good_id]').val()
     description = good_description.html()    
     partition_photo = $("input[name=partition_photo]").val()
+    cover_photo = $("input[name=cover_photo]").val()
 
     if category_ids == ''            
       $alert.empty().text('商品分类不能为空')      
@@ -171,7 +196,7 @@ window.GoodView = Backbone.View.extend
       $.ajax
         type: 'PUT'
         url: '/goods/' + good_id
-        data: {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, unit: unit, address: address, description: description, partition_photo: partition_photo}
+        data: {category_ids: category_ids, price: price, photo_asset_ids: photo_asset_ids, name: name, unit: unit, address: address, description: description, partition_photo: partition_photo, cover_photo: cover_photo}
         success: (res) ->
           if res.success
             window.location.href = "/goods"

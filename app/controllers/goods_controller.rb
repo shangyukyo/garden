@@ -37,6 +37,7 @@ class GoodsController < ApplicationController
       @good.description = params[:description]
       @good.photo_asset_ids = params[:photo_asset_ids]   
       @good.partition_photo = params[:partition_photo]   
+      @good.cover_photo = params[:cover_photo]  
       @good.save!
 
       @good.published!
@@ -65,7 +66,8 @@ class GoodsController < ApplicationController
       @good.address = params[:address]      
       @good.description = params[:description]
       @good.photo_asset_ids = params[:photo_asset_ids]   
-      @good.partition_photo = params[:partition_photo]      
+      @good.partition_photo = params[:partition_photo] 
+      @good.cover_photo = params[:cover_photo]       
       @good.save!
 
       @good.categories = @categories
