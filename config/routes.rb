@@ -54,6 +54,8 @@ Rails.application.routes.draw do
 
     resources :posters, only: [:index]
 
+    resource :client
+
     resource :notify, only: [] do
       collection do 
         post :alipay
