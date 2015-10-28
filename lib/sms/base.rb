@@ -33,8 +33,8 @@ module Sms
         @template_id = "37453"
         @datas = [ args[:code] ]
       elsif args[:type] == "pick_up_code"
-        @template_id = "42560"
-        @datas = [ args[:code], args[:address] ]
+        @template_id = "44924"
+        @datas = [ args[:code], args[:address], args[:time] ]
       end
 
     end
