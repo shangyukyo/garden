@@ -6,7 +6,8 @@ class Coupon < ActiveRecord::Base
   enum coupon_type: {
     default: 0,
     new_user: 1,
-    consume_100: 2
+    consume_100: 2,
+    fill_coupon: 3
   }
 
   scope :effect_coupons, -> {where("start_at < ? and expired_at > ?", Time.now, Time.now)}

@@ -8,6 +8,8 @@ class CouponsController < ApplicationController
       @coupons = Coupon.new_user
     elsif params[:coupon_type] == "consume_100"
       @coupons = Coupon.consume_100
+    elsif params[:coupon_type] == "fill_coupon"
+      @coupons = Coupon.fill_coupon
     end
 
     @total = @coupons.size
@@ -19,9 +21,15 @@ class CouponsController < ApplicationController
     coupon = Coupon.new
     coupon.name = params[:name]
     coupon.price = params[:price].to_f
+    coupon.minimum = params[:minimum].to_f
     coupon.start_at = params[:start_at]
     coupon.expired_at = params[:expired_at]
-    coupon.coupon_type = Coupon.coupon_types[:default]
+
+    if params[:coupon_type] == 'fill_coupon'   
+      coupon.coupon_type = Coupon.coupon_types[:fill_coupon]
+    else
+      coupon.coupon_type = Coupon.coupon_types[:default]
+    end
 
     if not params[:start_at].present?
       redirect_to :back, alert: '有效期 开始时间不能为空' and return
@@ -35,12 +43,13 @@ class CouponsController < ApplicationController
       redirect_to :back, alert: '价值必须大于0' and return
     end
 
+
     if not params[:name].present?
       redirect_to :back, alert: '名称不能为空' and return
     end
 
-    if coupon.save
-      redirect_to coupons_path
+    if coupon.save!
+      redirect_to coupons_path(coupon_type: params[:coupon_type])
     else
       redirect_to :back, alert: coupon.errors.full_messages
     end

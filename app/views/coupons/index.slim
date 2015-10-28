@@ -1,9 +1,9 @@
 .page-header
   h3: small 优惠券列表
 
-- if not params[:coupon_type].present?
+- if  !params[:coupon_type].present? or params[:coupon_type] == 'fill_coupon'
   .search
-    a.btn.btn-danger.ml-10 href="#{new_coupon_path}" 添加优惠券
+    a.btn.btn-danger.ml-10 href="#{new_coupon_path(coupon_type: params[:coupon_type])}" 添加优惠券
 
 .selectTabBar.clearfix
   ul.nav.nav-pills
@@ -17,7 +17,13 @@
 
     li class="#{params[:coupon_type] == 'consume_100' ? 'active' : nil}"
       a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'consume_100')}" 
-        | 消费满100元优惠券        
+        | 推广优惠券
+
+    li class="#{params[:coupon_type] == 'fill_coupon' ? 'active' : nil}"
+      a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'fill_coupon')}" 
+        | 满减优惠券
+
+
 
 
   
@@ -26,7 +32,9 @@
     thread
       tr.active
         th 优惠券名称
-        th 优惠券价值(元)      
+        th 优惠券价值(元)
+        - if params[:coupon_type] == 'fill_coupon'
+          th 消费满多少才可使用
         th 有效期 开始时间
         th 有效期 结束时间
         th #
@@ -37,6 +45,8 @@
             td 
               = coupon.name
             td= coupon.price
+            - if params[:coupon_type] == 'fill_coupon'
+              td= coupon.minimum
             td= coupon.start_at.strftime('%F %T')
             td= coupon.expired_at.strftime('%F %T')
             td

@@ -68,6 +68,10 @@ class Order < ActiveRecord::Base
         raise "优惠券已过有效期或未到有效期!"
       end
 
+      if target_coupon.fill_coupon? and self.origin_total_price < target_coupon.minimum
+        raise "消费满#{target_coupon.minimum}才可使用此优惠券"
+      end
+
       self.total_price = self.origin_total_price - target_coupon.price
 
       if self.total_price <= 0

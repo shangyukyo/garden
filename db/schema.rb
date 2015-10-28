@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026092437) do
+ActiveRecord::Schema.define(version: 20151028013423) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "mobile",          limit: 255,                   null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20151026092437) do
   create_table "coupons", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.decimal  "price",                   precision: 16, scale: 3, default: 0.0, null: false
+    t.decimal  "minimum",                 precision: 16, scale: 3, default: 0.0, null: false
     t.string   "desc",        limit: 255
     t.integer  "coupon_type", limit: 4
     t.datetime "start_at"

@@ -6,28 +6,33 @@
 
 .clearfix
   = form_tag coupons_path, class: 'form', role: 'form', method: :post
-  .form-group
-    = text_field_tag 'name', nil, class: 'form-control', placeholder: '优惠券名称'
-  .form-group
-    = text_field_tag 'price', nil, class: 'form-control', placeholder: '价值(元)'
-  .form-group
-    /= datetime_field_tag 'start_at', nil, class: 'form-control', placeholder: '有效期 开始时间 格式例如 1970-01-01 01:00:00' 
+    = hidden_field_tag :coupon_type, params[:coupon_type]
+    .form-group
+      = text_field_tag 'name', nil, class: 'form-control', placeholder: '优惠券名称'
+    .form-group
+      = text_field_tag 'price', nil, class: 'form-control', placeholder: '价值(元)'
+    - if params[:coupon_type] == 'fill_coupon'
+      .form-group
+        = text_field_tag 'minimum', nil, class: 'form-control', placeholder: '消费满多少才可使用'
 
-    .input-append.date#start_at data-date-format="yyyy-mm-dd hh:ii:ss"
-      input.input-sm.form-control size="20" type="text" name="start_at" placeholder="有效期 开始时间" value="#{params[:start_at]}"
-      span.add-on
-        i.icon-th
+    .form-group
+      /= datetime_field_tag 'start_at', nil, class: 'form-control', placeholder: '有效期 开始时间 格式例如 1970-01-01 01:00:00' 
 
-  .form-group
-    /= datetime_field_tag 'expired_at', nil, class: 'form-control', placeholder: '有效期 结束时间 格式例如 1970-01-01 01:00:00'
+      .input-append.date#start_at data-date-format="yyyy-mm-dd hh:ii:ss"
+        input.input-sm.form-control size="20" type="text" name="start_at" placeholder="有效期 开始时间" value="#{params[:start_at]}"
+        span.add-on
+          i.icon-th
 
-    .input-append.date#end_at data-date-format="yyyy-mm-dd hh:ii:ss"
-      input.input-sm.form-control size="20" type="text" name="expired_at" placeholder="有效期 结束时间" value="#{params[:expired_at]}"
-      span.add-on
-        i.icon-th
+    .form-group
+      /= datetime_field_tag 'expired_at', nil, class: 'form-control', placeholder: '有效期 结束时间 格式例如 1970-01-01 01:00:00'
 
-  .form-group
-    button.btn.btn-primary.createGoodsBtn type='submit' 提交
+      .input-append.date#end_at data-date-format="yyyy-mm-dd hh:ii:ss"
+        input.input-sm.form-control size="20" type="text" name="expired_at" placeholder="有效期 结束时间" value="#{params[:expired_at]}"
+        span.add-on
+          i.icon-th
+
+    .form-group
+      button.btn.btn-primary type='submit' 提交
 
 javascript:
   $(function(){
