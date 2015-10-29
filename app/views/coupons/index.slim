@@ -50,6 +50,7 @@
             td= coupon.start_at.strftime('%F %T')
             td= coupon.expired_at.strftime('%F %T')
             td
+              a href="#{edit_coupon_path(coupon)}" 编辑
               = link_to "删除", coupon_path(coupon), data: {confirm: '确定要删除此优惠券吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"                   
       - else
         tr

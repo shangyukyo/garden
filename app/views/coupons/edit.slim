@@ -1,0 +1,60 @@
+.page-header
+  h3: small 编辑优惠券
+
+- if flash[:alert].present?
+  .alert.alert-danger= flash[:alert]
+
+.clearfix
+  = form_tag coupon_path(id: @coupon.id), class: 'form', role: 'form', method: :put
+    
+    .form-group
+      = text_field_tag 'name', @coupon.name, class: 'form-control', placeholder: '优惠券名称'
+    .form-group
+      = text_field_tag 'price', @coupon.price, class: 'form-control', placeholder: '价值(元)'
+    - if @coupon.coupon_type == 'fill_coupon'
+      .form-group
+        = text_field_tag 'minimum', @coupon.minimum, class: 'form-control', placeholder: '消费满多少才可使用'
+
+    .form-group
+      /= datetime_field_tag 'start_at', nil, class: 'form-control', placeholder: '有效期 开始时间 格式例如 1970-01-01 01:00:00' 
+
+      .input-append.date#start_at data-date-format="yyyy-mm-dd hh:ii:ss"
+        input.input-sm.form-control size="20" type="text" name="start_at" placeholder="有效期 开始时间" value="#{@coupon.start_at}"
+        span.add-on
+          i.icon-th
+
+    .form-group
+      /= datetime_field_tag 'expired_at', nil, class: 'form-control', placeholder: '有效期 结束时间 格式例如 1970-01-01 01:00:00'
+
+      .input-append.date#end_at data-date-format="yyyy-mm-dd hh:ii:ss"
+        input.input-sm.form-control size="20" type="text" name="expired_at" placeholder="有效期 结束时间" value="#{@coupon.expired_at}"
+        span.add-on
+          i.icon-th
+
+    .form-group
+      button.btn.btn-primary type='submit' 提交
+
+javascript:
+  $(function(){
+    $("#start_at").datetimepicker({
+        language: "zh-CN",
+        format: "yyyy-mm-dd hh:ii:ss",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "top-right"        
+    }).on('show', function(){
+      $(".datetimepicker").css({top: 40})
+    });
+
+    $("#end_at").datetimepicker({
+        language: "zh-CN",
+        format: "yyyy-mm-dd hh:ii:ss",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-right"        
+    }).on('show', function(){
+      $(".datetimepicker").css({top: 40})
+    });
+
+  })
+

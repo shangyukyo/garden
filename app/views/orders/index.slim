@@ -35,7 +35,7 @@
     
 
 = form_tag "#{orders_path(format: 'xls')}", class: 'form-inline', method: 'get', role: 'form' do 
-  .form-group      
+  .form-group          
     = hidden_field_tag 'order_no', params[:order_no], class: 'form-control input-sm', placeholder: '订单编号'
 
     = hidden_field_tag 'warehouse_name', params[:warehouse_name], class: 'form-control input-sm ml-20', placeholder: '提货点'
@@ -63,6 +63,7 @@ hr
       thread.mt-20
         tr.active
           td 订单编号
+          td 收货人手机号
           td 订单价格
           td 订单状态
           / td 配送地址
@@ -75,6 +76,7 @@ hr
           - @orders.each do |order|  
             tr
               td= order.order_no
+              td= order.user.try(:mobile)
               td= order.total_price
               td= order.status_i18n                
               - if false
