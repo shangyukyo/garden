@@ -1,9 +1,9 @@
 .page-header
   h3: small 优惠券列表
 
-- if  !params[:coupon_type].present? or params[:coupon_type] == 'fill_coupon'
-  .search
-    a.btn.btn-danger.ml-10 href="#{new_coupon_path(coupon_type: params[:coupon_type])}" 添加优惠券
+/- if  !params[:coupon_type].present? or params[:coupon_type] == 'fill_coupon'
+.search
+  a.btn.btn-danger.ml-10 href="#{new_coupon_path(coupon_type: params[:coupon_type])}" 添加优惠券
 
 .selectTabBar.clearfix
   ul.nav.nav-pills

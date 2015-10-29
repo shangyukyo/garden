@@ -27,6 +27,10 @@ class CouponsController < ApplicationController
 
     if params[:coupon_type] == 'fill_coupon'   
       coupon.coupon_type = Coupon.coupon_types[:fill_coupon]
+    elsif params[:coupon_type] == 'new_user'
+      coupon.coupon_type = Coupon.coupon_types[:new_user]
+    elsif params[:coupon_type] == 'consume_100'
+      coupon.coupon_type = Coupon.coupon_types[:consume_100]
     else
       coupon.coupon_type = Coupon.coupon_types[:default]
     end
