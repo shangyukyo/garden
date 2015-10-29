@@ -13,7 +13,7 @@ class CouponsController < ApplicationController
     end
 
     @total = @coupons.size
-    @coupons = @coupons.order('id desc').offset(@o).limit(@per_page)
+    @coupons = @coupons.effect_coupons.order('id desc').offset(@o).limit(@per_page)
   end
 
   def create
