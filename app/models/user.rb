@@ -44,10 +44,6 @@ class User < ActiveRecord::Base
     self.used_invite_code = true
     self.target_invite_code = code
     self.save!
-
-    target_user = User.find_by invite_code: code
-
-    Coupon.new_user.first.give_to [target_user, self]
   end
 
   #下单
