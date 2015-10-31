@@ -26,6 +26,11 @@ class Api::UsersController < Api::ApplicationController
         @user.generate_invite_code
       end
 
+      if not @user.id.present?
+        generate_private_token
+        generate_invite_code
+      end
+
       # @user.generate_private_token  
       @user.save
     end    
