@@ -60,6 +60,20 @@ class Order < ActiveRecord::Base
     goods.first.photo_urls.first
   end
 
+  def clone
+    ActiveRecord::Base.transaction do 
+      order = user.orders.build
+      order.origin_total_price = origin_total_price
+      order.total_price = origin_total_price
+      order.quantity = quantity
+      order.warehouse = warehouse
+      order.save
+
+      order.goods << goods
+      order
+    end
+  end
+
   def use_coupon coupon_id      
     target_coupon  = user.coupons.find_by(id: coupon_id)
     if target_coupon.present?

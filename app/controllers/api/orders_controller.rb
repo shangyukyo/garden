@@ -32,6 +32,18 @@ class Api::OrdersController < Api::ApplicationController
     end
   end
 
+  def clone
+    begin
+      authenticate!
+
+      target_order = @current_user.orders.find_by order_no: params[:order_no]
+
+      @order = target_order.clone
+    rescue => e
+      error e.message
+    end
+  end
+
   def purchase
     begin    
       ActiveRecord::Base.transaction do 
