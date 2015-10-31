@@ -27,8 +27,8 @@ class Api::UsersController < Api::ApplicationController
       end
 
       if not @user.id.present?
-        generate_private_token
-        generate_invite_code
+        @user.generate_private_token
+        @user.generate_invite_code
       end
 
       # @user.generate_private_token  
