@@ -96,7 +96,12 @@ Rails.application.routes.draw do
   resources :areas, only: [:index, :create, :destroy]
   resources :schools, only: [:index, :create, :destroy]
   
-  resources :goods
+  resources :goods do 
+    member do 
+      get :shortage
+      get :publish
+    end
+  end
   
   resources :orders, only: [:index, :show] do 
     member do

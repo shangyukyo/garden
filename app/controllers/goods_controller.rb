@@ -1,5 +1,5 @@
 class GoodsController < ApplicationController
-  before_action :find_good, only: [:show, :edit, :update, :destroy, :new_good_spec, :create_good_spec]  
+  before_action :find_good, only: [:show, :edit, :update, :destroy, :new_good_spec, :create_good_spec, :shortage]  
 
   def index
     pagination
@@ -80,6 +80,11 @@ class GoodsController < ApplicationController
 
   def destroy
     @good.destroy
+    redirect_to :back
+  end
+
+  def shortage
+    @good.shortage!
     redirect_to :back
   end
 

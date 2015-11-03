@@ -30,6 +30,7 @@
           td 商品描述
           td 分类
           td 分区
+          td 状态
           td 商品价格(¥)
           td 产地
           td 用于首页显示的图片
@@ -50,6 +51,8 @@
                   span.label.label-info.ml-5= cate.name
 
               td
+                = good.published? ? '已上架' : '已下架'
+              td
                 = good.price
                 | /
                 = good.unit
@@ -64,6 +67,13 @@
                   = image_tag pic, size: "40x40", class: "pic_thumb ml-10"
               td
                 a href="#{edit_good_path(good)}" data-no-turbolink="true" 编辑
+
+                - if good.published?
+                  = link_to "下架", shortage_good_path(good), data: {confirm: '确定要下架商品?'}, class: "btn btn-danger btn-xs ml-20"
+
+                - if good.shortage?
+                  = link_to "发布", publish_good_path(good), data: {confirm: '确定要上架商品?'}, class: "btn btn-danger btn-xs ml-20"
+
                 - if current_user.admin_power
                   = link_to "删除", good_path(good), data: {confirm: '确定要删除此商品吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"       
 
