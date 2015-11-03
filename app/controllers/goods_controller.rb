@@ -34,7 +34,7 @@ class GoodsController < ApplicationController
       @good.price = params[:price]
       @good.unit = params[:unit]
       @good.address = params[:address]
-      @good.description = params[:description]
+      @good.description = "<body style='padding: 0px; marging: 0px;'>" +params[:description] + "</body>"
       @good.photo_asset_ids = params[:photo_asset_ids]   
       @good.partition_photo = params[:partition_photo]   
       @good.cover_photo = params[:cover_photo]  
@@ -64,7 +64,7 @@ class GoodsController < ApplicationController
       @good.price = params[:price]      
       @good.unit = params[:unit]
       @good.address = params[:address]      
-      @good.description = params[:description]
+      @good.description = "<body style='padding: 0px; marging: 0px;'>" +params[:description] + "</body>"
       @good.photo_asset_ids = params[:photo_asset_ids]   
       @good.partition_photo = params[:partition_photo] 
       @good.cover_photo = params[:cover_photo]       
