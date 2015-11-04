@@ -1,5 +1,5 @@
 class GoodsController < ApplicationController
-  before_action :find_good, only: [:show, :edit, :update, :destroy, :new_good_spec, :create_good_spec, :shortage]  
+  before_action :find_good, only: [:show, :edit, :update, :destroy, :new_good_spec, :create_good_spec, :shortage, :publish]  
 
   def index
     pagination
