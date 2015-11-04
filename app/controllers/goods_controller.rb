@@ -88,6 +88,11 @@ class GoodsController < ApplicationController
     redirect_to :back
   end
 
+  def publish
+    @good.published!
+    redirect_to :back    
+  end
+
 
   private
 
