@@ -2,27 +2,27 @@
   h3: small 商品列表
 
 .search
-  = form_tag '', class: 'form-inline', role: 'form', method: :get do 
+  = form_tag '', class: 'form-inline', role: 'form', method: :get do
     .form-group
-      = text_field_tag :name, params[:name], class: 'form-control input-sm', placeholder: '商品名称'    
-    .form-group                      
+      = text_field_tag :name, params[:name], class: 'form-control input-sm', placeholder: '商品名称'
+    .form-group
       button.btn.btn-search.ml-10 type='submit' 搜索
-    .form-group  
+    .form-group
       a.btn.btn-primary.ml-20 href="#{new_good_path}" data-no-turbolink="true" 添加商品
 
 .selectTabBar.clearfix
   ul.nav.nav-pills
     - Category.all.each do |c|
       li class="#{params[:category_id].to_i == c.id ? 'active' : nil}"
-        a.btn.btn-default.btn-xs href="#{goods_path(category_id: c.id)}" 
+        a.btn.btn-default.btn-xs href="#{goods_path(category_id: c.id)}"
           = c.name
 
 
 
-  
+
 .table-responsive
   table.table
-    - if @goods.present?      
+    - if @goods.present?
       thread.mt-20
         tr.active
           td 商品ID
@@ -38,7 +38,7 @@
           td 商品图片
           td #
         tbody
-          - @goods. each do |good|  
+          - @goods. each do |good|
             tr
               td= good.id
               td= good.name
@@ -69,13 +69,13 @@
                 a href="#{edit_good_path(good)}" data-no-turbolink="true" 编辑
 
                 - if good.published?
-                  = link_to "下架", shortage_good_path(good), data: {confirm: '确定要下架商品?'}, class: "btn btn-danger btn-xs ml-20"
+                  = link_to "下架", shortage_good_path(good), class: "btn btn-danger btn-xs ml-20"
 
                 - if good.shortage?
-                  = link_to "发布", publish_good_path(good), data: {confirm: '确定要上架商品?'}, class: "btn btn-danger btn-xs ml-20"
+                  = link_to "发布", publish_good_path(good),  class: "btn btn-danger btn-xs ml-20"
 
                 - if current_user.admin_power
-                  = link_to "删除", good_path(good), data: {confirm: '确定要删除此商品吗?'}, method: :delete, class: "btn btn-danger btn-xs ml-20"       
+                  = link_to "删除", good_path(good),  method: :delete, class: "btn btn-danger btn-xs ml-20"
 
 
     - else
@@ -97,7 +97,7 @@
 
 .nav
   = pager :total => @total, :page => @page, :per_page => @per_page
-  
+
 javascript:
   $(function(){
     $('img.pic_thumb').click(function(){
@@ -105,5 +105,3 @@ javascript:
       $("#imgModal").modal();
     })
   })
-    
-
