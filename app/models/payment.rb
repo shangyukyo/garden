@@ -39,10 +39,10 @@ class Payment < ActiveRecord::Base
         }
 
         order_user = orders.first.user
-        if order_user.used_invite_code and !order_user.get_regist_coupon 
+        if order_user.used_invite_code and !order_user.target_get_regist_coupon 
           target_user = User.find_by invite_code: order_user.target_invite_code
-          Coupon.new_user.first.give_to [target_user, order_user]       
-          order_user.update_attributes get_regist_coupon: true
+          Coupon.new_user.first.give_to [target_user]       
+          order_user.update_attributes target_get_regist_coupon: true
         end
 
       end

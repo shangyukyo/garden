@@ -40,6 +40,13 @@ class User < ActiveRecord::Base
     self.used_invite_code = true
     self.target_invite_code = code
     self.save!
+
+    # 使用邀请码  自己获一个注册优惠券
+    if self.used_invite_code and !self.get_regist_coupon       
+      Coupon.new_user.first.give_to [self]       
+      self.update_attributes get_regist_coupon: true
+    end
+
   end
 
   #下单

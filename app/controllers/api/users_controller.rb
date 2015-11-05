@@ -31,13 +31,17 @@ class Api::UsersController < Api::ApplicationController
         @user.generate_invite_code
       end
 
-      # @user.generate_private_token  
       @user.save
     end    
   end
 
   def use_invite_code
     authenticate!    
+
+    if not params[:code].present?
+      error("请输入邀请码!", status = 200)
+      return
+    end
     
     if @current_user.invite_code == params[:code]
       error("不能使用自己的邀请码!", status = 200)
@@ -53,6 +57,8 @@ class Api::UsersController < Api::ApplicationController
       error("邀请码错误!", status = 200)      
       return
     end
+
+
 
     @current_user.use_invite_code params[:code]
 

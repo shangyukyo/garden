@@ -71,33 +71,6 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  # def csv_content_for(orders)
-  #   FasterCSV.generate do |csv|  
-  #     csv << ["订单编号", "提货点", "提货码", "订单状态", "下单时间"]  
-    
-  #     orders.each do |order|  
-  #       csv << [
-  #         order.order_no,
-  #         order.warehouse.try(:name) || "无",
-  #         order.pick_up_code,
-  #         order.status_i18n,
-  #         order.created_at.strftime('%F %T')
-  #       ]  
-
-  #       csv << ["产品名称", "产品价格", "产地", "数量"]
-
-  #       order.goods.each do |good|
-  #         csv << [
-  #           good.name,
-  #           "#{good.price} / #{good.unit}",
-  #           good.address,
-  #           good.quantity
-  #         ]
-  #       end
-  #     end  
-    
-  #   end 
-  # end
 
   def xls_content_for(orders, groups)  
     xls_report = StringIO.new  
