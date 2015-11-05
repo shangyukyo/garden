@@ -49,7 +49,7 @@ class Api::UsersController < Api::ApplicationController
     end
 
     if @current_user.orders.where("status > ?", 1).present?
-      error("您已不是新注册用户，不能够享受此优惠!", status = 200)
+      error("邀请失败! 您已不是新注册用户，不能够享受此优惠!", status = 200)
       return 
     end
 
