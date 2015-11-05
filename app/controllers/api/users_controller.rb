@@ -48,6 +48,11 @@ class Api::UsersController < Api::ApplicationController
       return 
     end
 
+    if @current_user.orders.where("status > ?", 1).present?
+      error("您已不是新注册用户，不能够享受此优惠!", status = 200)
+      return 
+    end
+
     if @current_user.used_invite_code
       error("您已使用过邀请码!", status = 200)
       return 
