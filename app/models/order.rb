@@ -64,15 +64,21 @@ class Order < ActiveRecord::Base
     ActiveRecord::Base.transaction do 
       warehouse = Warehouse.find_by id: warehouse_id
 
-      order = user.orders.build
-      order.origin_total_price = origin_total_price
-      order.total_price = origin_total_price
-      order.quantity = quantity
-      order.warehouse = warehouse
-      order.save
+      # order = user.orders.build
+      # order.origin_total_price = origin_total_price
+      # order.total_price = origin_total_price
+      # order.quantity = quantity
+      # order.warehouse = warehouse
+      # order.save
 
-      order.order_goods << order_goods
-      order
+      goods_info = order_goods.map{|og|
+        {
+          "good_id" => og.good_id,
+          "quantity" => og.quantity
+        }
+      }
+
+      user.placed!(nil, goods_info, nil, nil)          
     end
   end
 
@@ -126,10 +132,6 @@ class Order < ActiveRecord::Base
     rescue => e
       nil    
     end
-  end
-
-  def test_regext
-    puts self.warehouse["business_time"].scan(/\（(.*?)\）/).map{|c| c}.join("")
   end
 
 end

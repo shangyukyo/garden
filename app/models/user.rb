@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
 
         warehouse = Warehouse.find_by id: warehouse_id
 
-        raise "提货点不能为空" if not warehouse.present?  
+        # raise "提货点不能为空" if not warehouse.present?  
         
         total_price = total_quantity  = 0        
         order          = orders.build
