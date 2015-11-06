@@ -13,13 +13,19 @@ class OrdersController < ApplicationController
       @orders = @orders.where("ext like ?", "%#{params[:warehouse_name]}%")
     end
 
-    if params[:pick_up_code].present?
-      @orders = @orders.where("ext like ?", "%#{params[:pick_up_code]}%")
+    if params[:mobile].present?
+      user = User.find_by(mobile: params[:mobile])
+
+      if not user.present?
+        render html: "手机号不存在"
+      end
+
+      @orders = @orders.where(user_id: user.id)
     end
 
-    if params[:mobile].present?
-      @orders = User.find_by(mobile: params[:mobile]).try(:orders)
-    end
+    if params[:pick_up_code].present?
+      @orders = @orders.where("ext like ?", "%#{params[:pick_up_code]}%")
+    end    
 
     if params[:start_at].present?
       @orders = @orders.where("created_at > ?", params[:start_at])
