@@ -8,7 +8,7 @@ class ClearOrderJob
 
     Order.pending.each do |o|
 
-      if o.created_at + 24.hours >= Time.now
+      if o.created_at + 24.hours <= Time.now
         o.destroy
       end
 

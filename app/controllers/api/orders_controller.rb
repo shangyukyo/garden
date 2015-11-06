@@ -5,13 +5,13 @@ class Api::OrdersController < Api::ApplicationController
     @orders = @current_user.orders.order('id desc')
 
     if params[:status] == "pending"
-      @orders = @orders.pending
+      @orders = @orders.pending.limit(8)
     elsif params[:status] == "paid"
       @orders = @orders.paid.limit(8)
     elsif params[:status] == "delivering"
-      @orders = @orders.delivering
+      @orders = @orders.delivering.limit(8)
     elsif params[:status] == "finished"
-      @orders = @orders.finished      
+      @orders = @orders.finished.limit(8) 
     end
   end
 
@@ -38,7 +38,7 @@ class Api::OrdersController < Api::ApplicationController
 
       target_order = @current_user.orders.find_by order_no: params[:order_no]
 
-      @order = target_order.clone
+      @order = target_order.clone params[:warehouse_id]
     rescue => e
       error e.message
     end
@@ -48,6 +48,11 @@ class Api::OrdersController < Api::ApplicationController
     begin    
       ActiveRecord::Base.transaction do 
         order                   = Order.find_by order_no: params[:order_no]
+
+        if order.status >= 1
+          error "订单不能重复支付!"
+          return 
+        end
 
         if params[:coupon_id].present?
           order.use_coupon params[:coupon_id]

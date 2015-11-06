@@ -60,8 +60,10 @@ class Order < ActiveRecord::Base
     goods.first.photo_urls.first
   end
 
-  def clone
+  def clone warehouse_id
     ActiveRecord::Base.transaction do 
+      warehouse = Warehouse.find_by id: warehouse_id
+
       order = user.orders.build
       order.origin_total_price = origin_total_price
       order.total_price = origin_total_price
@@ -69,7 +71,7 @@ class Order < ActiveRecord::Base
       order.warehouse = warehouse
       order.save
 
-      order.goods << goods
+      order.order_goods << order_goods
       order
     end
   end
