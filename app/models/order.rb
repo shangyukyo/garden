@@ -78,7 +78,7 @@ class Order < ActiveRecord::Base
         }
       }
 
-      user.placed!(nil, goods_info, nil, nil)          
+      user.placed!(nil, goods_info, nil, warehouse.id)          
     end
   end
 
