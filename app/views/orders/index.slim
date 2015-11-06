@@ -4,7 +4,9 @@
 .search
   = form_tag "#{orders_path}", class: 'form-inline', method: 'get', role: 'form' do 
     .form-group      
-      = text_field_tag 'order_no', params[:order_no], class: 'form-control input-sm', placeholder: '订单编号'
+      = text_field_tag 'mobile', params[:mobile], class: 'form-control input-sm ml-20', placeholder: '手机号'
+
+      = text_field_tag 'order_no', params[:order_no], class: 'form-control input-sm ml-20', placeholder: '订单编号'
 
       = select_tag "warehouse_name", options_for_select( [["所有", ""]] + Warehouse.order("id desc").map{|w| [w.name, w.name]}, [params[:warehouse_name]]), class: 'form-control input-sm ml-20'
 

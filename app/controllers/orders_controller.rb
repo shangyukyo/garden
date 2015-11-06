@@ -17,6 +17,10 @@ class OrdersController < ApplicationController
       @orders = @orders.where("ext like ?", "%#{params[:pick_up_code]}%")
     end
 
+    if params[:mobile].present?
+      @orders = User.find_by(mobile: params[:mobile]).try(:orders)
+    end
+
     if params[:start_at].present?
       @orders = @orders.where("created_at > ?", params[:start_at])
     end
