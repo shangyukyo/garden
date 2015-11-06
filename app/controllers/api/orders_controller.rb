@@ -49,7 +49,7 @@ class Api::OrdersController < Api::ApplicationController
       ActiveRecord::Base.transaction do 
         order                   = Order.find_by order_no: params[:order_no]
 
-        if order.status >= 1
+        if Order.statuses[order.status] >=  1
           error "订单不能重复支付!"
           return 
         end
@@ -76,6 +76,12 @@ class Api::OrdersController < Api::ApplicationController
     begin    
       ActiveRecord::Base.transaction do 
         order                   = Order.find_by order_no: params[:order_no]
+
+
+        if Order.statuses[order.status] >=  1
+          error "订单不能重复支付!"
+          return 
+        end
 
         if params[:coupon_id].present?
           order.use_coupon params[:coupon_id]
