@@ -64,13 +64,6 @@ class Order < ActiveRecord::Base
     ActiveRecord::Base.transaction do 
       warehouse = Warehouse.find_by id: warehouse_id
 
-      # order = user.orders.build
-      # order.origin_total_price = origin_total_price
-      # order.total_price = origin_total_price
-      # order.quantity = quantity
-      # order.warehouse = warehouse
-      # order.save
-
       goods_info = order_goods.map{|og|
         {
           "good_id" => og.good_id,
@@ -134,4 +127,15 @@ class Order < ActiveRecord::Base
     end
   end
 
+
+  def self.clear_data
+    Order.all.each do |o|
+      ogs = o.order_goods
+      ogs.each do |og|
+        if !og.good.present?
+          o.destroy
+        end
+      end
+    end
+  end
 end
