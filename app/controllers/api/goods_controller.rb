@@ -31,7 +31,7 @@ class Api::GoodsController < Api::ApplicationController
   end
 
   def search
-    @goods = Good.where("name like ?", "%#{params[:name]}%")
+    @goods = Good.published.where("name like ?", "%#{params[:name]}%")
   end
 
   def hot_keywords
