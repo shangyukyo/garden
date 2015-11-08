@@ -68,8 +68,7 @@ class Payment < ActiveRecord::Base
       out_trade_no: payment_no,
       notify_url: 'http://101.200.197.162/api/notify/alipay',
       subject: subject,
-      # total_fee: original_amount,
-      total_fee: 0.01,
+      total_fee: original_amount,      
       body: subject
     }, {
       sign_type: 'RSA',
@@ -82,8 +81,7 @@ class Payment < ActiveRecord::Base
     unifiedorder_params = {
       body: subject,
       out_trade_no: payment_no,
-      # total_fee: (original_amount * 100.0).to_i,
-      total_fee: 1,
+      total_fee: (original_amount * 100.0).to_i,      
       spbill_create_ip: '101.200.197.162',
       notify_url: 'http://101.200.197.162/api/notify/wechat',
       trade_type: 'APP'      
