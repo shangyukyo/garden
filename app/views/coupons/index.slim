@@ -9,11 +9,11 @@
   ul.nav.nav-pills
     li class="#{!params[:coupon_type].present? ? 'active' : nil}"
       a.btn.btn-default.btn-xs href="#{coupons_path}" 
-        | 普通优惠券        
+        | 普通优惠券定义
 
     li class="#{params[:coupon_type] == 'new_user' ? 'active' : nil}"
       a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'new_user')}" 
-        | 新手注册优惠券        
+        | 新手注册优惠券定义        
     - if false
       li class="#{params[:coupon_type] == 'consume_100' ? 'active' : nil}"
         a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'consume_100')}" 
@@ -21,7 +21,7 @@
 
     li class="#{params[:coupon_type] == 'fill_coupon' ? 'active' : nil}"
       a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'fill_coupon')}" 
-        | 满减优惠券
+        | 满减优惠券定义
 
 
 
