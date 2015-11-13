@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 
     # 使用邀请码  自己获一个注册优惠券
     if self.used_invite_code and !self.get_regist_coupon       
-      Coupon.new_user.first.give_to [self]       
+      Coupon.new_user.effect_coupons.first.give_to [self]       
       self.update_attributes get_regist_coupon: true
     end
 
