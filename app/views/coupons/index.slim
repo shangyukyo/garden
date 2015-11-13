@@ -13,7 +13,7 @@
 
     li class="#{params[:coupon_type] == 'new_user' ? 'active' : nil}"
       a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'new_user')}" 
-        | 新手注册优惠券定义        
+        | 邀请码送优惠券定义        
     - if false
       li class="#{params[:coupon_type] == 'consume_100' ? 'active' : nil}"
         a.ml-10.btn.btn-default.btn-xs href="#{coupons_path(coupon_type: 'consume_100')}" 
