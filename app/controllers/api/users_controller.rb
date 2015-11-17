@@ -16,7 +16,7 @@ class Api::UsersController < Api::ApplicationController
       return
     end
 
-    if params[:mobile] == "136666666666" and params[:verfiy_code] == "8888"
+    if params[:mobile] == "13600000001" and params[:verfiy_code] == "8888"
       @user = User.find_by(mobile: params[:mobile]) || User.new(mobile: params[:mobile])
 
       if !@user.invite_code.present? and @user.id.present?
