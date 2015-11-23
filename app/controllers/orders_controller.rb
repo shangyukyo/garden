@@ -114,6 +114,8 @@ class OrdersController < ApplicationController
       sheet1.row( good_title_row ).concat ["产品名称", "产品价格", "产地", "数量"]
       order.order_goods.each do |order_good|
         good = order_good.good
+
+        next if  not good.present?
         sheet1[good_count_row,0]=good.name
         sheet1[good_count_row,1]= "#{good.price} / #{good.unit}"
         sheet1[good_count_row,2]=good.address
