@@ -66,7 +66,7 @@ class Payment < ActiveRecord::Base
     Alipay::Mobile::Service.mobile_securitypay_pay_string({
       seller_id: 'dashengtianqi@aliyun.com',
       out_trade_no: payment_no,
-      notify_url: 'http://101.200.197.162/api/notify/alipay',
+      notify_url: 'http://101.200.197.162:9004/api/notify/alipay',
       subject: subject,
       total_fee: original_amount,      
       body: subject
@@ -83,7 +83,7 @@ class Payment < ActiveRecord::Base
       out_trade_no: payment_no,
       total_fee: (original_amount * 100.0).to_i,      
       spbill_create_ip: '101.200.197.162',
-      notify_url: 'http://101.200.197.162/api/notify/wechat',
+      notify_url: 'http://101.200.197.162:9004/api/notify/wechat',
       trade_type: 'APP'      
     }
 

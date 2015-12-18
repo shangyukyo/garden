@@ -20,7 +20,7 @@ class Good < ActiveRecord::Base
   end  
 
   def description_url
-    "http://101.200.197.162/api/goods/#{self.id}/description"
+    "http://101.200.197.162:9004/api/goods/#{self.id}/description"
   end
 
   def index_photo_url
