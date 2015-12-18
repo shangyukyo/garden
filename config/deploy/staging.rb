@@ -19,6 +19,7 @@
 
 set :password, ask('Server password', nil)
 set :rails_env, 'production'
+set :deploy_to, "/home/garden/www_test"
 
 # fetch(:default_env).merge!( rvm_path: "/home/garden/.rvm/bin/rvm" )
 

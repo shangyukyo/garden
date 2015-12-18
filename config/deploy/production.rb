@@ -20,6 +20,17 @@
 # role :app, %w{deploy@example.com}, my_property: :my_value
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
+set :password, ask('Server password', nil)
+set :rails_env, 'production'
+set :deploy_to, "/home/garden/www"
+
+# fetch(:default_env).merge!( rvm_path: "/home/garden/.rvm/bin/rvm" )
+
+server '101.200.197.162', 
+        user: 'garden',
+        roles: %w{web app db},
+        password: fetch(:password)
+
 
 
 
